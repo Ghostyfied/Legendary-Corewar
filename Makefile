@@ -6,11 +6,12 @@
 #    By: awehlbur <awehlbur@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/11/05 14:49:04 by awehlbur       #+#    #+#                 #
-#    Updated: 2019/12/03 13:44:05 by fhignett      ########   odam.nl          #
+#    Updated: 2019/12/03 14:07:11 by fhignett      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-include var.mk
+include makefilesrc/var.mk
+include makefilesrc/src.mk
 
 .PHONY: all libft clean fclean re
 
@@ -23,11 +24,13 @@ $(ASM_OBJS_PATH)%.o: $(ASM_PATH)%.c $(ASM_HEADERS) $(LIBFT_PATH)libft.a
 	@mkdir -p $(OBJS_PATH)
 	@mkdir -p $(ASM_OBJS_PATH)
 	@$(CC) $(FLAGS) $(INCLUDES) $(LIBFT_INCLUDES) -o $@ -c $<
+	@echo "$(PLUS) $@"
 
 $(CORE_OBJS_PATH)%.o: $(CORE_PATH)%.c $(CORE_HEADERS) $(LIBFT_PATH)libft.a
 	@mkdir -p $(OBJS_PATH)
 	@mkdir -p $(CORE_OBJS_PATH)
 	@$(CC) $(FLAGS) $(INCLUDES) $(LIBFT_INCLUDES) -o $@ -c $<
+	@echo "$(PLUS) $@"
 
 $(ASM): $(ASM_OBJS)
 	@$(CC) $(FLAGS) $(LIBFT) $(ASM_OBJS) -o $@

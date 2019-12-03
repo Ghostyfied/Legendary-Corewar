@@ -1,22 +1,14 @@
 # ========== Colours= ========== #
-
+GREEN = $(shell printf "\e[38;5;10m")
+WHITE = $(shell printf "\e[39m")
+PLUS = $(GREEN)+$(WHITE)
 
 # ========== Editable ========== #
 ASM				= asm
 COREWAR			= corewar
 
-# ========== Standard ========== #
-CC				= gcc
+# ========== Flags ========== #
 FLAGS			= # -g -Wall -Wextra -Werror #
-
-# =========== Files ============ #
-ASM_SRCS_FILES		=	op.c main.c compile.c
-
-CORE_SRCS_FILES		=	op.c main.c
-
-ASM_HEADERS_FILES	=	op.h
-
-CORE_HEADERS_FILES	=	op.h
 
 # ========== Sources =========== #
 ASM_PATH		= ASM_S/
