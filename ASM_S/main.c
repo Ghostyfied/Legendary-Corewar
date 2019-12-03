@@ -6,11 +6,11 @@
 /*   By: awehlbur <awehlbur@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/30 13:42:40 by awehlbur       #+#    #+#                */
-/*   Updated: 2019/11/05 17:35:23 by awehlbur      ########   odam.nl         */
+/*   Updated: 2019/12/03 12:36:02 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "asm.h"
 
 int			ft_free_all(int	l)
 {

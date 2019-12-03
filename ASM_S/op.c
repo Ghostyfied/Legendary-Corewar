@@ -6,11 +6,11 @@
 /*   By: awehlbur <awehlbur@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/05 15:37:39 by awehlbur       #+#    #+#                */
-/*   Updated: 2019/11/05 15:37:41 by awehlbur      ########   odam.nl         */
+/*   Updated: 2019/12/03 13:26:01 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/op.h"
+#include "op.h"
 
 t_op	g_op_tab[17] =
 {
