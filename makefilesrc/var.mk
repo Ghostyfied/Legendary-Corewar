@@ -25,7 +25,8 @@ CORE_OBJS 		= $(addprefix $(CORE_OBJS_PATH), $(CORE_SRCS_FILES:.c=.o))
 
 # ========== Includes ========== #
 INCLUDES_PATH	= includes/
-INCLUDES		= -I $(INCLUDES_PATH)
+INCLUDES_LIBFT	= libft/
+INCLUDES		= -I $(INCLUDES_PATH) -I $(INCLUDES_LIBFT)
 ASM_HEADERS		= $(addprefix $(INCLUDES_PATH), $(ASM_HEADERS_FILES))
 CORE_HEADERS	= $(addprefix $(INCLUDES_PATH), $(CORE_HEADERS_FILES))
 
