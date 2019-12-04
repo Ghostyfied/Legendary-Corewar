@@ -11,6 +11,6 @@ typedef struct			s_cursor
 	int					carry;
 }						t_cursor;
 
-int						ft_compile(char *filename, char *new_filename);
+int						ft_read_file(char *filename);
 
 #endif
