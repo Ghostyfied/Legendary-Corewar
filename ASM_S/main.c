@@ -6,7 +6,7 @@
 /*   By: awehlbur <awehlbur@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/30 13:42:40 by awehlbur       #+#    #+#                */
-/*   Updated: 2019/12/04 15:23:51 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/12/04 15:30:04 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ char		*ft_check_filename(char *file)
 	end = ft_strrchr(file, '.');
 	if (!end)
 		return (NULL);
-	if (ft_strcmp(end, ".cor"))
+	if (ft_strcmp(end, ".s"))
 		return (NULL);
 	diff = end - file;
-	new_file_ext = ft_strnew(diff  + 2);
+	new_file_ext = ft_strnew(diff  + 4);
 	ft_strncpy(new_file_ext, file, diff + 1);
-	ft_strncpy(ft_strrchr(new_file_ext, '.') + 1, "s", 1);
+	ft_strncpy(ft_strrchr(new_file_ext, '.') + 1, "cor", 3);
 	return (new_file_ext);
 }
 
