@@ -6,7 +6,7 @@
 /*   By: awehlbur <awehlbur@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 16:29:28 by awehlbur       #+#    #+#                */
-/*   Updated: 2019/12/05 20:35:56 by awehlbur      ########   odam.nl         */
+/*   Updated: 2019/12/05 20:37:24 by awehlbur      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int			validate_champions(int argc, char **argv, t_vm *vm)
 					j++;
 					temp = 1;
 				}
+				num -= temp ? 1 : 0;
+				temp = 0;
 			}
 		}
 	}
