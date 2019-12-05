@@ -5,7 +5,7 @@
 # include "op.h"
 # include <errno.h>
 
-# define MEM(x) (x*)ft_memalloc(sizeof(x))
+# define MEM(x) (x*)ft_memalloc(sizeof(x))]
 
 typedef	unsigned char	t_byte;
 
@@ -30,11 +30,11 @@ typedef	struct			s_label
 
 typedef struct			s_operation
 {
-	t_label				*label;
+	t_label				*labels;
 	int					op;
-	int					arg1;
-	int					arg2;
-	int					arg3;
+	t_arg				arg1;
+	t_arg				arg2;
+	t_arg				arg3;
 	int					size;
 	struct s_operation *next;
 }						t_operation;
