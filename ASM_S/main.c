@@ -6,7 +6,11 @@
 /*   By: awehlbur <awehlbur@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/30 13:42:40 by awehlbur       #+#    #+#                */
+<<<<<<< HEAD
 /*   Updated: 2019/12/05 17:31:11 by fhignett      ########   odam.nl         */
+=======
+/*   Updated: 2019/12/05 16:04:55 by rvan-ket      ########   odam.nl         */
+>>>>>>> 7c86901aa444bf653cb3ee0187c29f45cfd7bbe6
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +44,8 @@ void	make_file(char **champion, char *new_filename)
 
 	fd = open(new_filename, O_CREAT | O_RDWR, 0666);
 	ft_putstr_fd("00ea 83f3 ", fd);
+	get_name_comm(champion);
+
 }
 
 int			main(int argc, char **argv)
@@ -53,8 +59,9 @@ int			main(int argc, char **argv)
 	if (!(new_file_ext = ft_check_filename(argv[1])))
 		ft_error("Can not read file");
 	champion = ft_read_file(argv[1]);
-	parse(champion);
-	// make_file(champion, new_file_ext);
-	ft_chararrfree(&champion);
+	// parse(champion);
+	make_file(champion, new_file_ext);
+
+	// ft_chararrfree(&champion);
 	return (ft_free_all(0));
 }
