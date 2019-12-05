@@ -73,20 +73,18 @@ static t_label		*check_label(char *op)
 	return (label);
 }
 
-static t_operation	*create_operation(char **champion, int *i)
+static t_label	*get_labels(char **champion, int *i)
 {
-	t_operation	*new;
+	t_label		*label;
 	char		**split;
 	char		**first_op;
 	int			idx;
 
-	new = MEM(t_operation);
+	label = NULL;
 	split = ft_strsplit(champion[*i], SEPARATOR_CHAR);
 	first_op = ft_strsplit(split[0], ' ');
-	new->label = check_label(first_op[0]);
-	idx = chr_idx(first_op[0], LABEL_CHAR);
-	new->op = check_operation(&first_op[0][idx]);
-	return (new);
+	label = check_label(first_op[0]);
+	return (label);
 }
 
 void				parse(char **champion)
@@ -99,7 +97,7 @@ void				parse(char **champion)
 	i = 0;
 	// while (champion[i])
 	// {
-		create_operation(champion, &i);
+		get_labels(champion, &i);
 		i++;
 	// }
 }
