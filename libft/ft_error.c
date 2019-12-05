@@ -6,7 +6,7 @@
 /*   By: tide-jon <tide-jon@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/16 19:06:48 by tide-jon       #+#    #+#                */
-/*   Updated: 2019/09/16 19:06:55 by tide-jon      ########   odam.nl         */
+/*   Updated: 2019/12/05 11:49:19 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 void		ft_error(char *str)
 {
 	ft_putendl(str);
-	exit(0);
+	exit(1);
 }
