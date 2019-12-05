@@ -6,7 +6,7 @@
 /*   By: awehlbur <awehlbur@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/05 15:35:35 by awehlbur       #+#    #+#                */
-/*   Updated: 2019/12/04 17:33:57 by awehlbur      ########   odam.nl         */
+/*   Updated: 2019/12/04 17:38:19 by awehlbur      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int			ft_read_file(char *filename)
 		return (0);
 	lseek(fd, 0, SEEK_SET);	/* Set read pointer to beggining of the file */
 	read(fd, buff, size); /* read whole file at once */
-	// ft_putendl(buff);
+	ft_putendl(buff);
 	close(fd);
 
 	return (0);
