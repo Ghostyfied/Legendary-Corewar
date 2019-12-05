@@ -1,6 +1,9 @@
 #include "asm.h"
 
+static int			check_labels(char *line)
+{
 
+}
 
 static t_operation	*create_operation(char **op)
 {
@@ -16,7 +19,7 @@ void				parse(char **champion)
 	head = NULL;
 	while (champion[i])
 	{
-		create_operation(ft_strsplit(champion[i], SEPARATOR_CHAR));
+		// create_operation(ft_strsplit(champion[i], SEPARATOR_CHAR));
 		i++;
 	}
 }

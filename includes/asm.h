@@ -17,7 +17,7 @@ typedef	struct			s_label
 {
 	char				*name;
 	int					place;
-	// struct s_label		*next;
+	struct s_label		*next;
 }						t_label;
 
 typedef struct			s_operation
