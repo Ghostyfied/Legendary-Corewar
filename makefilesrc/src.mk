@@ -1,7 +1,11 @@
 # =========== Files ============ #
-ASM_SRCS_FILES		=	op.c main.c compile.c
+ASM_SRCS_FILES		=	op.c main.c \
+						compile.c \
+						parse.c
 
-CORE_SRCS_FILES		=	op.c main.c
+
+CORE_SRCS_FILES		=	op.c \
+						main.c
 
 ASM_HEADERS_FILES	=	op.h
 
