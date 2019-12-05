@@ -1,5 +1,6 @@
 # =========== Files ============ #
-ASM_SRCS_FILES		=	op.c main.c \
+ASM_SRCS_FILES		=	op.c \
+						main.c \
 						compile.c \
 						parse.c \
 						structs.c \

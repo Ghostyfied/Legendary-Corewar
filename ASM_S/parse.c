@@ -88,7 +88,8 @@ void				parse(char **champion)
 	/* Check comment and name and IF valid ttranslate */
 
 	head = NULL;
-	i = 0;
+	i = get_name_comm(champion);
+
 	while (champion[i])
 	{
 		add_operation(&head, new_operation(get_labels(champion, &i)));

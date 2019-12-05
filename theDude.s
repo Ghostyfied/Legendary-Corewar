@@ -1,3 +1,7 @@
-.name		"Big Lebowski"
+.name		"Big 
 
-.comment	"I'm the Dude, so that's what you call me."
+Lebowski"
+
+.comment	"I'm the Dude, 
+
+so that's what you call me."

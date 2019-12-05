@@ -6,7 +6,7 @@
 /*   By: rvan-ket <rvan-ket@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 16:04:05 by rvan-ket       #+#    #+#                */
-/*   Updated: 2019/12/05 18:12:06 by rvan-ket      ########   odam.nl         */
+/*   Updated: 2019/12/05 19:17:42 by rvan-ket      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	*get_str(char **champion, int *i, int j, int len)
 	return (str);
 }
 
-void	get_name_comm(char **champion)
+int	get_name_comm(char **champion)
 {
 	int		i;
 	char	*name;
@@ -106,4 +106,5 @@ void	get_name_comm(char **champion)
 	}
 	ft_putendl(name);
 	ft_putendl(comment);
+	return (i);
 }
