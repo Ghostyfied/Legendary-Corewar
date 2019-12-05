@@ -31,9 +31,17 @@ typedef struct			s_operation
 	struct s_operation *next;
 }						t_operation;
 
+typedef	struct			s_asm
+{
+	t_operation			operation;
+	char				*name;
+	char				*comment;
+	// struct s_label		*next;
+}						t_asm;
 
 char						**ft_read_file(char *filename);
 
 void						parse(char **champion);
+void						get_name_comm(char **champion);
 
 #endif
