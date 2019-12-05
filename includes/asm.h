@@ -5,9 +5,7 @@
 # include "op.h"
 # include <errno.h>
 
-# define MEM(x) (x*)ft_memalloc(sizeof(x))]
-
-typedef	unsigned char	t_byte;
+# define MEM(x) (x*)ft_memalloc(sizeof(x))
 
 typedef struct			s_cursor
 {
@@ -32,16 +30,20 @@ typedef struct			s_operation
 {
 	t_label				*labels;
 	int					op;
-	t_arg				arg1;
-	t_arg				arg2;
-	t_arg				arg3;
+	t_arg				arg[3];
 	int					size;
 	struct s_operation *next;
 }						t_operation;
 
-
 char						**ft_read_file(char *filename);
 
+void						add_label(t_label **head, t_label *new);
+void						add_operation(t_operation **head, t_operation *new);
 void						parse(char **champion);
+void						calculate_size(t_operation **operations);
+
+t_label						*new_label(char *name);
+
+t_operation					*new_operation(t_label *labels);
 
 #endif
