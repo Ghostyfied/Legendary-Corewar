@@ -85,14 +85,16 @@ void				parse(char **champion)
 {
 	int			i;
 	t_operation *head;
+	t_operation *op;
 	/* Check comment and name and IF valid ttranslate */
 
 	head = NULL;
 	i = 0;
 	while (champion[i])
 	{
-		add_operation(&head, new_operation(get_labels(champion, &i)));
-		get_operation(&head, champion[i]);
+		op = new_operation(get_labels(champion, &i));
+		get_operation(&op, champion[i]);
+		add_operation(&head, op);
 		i++;
 	}
 	calculate_size(&head);

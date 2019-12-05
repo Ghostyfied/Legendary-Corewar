@@ -12,7 +12,6 @@ void		print_op(t_operation *op)
 {
 	if (!op)
 		return ;
-	print_op(op->next);
 	ft_putendl("-----------------");
 	ft_putstr("labels:\n");
 	print_labels(op->labels);
@@ -24,6 +23,7 @@ void		print_op(t_operation *op)
 	if (op->arg[2].op)
 		ft_printf("arg3 : %s\n", op->arg[2].op);
 	ft_putendl("-----------------");
+	print_op(op->next);
 
 }
 
@@ -32,10 +32,12 @@ void		calculate_size(t_operation **operations)
 	char *op;
 	t_byte	oct;
 	int		arg;
+
+	ft_printf("%s\n", op_tab[(*operations)->op].name);
 	if (op_tab[(*operations)->op].octal)
 	{
 		// Get octal
 		;
 	}
-	print_op(*operations);
+	// print_op(*operations);
 }
