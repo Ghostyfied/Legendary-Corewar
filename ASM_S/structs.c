@@ -21,8 +21,12 @@ void		add_operation(t_operation **head, t_operation *new)
 {
 	if (!head)
 		return ;
-	new->next = *head;
-	*head = new;
+	if (!*head)
+	{
+		*head = new;
+		return ;
+	}
+	add_operation(&(*head)->next, new);
 }
 
 t_operation	*new_operation(t_label *labels)
