@@ -50,9 +50,10 @@ void						add_operation(t_operation **head, t_operation *new);
 void						parse(char **champion);
 void						calculate_size(t_operation **operations);
 
+int							get_name_comm(char **champion);
+
 t_label						*new_label(char *name);
 
 t_operation					*new_operation(t_label *labels);
-int							get_name_comm(char **champion);
 
 #endif
