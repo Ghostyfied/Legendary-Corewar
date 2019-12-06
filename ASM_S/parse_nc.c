@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   parse_nc.c                                         :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: rvan-ket <rvan-ket@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2019/12/05 16:04:05 by rvan-ket       #+#    #+#                */
-/*   Updated: 2019/12/06 11:34:10 by fhignett      ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "asm.h"
 
 static char	*get_other_lines(char **champion, char *str, int *i, int j)
