@@ -25,6 +25,7 @@ static int			check_operation(char *s, int size)
 			return (op_tab[i].opcode);
 		i++;
 	}
+	ft_printf("ERROR OCCURRED AT : %s\n", s);
 	return (0);
 }
 

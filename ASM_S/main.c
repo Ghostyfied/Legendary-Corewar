@@ -46,6 +46,6 @@ int			main(int argc, char **argv)
 	parse(champion);
 	// make_file(champion, new_file_ext);
 
-	// ft_chararrfree(&champion);
+	ft_chararrfree(&champion);
 	return (ft_free_all(0));
 }

@@ -1,6 +1,6 @@
 #include "asm.h"
 
-static int	get_encoding_byte(int arg1, int arg2, int arg3)
+static int		get_encoding_byte(int arg1, int arg2, int arg3)
 {
 	t_byte byte;
 
@@ -77,7 +77,7 @@ static char		*get_arg(t_operation *head, t_arg arg, t_operation *op, int *size)
 	int		value;
 	char	*lbl;
 
-	s = "";
+	s = NULL;
 	if (!arg.arg)
 		return (s);
 	value = ft_atoi(&arg.op[1]);
@@ -95,29 +95,50 @@ static char		*get_arg(t_operation *head, t_arg arg, t_operation *op, int *size)
 	return (s);
 }
 
+static void		print_exc_code(char *s)
+{
+	int i;
+
+	i = 0;
+	while (s[i])
+	{
+		ft_putchar(s[i]);
+		if ((i + 1) % 2 == 0)
+			ft_putchar(' ');
+		i++;
+	}
+}
+
 void			make_exc_code(t_operation **head, int *size_array)
 {
-	char	*operation_code;
-	char	*encoding_byte;
-	char	*arg1;
-	char	*arg2;
-	char	*arg3;
-	int		size;
-	t_operation *tmp;
+	char		*operation_code;
+	char		*encoding_byte;
+	char		*arg1;
+	char		*arg2;
+	char		*arg3;
+	int			size;
+	t_operation	*tmp;
 
 	tmp = *head;
 	while (tmp)
 	{
 		operation_code = get_hex(tmp->op, 1);
+		encoding_byte = NULL;
 		if (op_tab[tmp->op].octal)
 			encoding_byte = get_hex(get_encoding_byte(tmp->arg[0].arg, tmp->arg[1].arg, tmp->arg[2].arg), 1);
-		else
-			encoding_byte = "";
 		arg1 = get_arg(*head, tmp->arg[0], tmp, size_array);
 		arg2 = get_arg(*head, tmp->arg[1], tmp, size_array);
 		arg3 = get_arg(*head, tmp->arg[2], tmp, size_array);
-		size = ft_strlen(operation_code) + ft_strlen(encoding_byte) + ft_strlen(arg1) + ft_strlen(arg2) + ft_strlen(arg3);
-		ft_printf("%s %s %s %s %s\n", operation_code, encoding_byte, arg1, arg2, arg3);
+		tmp->executable = operation_code;
+		if (encoding_byte)
+			tmp->executable = ft_strjoinfree(tmp->executable, encoding_byte);
+		if (arg1)
+			tmp->executable = ft_strjoinfree(tmp->executable, arg1);
+		if (arg2)
+			tmp->executable = ft_strjoinfree(tmp->executable, arg2);
+		if (arg3)
+			tmp->executable = ft_strjoinfree(tmp->executable, arg3);
+		print_exc_code(tmp->executable);
 		tmp = tmp->next;
 	}
 }
