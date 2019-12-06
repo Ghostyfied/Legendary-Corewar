@@ -85,7 +85,7 @@ static char		*get_arg(t_operation *head, t_arg arg, t_operation *op, int *size)
 		return (get_hex(value, 1));
 	lbl = ft_strchr(arg.op, LABEL_CHAR);
 	if (lbl)
-		value = find_label(head, ++lbl, op->size_index, size);
+		value = find_label(head, lbl + 1, op->size_index, size);
 	else if (arg.arg == T_IND)
 		value = ft_atoi(arg.op);
 	if (arg.arg == T_IND)
