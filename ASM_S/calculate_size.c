@@ -86,7 +86,7 @@ void		calculate_size(t_operation **operations)
 	if (op_tab[(*operations)->op].octal)
 	{
 		// Get octal
-		;
+		// ;
 	}
 	print_op(*operations);
 }
