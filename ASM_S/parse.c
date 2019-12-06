@@ -86,13 +86,15 @@ void				parse(char **champion)
 	int			i;
 	t_operation *head;
 	t_operation *op;
-	/* Check comment and name and IF valid ttranslate */
 
 	head = NULL;
 	i = get_name_comm(champion);
+<<<<<<< HEAD
 
 	printf("%d\n", i);
 
+=======
+>>>>>>> 054c61ad1ca183114bbbbbe63a6a8da04fea40b0
 	while (champion[i])
 	{
 		op = new_operation(get_labels(champion, &i));

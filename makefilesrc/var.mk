@@ -33,4 +33,4 @@ CORE_HEADERS	= $(addprefix $(INCLUDES_PATH), $(CORE_HEADERS_FILES))
 # ========== Libraries ========= #
 LIBFT_PATH		= libft/
 LIBFT_INCLUDES	= -I libft/includes
-LIBFT			= -L $(LIBFT_PATH) -lft
+LIBFT			= $(LIBFT_PATH)/libft.a

@@ -1,18 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   parse_nc.c                                         :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: rvan-ket <rvan-ket@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2019/12/05 16:04:05 by rvan-ket       #+#    #+#                */
-/*   Updated: 2019/12/05 19:23:02 by rvan-ket      ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "asm.h"
 
-char	*get_other_lines(char **champion, char *str, int *i, int j)
+static char	*get_other_lines(char **champion, char *str, int *i, int j)
 {
 	while (champion[j])
 	{
@@ -31,7 +19,7 @@ char	*get_other_lines(char **champion, char *str, int *i, int j)
 	return (str);
 }
 
-void	check_line(char *str, int len)
+static void	check_line(char *str, int len)
 {
 	int i;
 	int flag;
@@ -60,7 +48,7 @@ void	check_line(char *str, int len)
 	}
 }
 
-char	*get_str(char **champion, int *i, int j, int len)
+static char	*get_str(char **champion, int *i, int j, int len)
 {
 	char *ptr;
 	char *ptr2;
@@ -83,7 +71,7 @@ char	*get_str(char **champion, int *i, int j, int len)
 	return (str);
 }
 
-int	get_name_comm(char **champion)
+int		get_name_comm(char **champion)
 {
 	int		i;
 	char	*name;
@@ -104,7 +92,5 @@ int	get_name_comm(char **champion)
 			break ;
 		i++;
 	}
-	ft_putendl(name);
-	ft_putendl(comment);
 	return (i + 1);
 }

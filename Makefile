@@ -6,7 +6,7 @@
 #    By: awehlbur <awehlbur@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/11/05 14:49:04 by awehlbur       #+#    #+#                 #
-#    Updated: 2019/12/05 19:04:48 by fhignett      ########   odam.nl          #
+#    Updated: 2019/12/06 11:40:19 by fhignett      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ clean:
 
 fclean: clean
 	@rm -fv $(ASM) $(COREWAR)
-	@rm -fv libft/libft.a
+	@rm -fv $(LIBFT)
 
 re:
 	@$(MAKE) fclean
