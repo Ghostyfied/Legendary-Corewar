@@ -91,6 +91,8 @@ void				parse(char **champion)
 	head = NULL;
 	i = get_name_comm(champion);
 
+	printf("%d\n", i);
+
 	while (champion[i])
 	{
 		op = new_operation(get_labels(champion, &i));
