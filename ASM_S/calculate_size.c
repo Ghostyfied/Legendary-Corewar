@@ -88,5 +88,5 @@ void		calculate_size(t_operation **operations)
 		// Get octal
 		;
 	}
-	// print_op(*operations);
+	print_op(*operations);
 }
