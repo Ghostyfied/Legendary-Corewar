@@ -1,16 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   compile.c                                          :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: awehlbur <awehlbur@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2019/11/05 15:35:35 by awehlbur       #+#    #+#                */
-/*   Updated: 2019/12/05 12:41:18 by fhignett      ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "asm.h"
+#include <errno.h>
 
 /*
 **	Read complete file at once by using lseek and putting it in buffer.

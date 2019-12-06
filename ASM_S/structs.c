@@ -32,8 +32,11 @@ void		add_operation(t_operation **head, t_operation *new)
 t_operation	*new_operation(t_label *labels)
 {
 	t_operation *op;
+	static int	size_index;
 
 	op = MEM(t_operation);
 	op->labels = labels;
+	op->size_index = size_index;
+	size_index++;
 	return (op);
 }

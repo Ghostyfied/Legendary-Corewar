@@ -51,6 +51,23 @@ static t_label		*get_labels(char **champion, int *i)
 	return (label);
 }
 
+static void			get_arg_type(t_operation **op, int size)
+{
+	int i;
+
+	i = 0;
+	while (i < size)
+	{
+		if ((*op)->arg[i].op[0] == DIRECT_CHAR)
+			(*op)->arg[i].arg = T_DIR;
+		else if ((*op)->arg[i].op[0] == 'r')
+			(*op)->arg[i].arg = T_REG;
+		else
+			(*op)->arg[i].arg = T_IND;
+		i++;
+	}
+}
+
 static void			get_operation(t_operation **head, char *operation)
 {
 	int		i;
@@ -78,6 +95,7 @@ static void			get_operation(t_operation **head, char *operation)
 	}
 	if (args[i])
 		ft_error("Too many arguments");
+	get_arg_type(head, op_tab[(*head)->op].nb_arg);
 	ft_chararrfree(&args);
 }
 
@@ -86,15 +104,10 @@ void				parse(char **champion)
 	int			i;
 	t_operation *head;
 	t_operation *op;
+	int			*size;
 
 	head = NULL;
 	i = get_name_comm(champion);
-<<<<<<< HEAD
-
-	printf("%d\n", i);
-
-=======
->>>>>>> 054c61ad1ca183114bbbbbe63a6a8da04fea40b0
 	while (champion[i])
 	{
 		op = new_operation(get_labels(champion, &i));
@@ -102,5 +115,8 @@ void				parse(char **champion)
 		add_operation(&head, op);
 		i++;
 	}
-	calculate_size(&head);
+	size = (int*)ft_memalloc(sizeof(int) * (op->size_index + 2));
+	calculate_size(head, &size, 0);
+	make_exc_code(&head, size);
 }
+

@@ -6,7 +6,7 @@
 #    By: awehlbur <awehlbur@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/11/05 14:49:04 by awehlbur       #+#    #+#                 #
-#    Updated: 2019/12/06 11:40:19 by fhignett      ########   odam.nl          #
+#    Updated: 2019/12/06 12:58:39 by fhignett      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,9 @@ include makefilesrc/src.mk
 
 .PHONY: all libft clean fclean re
 
-all: libft $(ASM) $(COREWAR)
+all: $(ASM) $(COREWAR)
 
-libft:
+$(LIBFT_PATH)libft.a:
 	@make -C $(LIBFT_PATH)
 
 $(ASM_OBJS_PATH)%.o: $(ASM_PATH)%.c $(ASM_HEADERS) $(LIBFT_PATH)libft.a
