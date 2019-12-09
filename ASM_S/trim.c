@@ -32,7 +32,12 @@ static int	count_len(char *s)
 	return (len);
 }
 
-char		*free_strtrim(char *s)
+/*
+** Trims a string of all tabs and spaces at beginning and end of string.
+** Replaces all tabs and spaces for one space and returns this new string.
+*/
+
+char		*strtrim(char *s)
 {
 	int j;
 	int i;

@@ -16,6 +16,10 @@ static int		get_arg_size(t_arg arg, int op)
 	return (size);
 }
 
+/*
+** Calculates the size of each operation line.
+*/
+
 void			calculate_size(t_operation *op, int **byte_size, int i)
 {
 	int size;

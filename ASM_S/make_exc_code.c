@@ -1,5 +1,12 @@
 #include "asm.h"
 
+/*
+** Using bitwise operators gets the correct encoding byte.
+** T_REG = 01 (1)
+** T_DIR = 10 (2)
+** T_IND = 11 (3)
+*/
+
 static int		get_encoding_byte(int arg1, int arg2, int arg3)
 {
 	t_byte byte;
@@ -11,6 +18,11 @@ static int		get_encoding_byte(int arg1, int arg2, int arg3)
 	byte <<= 2;
 	return (byte);
 }
+
+/*
+** Returns a string with size bytesize.
+** String contains the hex of nb.
+*/
 
 static char		*get_hex(unsigned int nb, int bytesize)
 {
@@ -27,6 +39,14 @@ static char		*get_hex(unsigned int nb, int bytesize)
 	}
 	return (hex);
 }
+
+/*
+** Uses the int *size to add up the byte dist from the label name to the arg using the label.
+** If label(index) is bigger then the arg(index) then step = -1.
+** Add all the operation sizes until label(index) is the same as arg(index).
+** Returns the amount of bytes from label to arg.
+** Can be negative depending if label was called before or after arg.
+*/
 
 static int		calc_bytes_dist(int *size, int label, int arg)
 {
@@ -52,6 +72,10 @@ static int		calc_bytes_dist(int *size, int label, int arg)
 	return (byte_dist);
 }
 
+/*
+** Finds and calculates the amount of bytes from arg:label to label:operation the cursor has to jump in the VM.
+*/
+
 static int		find_label(t_operation *op, char *label, int size_idx, int *size)
 {
 	t_label		*lbl;
@@ -67,10 +91,13 @@ static int		find_label(t_operation *op, char *label, int size_idx, int *size)
 		}
 		op = op->next;
 	}
-	ft_printf("\nLabel : %s\n", label);
 	ft_error("Label doesn't exist");
 	return (-1);
 }
+
+/*
+** Returns hex string for each argument.
+*/
 
 static char		*get_arg(t_operation *head, t_arg arg, t_operation *op, int *size)
 {
@@ -96,6 +123,10 @@ static char		*get_arg(t_operation *head, t_arg arg, t_operation *op, int *size)
 	return (s);
 }
 
+/*
+** Just for testing.
+*/
+
 static void		print_exc_code(char *s)
 {
 	int i;
@@ -109,6 +140,11 @@ static void		print_exc_code(char *s)
 		i++;
 	}
 }
+
+/*
+** Gets all hex strings for each operation line.
+** Adds them to each t_operation node.
+*/
 
 void			make_exc_code(t_operation **head, int *size_array)
 {

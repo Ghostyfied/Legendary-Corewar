@@ -1,5 +1,10 @@
 #include "asm.h"
 
+/*
+** Returns the index + 1 of the char given in the parameters.
+** If not found index 0 is returned.
+*/
+
 static int			chr_idx(char *s, int c)
 {
 	int i;
@@ -13,6 +18,12 @@ static int			chr_idx(char *s, int c)
 	}
 	return (0);
 }
+
+/*
+** Checks to see if operation is valid.
+** Compares (size)char of the string with all operations listed in op.c.
+** Returns operation code
+*/
 
 static int			check_operation(char *s, int size)
 {
@@ -28,6 +39,14 @@ static int			check_operation(char *s, int size)
 	ft_printf("ERROR OCCURRED AT : |%s|\n", s);
 	return (0);
 }
+
+/*
+** Goes char by char over the string until it finds the LABEL_CHAR.
+** If found adds label to t_label linked list.
+** It keeps going until it comes across a char that isn't in LABEL_CHARS.
+** Returns t_label, can also be NULL.
+** *i will be incremented correctly so that it continues on the correct line.
+*/
 
 static t_label		*get_labels(char **champion, int *i)
 {
@@ -52,6 +71,11 @@ static t_label		*get_labels(char **champion, int *i)
 	return (label);
 }
 
+/*
+** Checks all args to get the type.
+** Size is the number of arguments teh operation is supposed to have.
+*/
+
 static void			get_arg_type(t_operation **op, int size)
 {
 	int i;
@@ -69,6 +93,17 @@ static void			get_arg_type(t_operation **op, int size)
 	}
 }
 
+/*
+** Get's the correct index to start IF there is a label present.
+** Skips the space if present after LABEL_CHAR
+** Gets the size of the operation name by searching for the first space after LABEL_CHAR.
+** Checks if the operation is a valid operation and gets the operation code.
+** i is set to the index of first argument.
+** String is split from SEPERATOR_CHAR into a char** for each argument.
+** Checks if it's got the correct amount of arguments and adds it to t_operation struct.
+** Then adds operation type to t_arg
+*/
+
 static void			get_operation(t_operation **head, char *operation)
 {
 	int		i;
@@ -78,7 +113,7 @@ static void			get_operation(t_operation **head, char *operation)
 	i = chr_idx(operation, LABEL_CHAR);
 	if (i && operation[i - 2] == '%')
 		i = 0;
-	while (operation[i] == ' ' || operation[i] == '\t')
+	if (operation[i] == ' ')
 		i++;
 	size = chr_idx(&operation[i], ' ') - 1;
 	(*head)->op = check_operation(&operation[i], size);
@@ -99,6 +134,15 @@ static void			get_operation(t_operation **head, char *operation)
 	get_arg_type(head, op_tab[(*head)->op].nb_arg);
 	ft_chararrfree(&args);
 }
+
+/*
+** Returns the index of where the champion code begins after the .name and .comment.
+** For each champion line, looks for the label(s) and creats a t_operation adding the labels.
+** Trims the string, reduces everything to one single space,
+** then adds the other information to t_operation. (see t_operation struct)
+** Mallocs an int array and adds the size in bytes for each command at the size_index for each t_operation.
+** Adds the execution code in hex to each t_operation node.
+*/
 
 void				parse(char **champion)
 {
