@@ -71,6 +71,22 @@ static char	*get_str(char **champion, int *i, int j, int len)
 	return (str);
 }
 
+int		is_empty(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == COMMENT_CHAR)
+			return (1);
+		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int		get_name_comm(char **champion)
 {
 	int		i;
@@ -93,7 +109,7 @@ int		get_name_comm(char **champion)
 		i++;
 	}
 	i++;
-	while (champion[i][0] == '\n')
+	while (is_empty(champion[i]))
 		i++;
 	return (i);
 }

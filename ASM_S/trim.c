@@ -32,7 +32,7 @@ static int	count_len(char *s)
 	return (len);
 }
 
-char		*free_strtrim(char *s)
+char		*strtrim(char *s)
 {
 	int j;
 	int i;
