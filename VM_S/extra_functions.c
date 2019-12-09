@@ -1,6 +1,6 @@
 
 
-#include "../includes/vm.h"
+#include "vm.h"
 
 /*
 **	Check whether the argument after -n is a number
