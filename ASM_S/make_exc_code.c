@@ -12,7 +12,7 @@ static int		get_encoding_byte(int arg1, int arg2, int arg3)
 	return (byte);
 }
 
-static char		*get_hex(unsigned int nb, int bytesize)
+char		*get_hex(unsigned int nb, int bytesize)
 {
 	char *hex;
 

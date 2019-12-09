@@ -87,24 +87,24 @@ int		is_empty(char *str)
 	return (1);
 }
 
-int		get_name_comm(char **champion)
+int		get_name_comm(char **champion, t_asm **asm_info)
 {
 	int		i;
 	char	*name;
 	char	*comment;
 
 	i = 0;
-	name = NULL;
-	comment = NULL;
+	(*asm_info)->name = NULL;
+	(*asm_info)->comment = NULL;
 	while (champion[i])
 	{
 		if (!ft_strncmp(".name", champion[i], 5))
-			name = get_str(champion, &i, i, 5);
+			(*asm_info)->name = get_str(champion, &i, i, 5);
 		else if (!ft_strncmp(".comment", champion[i], 8))
-			comment = get_str(champion, &i, i, 8);
+			(*asm_info)->comment = get_str(champion, &i, i, 8);
 		else if (*champion[i] != '\n')
 			ft_error("foute naam of comment brobro");
-		if (name && comment)
+		if ((*asm_info)->name && (*asm_info)->comment)
 			break ;
 		i++;
 	}
