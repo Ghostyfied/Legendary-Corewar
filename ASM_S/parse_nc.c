@@ -71,7 +71,7 @@ static char	*get_str(char **champion, int *i, int j, int len)
 	return (str);
 }
 
-int		is_empty(char *str)
+int			is_empty(char *str)
 {
 	int i;
 
@@ -87,7 +87,7 @@ int		is_empty(char *str)
 	return (1);
 }
 
-int		get_name_comm(char **champion, t_asm **asm_info)
+int			get_name_comm(char **champion, t_asm **asm_info)
 {
 	int		i;
 	char	*name;

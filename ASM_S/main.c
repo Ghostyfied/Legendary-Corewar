@@ -1,10 +1,5 @@
 #include "asm.h"
 
-int			ft_free_all(int	l)
-{
-	return (l);
-}
-
 char		*ft_check_filename(char *file)
 {
 	char	*end;
@@ -16,44 +11,44 @@ char		*ft_check_filename(char *file)
 		return (NULL);
 	if (ft_strcmp(end, ".s"))
 		return (NULL);
-	new_file_ext = ft_strnew(end - file  + 2);
+	new_file_ext = ft_strnew(end - file + 2);
 	ft_strncpy(new_file_ext, file, end - file + 1);
 	ft_strncpy(ft_strrchr(new_file_ext, '.') + 1, "cor", 3);
 	return (new_file_ext);
 }
 
-int		calchex(char one, char two)
+int			calchex(char one, char two)
 {
 	int		i;
 	int		j;
 	char	*hex;
-	
+
 	hex = ft_strdup("0123456789abcdef");
 	i = ft_strchr(hex, one) - hex;
 	j = ft_strchr(hex, two) - hex;
 	return (16 * i + j);
 }
 
-void	puthex(char *str, int fd)
+void		puthex(char *str, int fd)
 {
 	int i;
 	int	len;
 
 	i = 0;
 	len = ft_strlen(str);
-	while(i < len)
-	{	
+	while (i < len)
+	{
 		ft_putchar_fd(calchex(str[i], str[i + 1]), fd);
 		i += 2;
 	}
 }
 
-void	make_file(char **champion, char *new_filename, t_asm *asm_info)
+void		make_file(char **champion, char *new_filename, t_asm *asm_info)
 {
-	int			fd;
-	t_operation	*op;
-	char		*exec_size;
-	unsigned char		byte;
+	int				fd;
+	t_operation		*op;
+	char			*exec_size;
+	unsigned char	byte;
 
 	fd = open(new_filename, O_CREAT | O_RDWR, 0666);
 	if (fd < 0)
