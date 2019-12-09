@@ -164,9 +164,9 @@ void				name_comm_hexify(t_asm **asm_info)
 	char	*comment;
 
 	name  = hex_fill((*asm_info)->name, CHAMP_MAX_SIZE);
-	printf("NAME: %s\n", name);
+	// printf("NAME: %s\n", name);
 	comment  = hex_fill((*asm_info)->comment, COMMENT_LENGTH);
-	printf("COMMENT: %s\n", comment);
+	// printf("COMMENT: %s\n", comment);
 	free((*asm_info)->comment);
 	free((*asm_info)->name);
 	(*asm_info)->name = name;
@@ -201,5 +201,5 @@ void				parse(char **champion, t_asm **asm_info)
 	}
 	size = (int*)ft_memalloc(sizeof(int) * (op->size_index + 2));
 	calculate_size(head, &size, 0);
-	make_exc_code(&head, size);
+	(*asm_info)->exec_code_size = make_exc_code(&head, size);
 }

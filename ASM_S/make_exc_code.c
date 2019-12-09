@@ -126,25 +126,26 @@ static char		*get_arg(t_operation *head, t_arg arg, t_operation *op, int *size)
 /*
 ** Gets all hex strings for each operation line.
 ** Adds them to each t_operation node.
+** Returns the Champions exec code size. (not hex!)
 */
 
-void			make_exc_code(t_operation **head, int *size_array)
+int			make_exc_code(t_operation **head, int *size_array)
 {
-	char		*operation_code;
 	char		*encoding_byte;
 	char		*args;
 	t_operation	*tmp;
+	int			size;
 	int			i;
 
 	tmp = *head;
+	size = 0;
 	while (tmp)
 	{
 		i = 0;
-		operation_code = get_hex(tmp->op, 1);
+		tmp->executable = get_hex(tmp->op, 1);
 		encoding_byte = NULL;
 		if (op_tab[tmp->op].octal)
 			encoding_byte = get_hex(get_encoding_byte(tmp->arg[0].arg, tmp->arg[1].arg, tmp->arg[2].arg), 1);
-		tmp->executable = operation_code;
 		if (encoding_byte)
 			tmp->executable = ft_strjoinfree(tmp->executable, encoding_byte);
 		while (i < 3)
@@ -154,7 +155,8 @@ void			make_exc_code(t_operation **head, int *size_array)
 				tmp->executable = ft_strjoinfree(tmp->executable, args);
 			i++;
 		}
-		print_exc_code(tmp->executable);
+		size += (ft_strlen(tmp->executable) >> 1);
 		tmp = tmp->next;
 	}
+	return (size);
 }

@@ -33,6 +33,7 @@ typedef struct			s_operation
 typedef	struct			s_asm
 {
 	t_operation			*operations;
+	int					exec_code_size;
 	char				*name;
 	char				*comment;
 	// struct s_label		*next;
@@ -45,8 +46,8 @@ void					add_label(t_label **head, t_label *new);
 void					add_operation(t_operation **head, t_operation *new);
 void					parse(char **champion, t_asm **asm_info);
 void					calculate_size(t_operation *operations, int **size, int i);
-void					make_exc_code(t_operation **op, int *size);
 
+int						make_exc_code(t_operation **op, int *size);
 int						get_name_comm(char **champion, t_asm **asm_info);
 
 t_label					*new_label(char *name);
