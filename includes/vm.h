@@ -1,7 +1,14 @@
 #ifndef VM_H
 # define VM_H
+
 # include "op.h"
-# include "../libft/libft.h"
+# include "libft.h"
+
+typedef struct			s_cursor
+{
+	int					carry;
+	int					registry[REG_NUMBER];
+}						t_cursor;
 
 typedef struct			s_champ
 {

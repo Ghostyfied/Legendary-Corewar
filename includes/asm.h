@@ -7,12 +7,6 @@
 
 # define MEM(x) (x*)ft_memalloc(sizeof(x))
 
-typedef struct			s_cursor
-{
-	int					carry;
-	int					registry[REG_NUMBER];
-}						t_cursor;
-
 typedef	struct			s_arg
 {
 	int					arg;
