@@ -26,3 +26,17 @@ void			print_op(t_operation *op)
 	ft_putendl("-----------------");
 	print_op(op->next);
 }
+
+void		print_exc_code(char *s)
+{
+	int i;
+
+	i = 0;
+	while (s[i])
+	{
+		ft_putchar(s[i]);
+		if ((i + 1) % 2 == 0)
+			ft_putchar(' ');
+		i++;
+	}
+}

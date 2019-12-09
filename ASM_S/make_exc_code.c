@@ -124,24 +124,6 @@ static char		*get_arg(t_operation *head, t_arg arg, t_operation *op, int *size)
 }
 
 /*
-** Just for testing.
-*/
-
-static void		print_exc_code(char *s)
-{
-	int i;
-
-	i = 0;
-	while (s[i])
-	{
-		ft_putchar(s[i]);
-		if ((i + 1) % 2 == 0)
-			ft_putchar(' ');
-		i++;
-	}
-}
-
-/*
 ** Gets all hex strings for each operation line.
 ** Adds them to each t_operation node.
 */
@@ -150,31 +132,28 @@ void			make_exc_code(t_operation **head, int *size_array)
 {
 	char		*operation_code;
 	char		*encoding_byte;
-	char		*arg1;
-	char		*arg2;
-	char		*arg3;
-	int			size;
+	char		*args;
 	t_operation	*tmp;
+	int			i;
 
 	tmp = *head;
 	while (tmp)
 	{
+		i = 0;
 		operation_code = get_hex(tmp->op, 1);
 		encoding_byte = NULL;
 		if (op_tab[tmp->op].octal)
 			encoding_byte = get_hex(get_encoding_byte(tmp->arg[0].arg, tmp->arg[1].arg, tmp->arg[2].arg), 1);
-		arg1 = get_arg(*head, tmp->arg[0], tmp, size_array);
-		arg2 = get_arg(*head, tmp->arg[1], tmp, size_array);
-		arg3 = get_arg(*head, tmp->arg[2], tmp, size_array);
 		tmp->executable = operation_code;
 		if (encoding_byte)
 			tmp->executable = ft_strjoinfree(tmp->executable, encoding_byte);
-		if (arg1)
-			tmp->executable = ft_strjoinfree(tmp->executable, arg1);
-		if (arg2)
-			tmp->executable = ft_strjoinfree(tmp->executable, arg2);
-		if (arg3)
-			tmp->executable = ft_strjoinfree(tmp->executable, arg3);
+		while (i < 3)
+		{
+			args = get_arg(*head, tmp->arg[i], tmp, size_array);
+			if (args)
+				tmp->executable = ft_strjoinfree(tmp->executable, args);
+			i++;
+		}
 		print_exc_code(tmp->executable);
 		tmp = tmp->next;
 	}

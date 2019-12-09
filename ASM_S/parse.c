@@ -126,7 +126,7 @@ static void			get_operation(t_operation **head, char *operation)
 	{
 		if (!args[i])
 			ft_error("Missing argument");
-		(*head)->arg[i].op = ft_strdup(args[i]);
+		(*head)->arg[i].op = ft_strtrim(args[i]);
 		i++;
 	}
 	if (args[i])
@@ -163,5 +163,4 @@ void				parse(char **champion)
 	size = (int*)ft_memalloc(sizeof(int) * (op->size_index + 2));
 	calculate_size(head, &size, 0);
 	make_exc_code(&head, size);
-	ft_putendl("");
 }

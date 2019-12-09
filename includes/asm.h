@@ -56,6 +56,7 @@ t_operation				*new_operation(t_label *labels);
 /* DEBUG */
 void			print_labels(t_label *lbl);
 void			print_op(t_operation *op);
+void			print_exc_code(char *s);
 /* DEBUG */
 
 #endif
