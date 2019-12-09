@@ -92,5 +92,8 @@ int		get_name_comm(char **champion)
 			break ;
 		i++;
 	}
-	return (i + 1);
+	i++;
+	while (champion[i][0] == '\n')
+		i++;
+	return (i);
 }
