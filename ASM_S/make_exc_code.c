@@ -15,8 +15,7 @@ static int		get_encoding_byte(int arg1, int arg2, int arg3)
 	byte = byte | arg1;
 	byte = (byte << 2) | arg2;
 	byte = (byte << 2) | arg3;
-	byte <<= 2;
-	return (byte);
+	return (byte << 2);
 }
 
 /*
