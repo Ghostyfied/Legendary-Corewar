@@ -163,7 +163,7 @@ void				name_comm_hexify(t_asm **asm_info)
 	char	*name;
 	char	*comment;
 
-	name  = hex_fill((*asm_info)->name, CHAMP_MAX_SIZE);
+	name  = hex_fill((*asm_info)->name, PROG_NAME_LENGTH);
 	// printf("NAME: %s\n", name);
 	comment  = hex_fill((*asm_info)->comment, COMMENT_LENGTH);
 	// printf("COMMENT: %s\n", comment);
