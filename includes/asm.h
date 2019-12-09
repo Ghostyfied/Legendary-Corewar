@@ -37,7 +37,7 @@ typedef struct			s_operation
 
 typedef	struct			s_asm
 {
-	t_operation			operation;
+	t_operation			*operations;
 	char				*name;
 	char				*comment;
 	// struct s_label		*next;
