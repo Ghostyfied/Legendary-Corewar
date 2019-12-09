@@ -9,6 +9,10 @@ t_label		*new_label(char *name)
 	return (label);
 }
 
+/*
+** Add t_label to front of a linked list.
+*/
+
 void		add_label(t_label **head, t_label *new)
 {
 	if (!head)
@@ -16,6 +20,10 @@ void		add_label(t_label **head, t_label *new)
 	new->next = *head;
 	*head = new;
 }
+
+/*
+** Add t_operation to end of a linked list.
+*/
 
 void		add_operation(t_operation **head, t_operation *new)
 {
@@ -28,6 +36,10 @@ void		add_operation(t_operation **head, t_operation *new)
 	}
 	add_operation(&(*head)->next, new);
 }
+
+/*
+** Adds size_index, to find the correct size in int *size. (see parse.c/parse() comment)
+*/
 
 t_operation	*new_operation(t_label *labels)
 {
