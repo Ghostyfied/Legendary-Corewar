@@ -67,6 +67,7 @@ static int		find_label(t_operation *op, char *label, int size_idx, int *size)
 		}
 		op = op->next;
 	}
+	ft_printf("\nLabel : %s\n", label);
 	ft_error("Label doesn't exist");
 	return (-1);
 }

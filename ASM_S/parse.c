@@ -25,7 +25,7 @@ static int			check_operation(char *s, int size)
 			return (op_tab[i].opcode);
 		i++;
 	}
-	ft_printf("ERROR OCCURRED AT : %s\n", s);
+	ft_printf("ERROR OCCURRED AT : |%s|\n", s);
 	return (0);
 }
 
@@ -91,7 +91,7 @@ static void			get_operation(t_operation **head, char *operation)
 	{
 		if (!args[i])
 			ft_error("Missing argument");
-		(*head)->arg[i].op = ft_strtrim(args[i]);
+		(*head)->arg[i].op = ft_strdup(args[i]);
 		i++;
 	}
 	if (args[i])
@@ -112,12 +112,12 @@ void				parse(char **champion)
 	while (champion[i])
 	{
 		op = new_operation(get_labels(champion, &i));
-		get_operation(&op, champion[i]);
+		get_operation(&op, strtrim(champion[i]));
 		add_operation(&head, op);
 		i++;
 	}
 	size = (int*)ft_memalloc(sizeof(int) * (op->size_index + 2));
 	calculate_size(head, &size, 0);
 	make_exc_code(&head, size);
+	ft_putendl("");
 }
-

@@ -3,6 +3,7 @@
 
 # include "libft.h"
 # include "op.h"
+# include <stdio.h>
 # include <errno.h>
 
 # define MEM(x) (x*)ft_memalloc(sizeof(x))
@@ -38,6 +39,7 @@ typedef	struct			s_asm
 }						t_asm;
 
 char					**ft_read_file(char *filename);
+char					*strtrim(char *s);
 
 void					add_label(t_label **head, t_label *new);
 void					add_operation(t_operation **head, t_operation *new);
