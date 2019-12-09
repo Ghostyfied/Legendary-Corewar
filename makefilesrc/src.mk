@@ -10,7 +10,12 @@ ASM_SRCS_FILES		=	op.c \
 						debug.c #DELETE LATER
 
 
-CORE_SRCS_FILES		=	main.c
+CORE_SRCS_FILES		=	main.c \
+						assign_positions.c \
+						check_flag_stuff.c \
+						count_and_check_champs.c \
+						extra_functions.c \
+						read_file.c
 
 ASM_HEADERS_FILES	=	op.h
 

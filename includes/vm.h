@@ -35,5 +35,16 @@ typedef struct			s_vm
 
 void			check_champion_position(t_vm *vm);
 void			count_champions(t_vm *vm, char **argv);
+void			assign_champ_num(t_vm *vm, int argc, char **argv);
+
+// static int		ft_is_a_number(char *str);
+
+int				ft_arrlen(char **tab);
+void			ft_arrdel(char **arr);
+void			set_no_flag_number(t_vm *vm, int num, int nb);
+int				ft_is_a_number(char *str);
+void			retrieve_flags(t_vm *vm, int argc, char **argv);
+void			read_file(t_vm *vm, char *argv, int num);
+
 
 #endif
