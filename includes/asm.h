@@ -27,7 +27,7 @@ typedef struct			s_operation
 	int					op;
 	t_arg				arg[3];
 	char				*executable;
-	struct s_operation *next;
+	struct s_operation	*next;
 }						t_operation;
 
 typedef	struct			s_asm
@@ -36,29 +36,28 @@ typedef	struct			s_asm
 	int					exec_code_size;
 	char				*name;
 	char				*comment;
-	// struct s_label		*next;
 }						t_asm;
 
 char					**ft_read_file(char *filename);
 char					*strtrim(char *s);
+char					*get_hex(unsigned int nb, int bytesize);
 
+void					name_comm_hexify(t_asm **asm_info);
 void					add_label(t_label **head, t_label *new);
 void					add_operation(t_operation **head, t_operation *new);
 void					parse(char **champion, t_asm **asm_info);
-void					calculate_size(t_operation *operations, int **size, int i);
+void					calculate_size(t_operation *operations,
+						int **size, int i);
 
 int						make_exc_code(t_operation **op, int *size);
 int						get_name_comm(char **champion, t_asm **asm_info);
+int						chr_idx(char *s, int c);
+int						get_encoding_byte(t_arg *arg);
+int						check_operation(char *s, int size);
+int						check_op_on_line(char *line);
 
 t_label					*new_label(char *name);
 
 t_operation				*new_operation(t_label *labels);
 
-/* DEBUG */
-void			print_labels(t_label *lbl);
-void			print_op(t_operation *op);
-void			print_exc_code(char *s);
-/* DEBUG */
-
-char				*get_hex(unsigned int nb, int bytesize);
 #endif

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   calculate_size.c                                   :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/12/10 16:04:07 by fhignett       #+#    #+#                */
+/*   Updated: 2019/12/10 16:24:15 by fhignett      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
 static int		get_arg_size(t_arg arg, int op)
@@ -12,7 +24,7 @@ static int		get_arg_size(t_arg arg, int op)
 	else if (arg.arg == T_IND)
 		size = 2;
 	else if (arg.arg == T_DIR)
-		size = op_tab[op].dir_size;
+		size = g_op_tab[op].dir_size;
 	return (size);
 }
 
@@ -28,7 +40,7 @@ void			calculate_size(t_operation *op, int **byte_size, int i)
 		return ;
 	calculate_size(op->next, byte_size, i + 1);
 	size = 1;
-	if (op_tab[op->op].octal)
+	if (g_op_tab[op->op].octal)
 		size++;
 	size += get_arg_size(op->arg[0], op->op);
 	size += get_arg_size(op->arg[1], op->op);

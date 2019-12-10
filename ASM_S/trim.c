@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   trim.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/12/10 16:17:15 by fhignett       #+#    #+#                */
+/*   Updated: 2019/12/10 16:22:51 by fhignett      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
 static int	iswspace(char c)
@@ -32,6 +44,23 @@ static int	count_len(char *s)
 	return (len);
 }
 
+static char	*replace_wspaces(char *trim, char *s, int *j, int *i)
+{
+	trim[*j] = ' ';
+	(*j)++;
+	while (iswspace(s[*i]))
+		(*i)++;
+	return (trim);
+}
+
+static char	*copy_str(char *trim, char *s, int *j, int *i)
+{
+	trim[*j] = s[*i];
+	(*i)++;
+	(*j)++;
+	return (trim);
+}
+
 /*
 ** Trims a string of all tabs and spaces at beginning and end of string.
 ** Replaces all tabs and spaces for one space and returns this new string.
@@ -39,10 +68,10 @@ static int	count_len(char *s)
 
 char		*strtrim(char *s)
 {
-	int j;
-	int i;
-	int len;
-	char *trim;
+	int		j;
+	int		i;
+	int		len;
+	char	*trim;
 
 	i = 0;
 	if (!s)
@@ -57,19 +86,9 @@ char		*strtrim(char *s)
 	while (s[i] && j < len)
 	{
 		if (iswspace(s[i]))
-		{
-			trim[j] = ' ';
-			j++;
-			while (iswspace(s[i]))
-				i++;
-		}
+			trim = replace_wspaces(trim, s, &j, &i);
 		else
-		{
-			trim[j] = s[i];
-			i++;
-			j++;
-		}
+			trim = copy_str(trim, s, &j, &i);
 	}
-	trim[j] = '\0';
 	return (trim);
 }

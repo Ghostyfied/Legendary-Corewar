@@ -6,13 +6,13 @@
 /*   By: awehlbur <awehlbur@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/05 15:37:39 by awehlbur       #+#    #+#                */
-/*   Updated: 2019/12/06 14:33:29 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/12/10 16:16:06 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
 
-t_op	op_tab[17] =
+t_op	g_op_tab[17] =
 {
 	{0, 0, {0}, 0, 0, 0, 0, 0},
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 4},

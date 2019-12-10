@@ -8,7 +8,8 @@ ASM_SRCS_FILES		=	op.c \
 						parse_nc.c \
 						make_exc_code.c \
 						trim.c \
-						debug.c #DELETE LATER
+						hex.c \
+						misc.c
 
 
 CORE_SRCS_FILES		=	main.c \

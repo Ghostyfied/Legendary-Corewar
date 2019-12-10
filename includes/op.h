@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 17:56:24 by fhignett       #+#    #+#                */
-/*   Updated: 2019/12/06 13:52:59 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/12/10 16:16:14 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,6 @@ typedef struct					s_op
 	t_byte						dir_size;
 }								t_op;
 
-extern t_op						op_tab[17];
+extern t_op						g_op_tab[17];
 
 #endif

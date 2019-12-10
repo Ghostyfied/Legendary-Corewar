@@ -1,53 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   make_exc_code.c                                    :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/12/10 16:09:17 by fhignett       #+#    #+#                */
+/*   Updated: 2019/12/10 16:50:29 by fhignett      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
 /*
-** Using bitwise operators gets the correct encoding byte.
-** T_REG = 01 (1)
-** T_DIR = 10 (2)
-** T_IND = 11 (3)
-*/
-
-static int		get_encoding_byte(int arg1, int arg2, int arg3)
-{
-	t_byte byte;
-
-	byte = 0;
-	byte = byte | arg1;
-	byte = (byte << 2) | arg2;
-	byte = (byte << 2) | arg3;
-	return (byte << 2);
-}
-
-/*
-** Returns a string with size bytesize.
-** String contains the hex of nb.
-*/
-
-char		*get_hex(unsigned int nb, int bytesize)
-{
-	char *hex;
-
-	bytesize *= 2;
-	hex = ft_strnew(bytesize);
-	bytesize--;
-	while (bytesize >= 0)
-	{
-		hex[bytesize] = "0123456789abcdef"[nb % 16];
-		nb /= 16;
-		bytesize--;
-	}
-	return (hex);
-}
-
-/*
-** Uses the int *size to add up the byte dist from the label name to the arg using the label.
+** Uses the int *size to add up the byte dist from
+** the label name to the arg using the label.
 ** If label(index) is bigger then the arg(index) then step = -1.
 ** Add all the operation sizes until label(index) is the same as arg(index).
 ** Returns the amount of bytes from label to arg.
 ** Can be negative depending if label was called before or after arg.
 */
 
-static int		calc_bytes_dist(int *size, int label, int arg)
+static int	calc_bytes_dist(int *size, int label, int arg)
 {
 	int i;
 	int	step;
@@ -72,10 +46,11 @@ static int		calc_bytes_dist(int *size, int label, int arg)
 }
 
 /*
-** Finds and calculates the amount of bytes from arg:label to label:operation the cursor has to jump in the VM.
+** Finds and calculates the amount of bytes from
+** arg:label to label:operation the cursor has to jump in the VM.
 */
 
-static int		find_label(t_operation *op, char *label, int size_idx, int *size)
+static int	find_label(t_operation *op, char *label, int size_idx, int *size)
 {
 	t_label		*lbl;
 
@@ -98,7 +73,7 @@ static int		find_label(t_operation *op, char *label, int size_idx, int *size)
 ** Returns hex string for each argument.
 */
 
-static char		*get_arg(t_operation *head, t_arg arg, t_operation *op, int *size)
+static char	*get_arg(t_operation *head, t_arg arg, t_operation *op, int *size)
 {
 	char	*s;
 	int		value;
@@ -118,8 +93,23 @@ static char		*get_arg(t_operation *head, t_arg arg, t_operation *op, int *size)
 	if (arg.arg == T_IND)
 		s = get_hex(value, 2);
 	else if (arg.arg == T_DIR)
-		s = get_hex(value, op_tab[op->op].dir_size);
+		s = get_hex(value, g_op_tab[op->op].dir_size);
 	return (s);
+}
+
+static void	arg_exc_code(t_operation *tmp, t_operation *head, int *size_array)
+{
+	int		i;
+	char	*args;
+
+	i = 0;
+	while (i < 3)
+	{
+		args = get_arg(head, tmp->arg[i], tmp, size_array);
+		if (args)
+			tmp->executable = ft_strjoinfree(tmp->executable, args);
+		i++;
+	}
 }
 
 /*
@@ -131,29 +121,20 @@ static char		*get_arg(t_operation *head, t_arg arg, t_operation *op, int *size)
 int			make_exc_code(t_operation **head, int *size_array)
 {
 	char		*encoding_byte;
-	char		*args;
 	t_operation	*tmp;
 	int			size;
-	int			i;
 
 	tmp = *head;
 	size = 0;
 	while (tmp)
 	{
-		i = 0;
 		tmp->executable = get_hex(tmp->op, 1);
 		encoding_byte = NULL;
-		if (op_tab[tmp->op].octal)
-			encoding_byte = get_hex(get_encoding_byte(tmp->arg[0].arg, tmp->arg[1].arg, tmp->arg[2].arg), 1);
+		if (g_op_tab[tmp->op].octal)
+			encoding_byte = get_hex(get_encoding_byte(tmp->arg), 1);
 		if (encoding_byte)
 			tmp->executable = ft_strjoinfree(tmp->executable, encoding_byte);
-		while (i < 3)
-		{
-			args = get_arg(*head, tmp->arg[i], tmp, size_array);
-			if (args)
-				tmp->executable = ft_strjoinfree(tmp->executable, args);
-			i++;
-		}
+		arg_exc_code(tmp, *head, size_array);
 		size += (ft_strlen(tmp->executable) >> 1);
 		tmp = tmp->next;
 	}

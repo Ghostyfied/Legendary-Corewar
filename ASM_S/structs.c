@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   structs.c                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/12/10 16:16:49 by fhignett       #+#    #+#                */
+/*   Updated: 2019/12/10 16:17:02 by fhignett      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
 t_label		*new_label(char *name)
@@ -38,7 +50,8 @@ void		add_operation(t_operation **head, t_operation *new)
 }
 
 /*
-** Adds size_index, to find the correct size in int *size. (see parse.c/parse() comment)
+** Adds size_index, to find the correct size in int *size.
+** (see parse.c/parse() comment)
 */
 
 t_operation	*new_operation(t_label *labels)
