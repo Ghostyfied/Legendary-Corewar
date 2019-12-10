@@ -50,7 +50,7 @@ char		*strtrim(char *s)
 	while (iswspace(s[i]))
 		i++;
 	if (!s[i])
-		return (NULL);
+		return (ft_strdup(""));
 	len = count_len(&s[i]);
 	trim = (char*)ft_memalloc(sizeof(char) * (len + 1));
 	j = 0;

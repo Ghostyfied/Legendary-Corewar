@@ -63,7 +63,7 @@ static int			check_op_on_line(char *line)
 /*
 ** Goes char by char over the string until it finds the LABEL_CHAR.
 ** If found adds label to t_label linked list.
-** It keeps going until it comes across a char that isn't in LABEL_CHARS.
+** Checks if after LABEL_CHAR there is a comment or operation.
 ** Returns t_label, can also be NULL.
 ** *i will be incremented correctly so that it continues on the correct line.
 */
@@ -86,6 +86,8 @@ static t_label		*get_labels(char **champion, int *i)
 			{
 				j = 0;
 				(*i)++;
+				while (champion[*i][j] == COMMENT_CHAR || !ft_strlen(champion[*i]))
+					(*i)++;
 			}
 		}
 		else if (!ft_strchr(LABEL_CHARS, champion[*i][j]))
@@ -151,7 +153,7 @@ static void			get_operation(t_operation **head, char *operation)
 	{
 		if (!args[i])
 			ft_error("Missing argument");
-		(*head)->arg[i].op = ft_strtrim(args[i]);
+		(*head)->arg[i].op = strtrim(args[i]);
 		i++;
 	}
 	if (args[i])
@@ -222,7 +224,7 @@ void				parse(char **champion, t_asm **asm_info)
 	while (champion[i])
 	{
 		op = new_operation(get_labels(champion, &i));
-		get_operation(&op, strtrim(champion[i]));
+		get_operation(&op, champion[i]);
 		add_operation(&head, op);
 		i++;
 	}

@@ -21,10 +21,15 @@ char			**ft_read_file(char *filename)
 	lseek(fd, 0, SEEK_SET);	/* Set read pointer to beggining of the file */
 	read(fd, buff, size); /* read whole file at once */
 	close(fd);
-	tmp = buff;
-	buff = strtrim(buff);
 	champion = ft_strsplit(buff, '\n');
+	fd = 0;
+	while (champion[fd])
+	{
+		tmp = champion[fd];
+		champion[fd] = strtrim(champion[fd]);
+		free(tmp);
+		fd++;
+	}
 	ft_strdel(&buff);
-	free(tmp);
 	return (champion);
 }
