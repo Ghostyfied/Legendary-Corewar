@@ -16,7 +16,7 @@ void			print_op(t_operation *op)
 	ft_putendl("-----------------");
 	ft_putstr("labels:\n");
 	print_labels(op->labels);
-	ft_printf("%dop id : %d\n", op->size_index, op->op);
+	ft_printf("op id : %d\n", op->op);
 	if (op->arg[0].op)
 		ft_printf("arg1 : %-8s -> %d\n", op->arg[0].op, op->arg[0].arg);
 	if (op->arg[1].op)

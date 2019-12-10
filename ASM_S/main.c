@@ -86,5 +86,5 @@ int			main(int argc, char **argv)
 	parse(champion, &asm_info);
 	make_file(champion, new_file_ext, asm_info);
 	ft_chararrfree(&champion);
-	return (ft_free_all(0));
+	return (0);
 }
