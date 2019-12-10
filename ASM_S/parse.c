@@ -41,6 +41,26 @@ static int			check_operation(char *s, int size)
 }
 
 /*
+** Checks the characters afte the LABEL_CHAR
+*/
+
+static int			check_op_on_line(char *line)
+{
+	int i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == COMMENT_CHAR)
+			return (0);
+		else if (line[i] != ' ')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+/*
 ** Goes char by char over the string until it finds the LABEL_CHAR.
 ** If found adds label to t_label linked list.
 ** It keeps going until it comes across a char that isn't in LABEL_CHARS.
@@ -58,15 +78,20 @@ static t_label		*get_labels(char **champion, int *i)
 	while (champion[*i][j])
 	{
 		if (champion[*i][j] == LABEL_CHAR)
+		{
 			add_label(&label, new_label(ft_strncpy(ft_strnew(j), champion[*i], j)));
+			if (check_op_on_line(&champion[*i][j + 1]))
+				break ;
+			else
+			{
+				j = 0;
+				(*i)++;
+			}
+		}
 		else if (!ft_strchr(LABEL_CHARS, champion[*i][j]))
 			break ;
-		j++;
-		if (!champion[*i][j])
-		{
-			j = 0;
-			(*i)++;
-		}
+		else
+			j++;
 	}
 	return (label);
 }
@@ -135,7 +160,11 @@ static void			get_operation(t_operation **head, char *operation)
 	ft_chararrfree(&args);
 }
 
-/* name and comment to hex __ hex_fill checks if name or comment doesnt exeed bytes and fills remaining bytes*/
+/*
+** name and comment to hex
+** hex_fill checks if name or comment doesnt exceed bytes and fills remaining bytes
+*/
+
 char				*hex_fill(char *str, int size)
 {
 	int		i;
@@ -164,9 +193,7 @@ void				name_comm_hexify(t_asm **asm_info)
 	char	*comment;
 
 	name  = hex_fill((*asm_info)->name, PROG_NAME_LENGTH);
-	// printf("NAME: %s\n", name);
 	comment  = hex_fill((*asm_info)->comment, COMMENT_LENGTH);
-	// printf("COMMENT: %s\n", comment);
 	free((*asm_info)->comment);
 	free((*asm_info)->name);
 	(*asm_info)->name = name;

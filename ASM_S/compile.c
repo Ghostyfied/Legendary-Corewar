@@ -9,6 +9,7 @@ char			**ft_read_file(char *filename)
 {
 	int			fd;
 	char		*buff;
+	char		*tmp;
 	size_t		size;
 	char		**champion;
 
@@ -20,7 +21,10 @@ char			**ft_read_file(char *filename)
 	lseek(fd, 0, SEEK_SET);	/* Set read pointer to beggining of the file */
 	read(fd, buff, size); /* read whole file at once */
 	close(fd);
+	tmp = buff;
+	buff = strtrim(buff);
 	champion = ft_strsplit(buff, '\n');
 	ft_strdel(&buff);
+	free(tmp);
 	return (champion);
 }
