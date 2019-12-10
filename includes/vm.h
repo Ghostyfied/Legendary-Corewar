@@ -3,6 +3,7 @@
 
 # include "op.h"
 # include "libft.h"
+# include <errno.h>
 
 typedef struct			s_cursor
 {

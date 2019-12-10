@@ -1,6 +1,6 @@
 
 
-#include "../includes/vm.h"
+#include "vm.h"
 
 /*
 **	check which flag it is and go to parsing function, can add more ^^

@@ -6,11 +6,11 @@
 /*   By: awehlbur <awehlbur@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/05 14:57:25 by awehlbur       #+#    #+#                */
-/*   Updated: 2019/11/05 14:57:40 by awehlbur      ########   odam.nl         */
+/*   Updated: 2019/12/09 18:13:06 by rvan-ket      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/vm.h"
+#include "vm.h"
 
 /*
 **	initialize values

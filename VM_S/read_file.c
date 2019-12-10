@@ -1,6 +1,6 @@
 
 
-#include "../includes/vm.h"
+#include "vm.h"
 
 /*
 **	Keep adding size of last code up to bit_swap and check the code in the file in the other functions.
@@ -32,7 +32,7 @@ void		read_file(t_vm *vm, char *argv, int num)
 
 	fd = open(argv, O_RDONLY);
 	if (fd == -1)
-		ft_error("Cant open file");
+		ft_error(strerror(errno));
 	size = lseek(fd, 0, SEEK_END);
 	lseek(fd, 0, SEEK_SET);
 	if (size < 0)
