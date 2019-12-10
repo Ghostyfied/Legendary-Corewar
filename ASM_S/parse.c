@@ -202,4 +202,5 @@ void				parse(char **champion, t_asm **asm_info)
 	size = (int*)ft_memalloc(sizeof(int) * (op->size_index + 2));
 	calculate_size(head, &size, 0);
 	(*asm_info)->exec_code_size = make_exc_code(&head, size);
+	(*asm_info)->operations = head;
 }

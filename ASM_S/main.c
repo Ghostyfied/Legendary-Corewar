@@ -27,8 +27,8 @@ void	make_file(char **champion, char *new_filename)
 	int fd;
 
 	fd = open(new_filename, O_CREAT | O_RDWR, 0666);
-	ft_putstr_fd("00ea 83f3 ", fd);
-	
+	if (fd < 0)
+		ft_error(strerror(errno));
 
 }
 
@@ -46,7 +46,7 @@ int			main(int argc, char **argv)
 		ft_error("Can not read file");
 	champion = ft_read_file(argv[1]);
 	parse(champion, &asm_info);
-	// make_file(champion, new_file_ext);
+	make_file(champion, new_file_ext);
 	ft_chararrfree(&champion);
 	return (ft_free_all(0));
 }
