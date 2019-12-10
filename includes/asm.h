@@ -60,4 +60,6 @@ t_label					*new_label(char *name);
 
 t_operation				*new_operation(t_label *labels);
 
+void					free_asm(t_asm *asm_info);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:06:32 by fhignett       #+#    #+#                */
-/*   Updated: 2019/12/10 16:15:22 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/12/10 17:23:53 by rvan-ket      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int			calchex(char one, char two)
 	hex = ft_strdup("0123456789abcdef");
 	i = ft_strchr(hex, one) - hex;
 	j = ft_strchr(hex, two) - hex;
+	free(hex);
 	return (16 * i + j);
 }
 
@@ -98,5 +99,7 @@ int			main(int argc, char **argv)
 	parse(champion, &asm_info);
 	make_file(champion, new_file_ext, asm_info);
 	ft_chararrfree(&champion);
+	free_asm(asm_info);
+	free(asm_info);
 	return (0);
 }

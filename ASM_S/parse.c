@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:24:50 by fhignett       #+#    #+#                */
-/*   Updated: 2019/12/10 16:52:40 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/12/10 17:19:34 by rvan-ket      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,4 +152,5 @@ void			parse(char **champion, t_asm **asm_info)
 	calculate_size(head, &size, 0);
 	(*asm_info)->exec_code_size = make_exc_code(&head, size);
 	(*asm_info)->operations = head;
+	free(size);
 }

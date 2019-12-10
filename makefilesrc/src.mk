@@ -9,7 +9,8 @@ ASM_SRCS_FILES		=	op.c \
 						make_exc_code.c \
 						trim.c \
 						hex.c \
-						misc.c
+						misc.c \
+						free_shizzl.c
 
 
 CORE_SRCS_FILES		=	main.c \
