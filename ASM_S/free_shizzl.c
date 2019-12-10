@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   free_shizzl.c                                      :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rvan-ket <rvan-ket@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/12/10 17:27:14 by rvan-ket       #+#    #+#                */
+/*   Updated: 2019/12/10 17:29:52 by rvan-ket      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
-void		free_labels(t_label	*label)
+void	free_labels(t_label *label)
 {
 	t_label	*temp;
 
@@ -12,7 +24,8 @@ void		free_labels(t_label	*label)
 		free(temp);
 	}
 }
-void		free_asm(t_asm *asm_info)
+
+void	free_asm(t_asm *asm_info)
 {
 	t_operation *temp;
 
