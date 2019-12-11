@@ -1,7 +1,7 @@
 .name "Buttman"
 .comment "I like butts"
 
-loop: sti r1, %:live, %1     #robin
+loop: sti r1, %:live, %1   #robin
 live:     #WAAROM WERKT DIT??
 #dit mag?
 

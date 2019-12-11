@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:24:50 by fhignett       #+#    #+#                */
-/*   Updated: 2019/12/10 17:19:34 by rvan-ket      ########   odam.nl         */
+/*   Updated: 2019/12/11 13:03:42 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,28 +53,6 @@ static t_label	*get_labels(char **chmp, int *i)
 			j++;
 	}
 	return (label);
-}
-
-/*
-** Checks all args to get the type.
-** Size is the number of arguments teh operation is supposed to have.
-*/
-
-static void		get_arg_type(t_operation **op, int size)
-{
-	int i;
-
-	i = 0;
-	while (i < size)
-	{
-		if ((*op)->arg[i].op[0] == DIRECT_CHAR)
-			(*op)->arg[i].arg = T_DIR;
-		else if ((*op)->arg[i].op[0] == 'r')
-			(*op)->arg[i].arg = T_REG;
-		else
-			(*op)->arg[i].arg = T_IND;
-		i++;
-	}
 }
 
 /*

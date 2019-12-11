@@ -48,6 +48,9 @@ void					add_operation(t_operation **head, t_operation *new);
 void					parse(char **champion, t_asm **asm_info);
 void					calculate_size(t_operation *operations,
 						int **size, int i);
+void					arg_exc_code(t_operation *tmp,
+						t_operation *head, int *size_array);
+void					get_arg_type(t_operation **op, int size);
 
 int						make_exc_code(t_operation **op, int *size);
 int						get_name_comm(char **champion, t_asm **asm_info);
@@ -55,6 +58,8 @@ int						chr_idx(char *s, int c);
 int						get_encoding_byte(t_arg *arg);
 int						check_operation(char *s, int size);
 int						check_op_on_line(char *line);
+int						find_label(t_operation *op, char *label,
+						int size_idx, int *size);
 
 t_label					*new_label(char *name);
 
