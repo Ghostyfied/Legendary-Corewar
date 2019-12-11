@@ -10,7 +10,8 @@ ASM_SRCS_FILES		=	op.c \
 						trim.c \
 						hex.c \
 						misc.c \
-						free_shizzl.c
+						free_shizzl.c \
+						arg.c
 
 
 CORE_SRCS_FILES		=	main.c \
