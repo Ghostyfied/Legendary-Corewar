@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:06:32 by fhignett       #+#    #+#                */
-/*   Updated: 2019/12/10 17:23:53 by rvan-ket      ########   odam.nl         */
+/*   Updated: 2019/12/10 18:05:27 by rvan-ket      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,5 @@ int			main(int argc, char **argv)
 	make_file(champion, new_file_ext, asm_info);
 	ft_chararrfree(&champion);
 	free_asm(asm_info);
-	free(asm_info);
 	return (0);
 }
