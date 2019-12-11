@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:50:34 by fhignett       #+#    #+#                */
-/*   Updated: 2019/12/10 16:53:18 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/12/11 21:01:16 by flintlouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,19 @@
 
 int	get_encoding_byte(t_arg *arg)
 {
-	t_byte byte;
+	t_byte	byte;
+	int		arg1;
+	int		arg2;
+	int		arg3;
+
 
 	byte = 0;
-	byte = byte | arg[0].arg;
-	byte = (byte << 2) | arg[1].arg;
-	byte = (byte << 2) | arg[2].arg;
+	arg1 = arg[0].arg == T_IND ? 3 : arg[0].arg;
+	arg2 = arg[1].arg == T_IND ? 3 : arg[1].arg;
+	arg3 = arg[2].arg == T_IND ? 3 : arg[2].arg;
+	byte = byte | arg1;
+	byte = (byte << 2) | arg2;
+	byte = (byte << 2) | arg3;
 	return (byte << 2);
 }
 
