@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 13:03:16 by fhignett       #+#    #+#                */
-/*   Updated: 2019/12/11 13:05:41 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/12/11 22:36:06 by flintlouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void		arg_exc_code(t_operation *tmp, t_operation *head, int *size_array)
 	i = 0;
 	while (i < 3)
 	{
-		if (tmp->arg[i].op && !check_arg(tmp->arg[i]))
+		if (tmp->arg[i].op && (!check_arg(tmp->arg[i]) || !(g_op_tab[tmp->op].args[i] & tmp->arg[i].arg)))
 		{
 			ft_putendl(tmp->arg[i].op);
 			ft_error("Argument error");
