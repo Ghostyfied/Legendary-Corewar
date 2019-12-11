@@ -6,18 +6,11 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:24:50 by fhignett       #+#    #+#                */
-/*   Updated: 2019/12/11 13:03:42 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/12/11 19:42:40 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-
-static void		check_comments(char **chmp, int *i)
-{
-	(*i)++;
-	while (chmp[*i][0] == COMMENT_CHAR || !ft_strlen(chmp[*i]))
-		(*i)++;
-}
 
 /*
 ** Goes char by char over the string until it finds the LABEL_CHAR.
@@ -39,13 +32,10 @@ static t_label	*get_labels(char **chmp, int *i)
 		if (chmp[*i][j] == LABEL_CHAR)
 		{
 			add_label(&label, new_label(ft_strncpy(ft_strnew(j), chmp[*i], j)));
-			if (check_op_on_line(&chmp[*i][j + 1]))
+			if (chmp[*i][j + 1])
 				break ;
-			else
-			{
-				j = 0;
-				check_comments(chmp, i);
-			}
+			j = 0;
+			(*i)++;
 		}
 		else if (!ft_strchr(LABEL_CHARS, chmp[*i][j]))
 			break ;
@@ -118,6 +108,9 @@ void			parse(char **champion, t_asm **asm_info)
 
 	head = NULL;
 	i = get_name_comm(champion, asm_info);
+	delete_comments(&champion[i], COMMENT_CHAR);
+	delete_comments(&champion[i], ALT_COMMENT_CHAR);
+	champion = delete_empty_lines(champion, &i);
 	name_comm_hexify(asm_info);
 	while (champion[i])
 	{
@@ -131,4 +124,5 @@ void			parse(char **champion, t_asm **asm_info)
 	(*asm_info)->exec_code_size = make_exc_code(&head, size);
 	(*asm_info)->operations = head;
 	free(size);
+	ft_chararrfree(&champion);
 }

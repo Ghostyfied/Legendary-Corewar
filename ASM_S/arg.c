@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 13:03:16 by fhignett       #+#    #+#                */
-/*   Updated: 2019/12/11 13:05:41 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/12/11 20:02:35 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,27 +62,35 @@ static char	*get_arg(t_operation *head, t_arg arg, t_operation *op, int *size)
 	return (s);
 }
 
-static int	check_arg(t_arg arg)
+static int	check_valid_arg(t_arg arg, int op, int arg_counter)
+{
+	// t_byte *args;
+	// int i;
+	
+	// i = 0;
+	// args = g_op_tab[op].args;
+	// while ()
+	return (1);
+}
+
+static int	check_arg(t_arg arg, int op, int arg_counter)
 {
 	int i;
-	int end;
+	int size;
 
 	i = arg.arg == T_IND ? 0 : 1;
 	if (arg.op[i] == LABEL_CHAR)
 		return (1);
-	end = chr_idx(arg.op, ' ');
-	end = !end ? ft_strlen(arg.op) : end - 1;
-	if (i == end)
+	size = ft_strlen(arg.op) - i;
+	if (!size)
 		return (0);
-	while (i < end)
+	while (arg.op[i])
 	{
 		if (!ft_isdigit(arg.op[i]))
 			return (0);
 		i++;
 	}
-	if (arg.op[end] && arg.op[end + 1] != COMMENT_CHAR)
-		return (0);
-	return (1);
+	return (check_valid_arg(arg, op, arg_counter));
 }
 
 void		arg_exc_code(t_operation *tmp, t_operation *head, int *size_array)
@@ -93,7 +101,7 @@ void		arg_exc_code(t_operation *tmp, t_operation *head, int *size_array)
 	i = 0;
 	while (i < 3)
 	{
-		if (tmp->arg[i].op && !check_arg(tmp->arg[i]))
+		if (tmp->arg[i].op && !check_arg(tmp->arg[i], tmp->op, i))
 		{
 			ft_putendl(tmp->arg[i].op);
 			ft_error("Argument error");

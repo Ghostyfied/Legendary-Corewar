@@ -1,13 +1,19 @@
 .name "Buttman"
 .comment "I like butts"
 
-loop: sti r1, %:live, %1   #robin
-live:     #WAAROM WERKT DIT??
-#dit mag?
+#srgrsrsg  szgz 
 
-          
+			
+##
 
-life:     #comment
-        live %20000000
-        ld %0, r2
+
+loop: sti r1,              %:live,%1#dsgdfh
+live:   #blabla
+;dit is ook een comment
+life:
+        live		 %20000000
+        ld %0, r2  #comment dsfkgalhjsb 124 ; ; #
         zjmp %:loop
+
+
+#comment : hahahaha
