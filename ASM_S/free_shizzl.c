@@ -6,7 +6,7 @@
 /*   By: rvan-ket <rvan-ket@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 17:27:14 by rvan-ket       #+#    #+#                */
-/*   Updated: 2019/12/10 17:29:52 by rvan-ket      ########   odam.nl         */
+/*   Updated: 2019/12/10 18:04:44 by rvan-ket      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,5 @@ void	free_asm(t_asm *asm_info)
 		free(temp->arg[2].op);
 		free(temp);
 	}
+	free(asm_info);
 }

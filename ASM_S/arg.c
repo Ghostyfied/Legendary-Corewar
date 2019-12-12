@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 13:03:16 by fhignett       #+#    #+#                */
-/*   Updated: 2019/12/11 20:02:35 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/12/12 11:02:13 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,6 @@ static char	*get_arg(t_operation *head, t_arg arg, t_operation *op, int *size)
 	return (s);
 }
 
-static int	check_valid_arg(t_arg arg, int op, int arg_counter)
-{
-	// t_byte *args;
-	// int i;
-	
-	// i = 0;
-	// args = g_op_tab[op].args;
-	// while ()
-	return (1);
-}
-
 static int	check_arg(t_arg arg, int op, int arg_counter)
 {
 	int i;
@@ -90,7 +79,7 @@ static int	check_arg(t_arg arg, int op, int arg_counter)
 			return (0);
 		i++;
 	}
-	return (check_valid_arg(arg, op, arg_counter));
+	return (g_op_tab[op].args[arg_counter] & arg.arg);
 }
 
 void		arg_exc_code(t_operation *tmp, t_operation *head, int *size_array)
@@ -103,7 +92,7 @@ void		arg_exc_code(t_operation *tmp, t_operation *head, int *size_array)
 	{
 		if (tmp->arg[i].op && !check_arg(tmp->arg[i], tmp->op, i))
 		{
-			ft_putendl(tmp->arg[i].op);
+			ft_printf("ERROR OCCURRED AT : -> %s <-\n", tmp->arg[i].op);
 			ft_error("Argument error");
 		}
 		args = get_arg(head, tmp->arg[i], tmp, size_array);
