@@ -23,7 +23,7 @@ void		retrieve_flags(t_vm *vm, int argc, char **argv)
 	else
 	{
 		vm->champs[vm->nb].nb_set = 0;
-		read_file(vm, argv[vm->index], vm->nb);
+		read_file(vm, argv[vm->index], &vm->champs[vm->nb]);
 	}
 	vm->index++;
 	retrieve_flags(vm, argc, argv);

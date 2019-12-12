@@ -1,5 +1,5 @@
-.name "Batman"
-.comment "I like Robin"
+.name "Buttman"
+.comment "I like butts"
 
 loop: sti r1,              %:live,%1
 live:

@@ -44,6 +44,7 @@ static void		find_cor(t_vm *vm, char **string)
 /*
 **	Count champions and split the string on spaces, then look for .cor extension to count
 */
+
 void			count_champions(t_vm *vm, char **argv)
 {
 	int		i;
@@ -65,5 +66,5 @@ void			count_champions(t_vm *vm, char **argv)
 		ft_error("too many champs omegalul");
 	if (vm->count == 0)
 		ft_error("no players please put some in");
-	vm->champs = (t_champ*)malloc(sizeof(t_champ) * vm->count);
+	vm->champs = (t_champ*)ft_memalloc(sizeof(t_champ) * vm->count);
 }

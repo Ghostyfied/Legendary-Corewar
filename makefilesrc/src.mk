@@ -19,7 +19,11 @@ CORE_SRCS_FILES		=	main.c \
 						check_flag_stuff.c \
 						count_and_check_champs.c \
 						extra_functions.c \
-						read_file.c
+						read_file.c \
+						structs.c \
+						decode_code.c \
+						op.c \
+						debug.c #DELETE ME LATER
 
 ASM_HEADERS_FILES	=	op.h
 
