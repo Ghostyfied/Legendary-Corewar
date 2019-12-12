@@ -57,7 +57,7 @@ void					delete_comments(char **champion, char comment_char);
 int						make_exc_code(t_operation **op, int *size);
 int						get_name_comm(char **champion, t_asm **asm_info);
 int						chr_idx(char *s, int c);
-int						get_encoding_byte(t_arg *arg);
+int						get_encoding_byte(t_arg *args);
 int						check_operation(char *s, int size);
 int						find_label(t_operation *op, char *label,
 						int size_idx, int *size);
