@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:04:31 by fhignett       #+#    #+#                */
-/*   Updated: 2019/12/11 19:50:41 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/12/12 11:13:29 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ static int	count_empty_lines(char **array, int *i)
 	}
 	return (empty);
 }
+
+/*
+** Deletes all empty lines,
+** and replaces all ' ' and '\t' with a single ' 'and trims all lines.
+*/
 
 char		**delete_empty_lines(char **old, int *idx)
 {
