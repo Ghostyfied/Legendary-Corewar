@@ -9,6 +9,7 @@
 # define REG			1
 # define DIR			2
 # define IND			3
+# define CODE_OFFSET	(16 + COMMENT_LENGTH + PROG_NAME_LENGTH)
 
 typedef struct			s_cursor
 {

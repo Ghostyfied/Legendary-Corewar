@@ -55,6 +55,10 @@ static t_arg	*get_args(int fd, int op_code, t_byte octal, int *nb_arg)
 	return (args);
 }
 
+/*
+** Disassembler made by accident
+*/
+
 void			decode_code(int fd, t_champ *champ)
 {
 	t_byte		op_code;
