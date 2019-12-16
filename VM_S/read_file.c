@@ -10,7 +10,7 @@
 // 	size_t		i;
 // 	size_t		bit_swap;
 
-// 	bit_swap = sizeof(unsigned int);
+// 	bit_swap = 0;
 // 	check_magic_header(champ, content);
 // 	i = (size_t)check_prog_name(champ, content, bit_swap);
 // 	bit_swap = i + bit_swap + sizeof(champ->prog_size);
@@ -26,7 +26,7 @@
 */
 void		read_file(t_vm *vm, char *argv, int num)
 {
-	char	*content;
+	t_byte	*content;
 	int		fd;
 	int		size;
 

@@ -7,8 +7,15 @@
 
 typedef struct			s_cursor
 {
+	int					id;
 	int					carry;
 	int					registry[REG_NUMBER];
+	int					opcode;
+	int					jump;
+	int					last_live;
+	int					wait_cycles;
+	int					position;
+	struct s_cursor		*next;
 }						t_cursor;
 
 typedef struct			s_champ
