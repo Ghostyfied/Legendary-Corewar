@@ -81,5 +81,6 @@ void		read_file(t_vm *vm, char *argv, t_champ *champ)
 	position = vm->champ_position * vm->champ_nb;
 	ft_memcpy(&vm->arena[position], code, champ->code_size);
 	close(fd);
+	free(code);
 	vm->champ_nb++;
 }
