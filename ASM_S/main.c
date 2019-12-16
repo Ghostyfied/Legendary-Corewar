@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:06:32 by fhignett       #+#    #+#                */
-/*   Updated: 2019/12/10 18:05:27 by rvan-ket      ########   odam.nl         */
+/*   Updated: 2019/12/12 22:10:55 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void		make_file(char **champion, char *new_filename, t_asm *asm_info)
 	if (fd < 0)
 		ft_error(strerror(errno));
 	ft_printf("Writing output program to %s\n", new_filename);
-	puthex("00ea83f3", fd);
+	puthex(get_hex(COREWAR_EXEC_MAGIC, 4), fd);
 	puthex(asm_info->name, fd);
 	puthex("00000000", fd);
 	exec_size = get_hex(asm_info->exec_code_size, 4);
@@ -85,6 +85,7 @@ void		make_file(char **champion, char *new_filename, t_asm *asm_info)
 
 int			main(int argc, char **argv)
 {
+	/* CHECK FOR NEW LINE AT END OF FILE. LABEL CAN BE AT EOF. NOT NORMINETTE+. */
 	int		res;
 	char	*new_file_ext;
 	char	**champion;
@@ -98,7 +99,6 @@ int			main(int argc, char **argv)
 	champion = ft_read_file(argv[1]);
 	parse(champion, &asm_info);
 	make_file(champion, new_file_ext, asm_info);
-	ft_chararrfree(&champion);
 	free_asm(asm_info);
 	return (0);
 }

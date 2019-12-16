@@ -99,7 +99,7 @@ void			assign_champ_num(t_vm *vm, int argc, char **argv)
 			vm->index++;
 		}
 		if (vm->index < argc)
-			read_file(vm, argv[vm->index], vm->nb);
+			read_file(vm, argv[vm->index], &vm->champs[vm->nb]);
 		else
 			ft_error("That wont work");
 	}

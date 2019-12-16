@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 17:56:24 by fhignett       #+#    #+#                */
-/*   Updated: 2019/12/10 16:16:14 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/12/12 21:04:18 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define CHAMP_MAX_SIZE			(MEM_SIZE / 6)
 
 # define COMMENT_CHAR			'#'
+# define ALT_COMMENT_CHAR		';'
 # define LABEL_CHAR				':'
 # define DIRECT_CHAR			'%'
 # define SEPARATOR_CHAR			','
@@ -53,7 +54,7 @@ typedef unsigned char			t_byte;
 
 # define T_REG					1
 # define T_DIR					2
-# define T_IND					3
+# define T_IND					4
 # define T_LAB					8
 
 # define PROG_NAME_LENGTH		(128)

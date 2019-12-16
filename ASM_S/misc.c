@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:50:34 by fhignett       #+#    #+#                */
-/*   Updated: 2019/12/10 16:53:18 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/12/12 11:10:24 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,20 @@
 ** T_IND = 11 (3)
 */
 
-int	get_encoding_byte(t_arg *arg)
+int	get_encoding_byte(t_arg *args)
 {
-	t_byte byte;
+	t_byte	byte;
+	int		arg;
+	int		i;
 
-	byte = 0;
-	byte = byte | arg[0].arg;
-	byte = (byte << 2) | arg[1].arg;
-	byte = (byte << 2) | arg[2].arg;
-	return (byte << 2);
+	i = 0;
+	while (i < 3)
+	{
+		arg = args[i].arg == T_IND ? 3 : args[i].arg;
+		byte = (byte | arg) << 2;
+		i++;
+	}
+	return (byte);
 }
 
 /*
@@ -66,26 +71,6 @@ int	check_operation(char *s, int size)
 			return (g_op_tab[i].opcode);
 		i++;
 	}
-	ft_printf("ERROR OCCURRED AT : |%s|\n", s);
-	return (0);
-}
-
-/*
-** Checks the characters afte the LABEL_CHAR
-*/
-
-int	check_op_on_line(char *line)
-{
-	int i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] == COMMENT_CHAR)
-			return (0);
-		else if (line[i] != ' ')
-			return (1);
-		i++;
-	}
+	ft_printf("ERROR OCCURRED AT : -> %s <-\n", s);
 	return (0);
 }

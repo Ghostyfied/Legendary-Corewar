@@ -6,7 +6,7 @@
 #    By: awehlbur <awehlbur@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/11/05 14:49:04 by awehlbur       #+#    #+#                 #
-#    Updated: 2019/12/06 12:58:39 by fhignett      ########   odam.nl          #
+#    Updated: 2019/12/12 18:45:34 by fhignett      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,11 +32,11 @@ $(CORE_OBJS_PATH)%.o: $(CORE_PATH)%.c $(CORE_HEADERS) $(LIBFT_PATH)libft.a
 	@$(CC) $(FLAGS) $(INCLUDES) $(LIBFT_INCLUDES) -o $@ -c $<
 	@echo "$(PLUS) $@"
 
-$(ASM): $(ASM_OBJS)
+$(ASM): $(ASM_OBJS) $(ASM_HEADERS)
 	@$(CC) $(FLAGS) $(LIBFT) $(ASM_OBJS) -o $@
 	@echo Assembler compiled
 
-$(COREWAR): $(CORE_OBJS)
+$(COREWAR): $(CORE_OBJS) $(CORE_HEADERS)
 	@$(CC) $(FLAGS) $(LIBFT) $(CORE_OBJS) -o $@
 	@echo "Virtual Machine compiled"
 

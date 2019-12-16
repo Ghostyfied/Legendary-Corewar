@@ -1,48 +1,71 @@
-
-
 #include "vm.h"
 
-/*
-**	Keep adding size of last code up to bit_swap and check the code in the file in the other functions.
-*/
-// void		validate_champion(t_champ *champ, char *content)
-// {
-// 	size_t		i;
-// 	size_t		bit_swap;
+static void check_magic_header(int fd)
+{
+	int mh;
 
-// 	bit_swap = 0;
-// 	check_magic_header(champ, content);
-// 	i = (size_t)check_prog_name(champ, content, bit_swap);
-// 	bit_swap = i + bit_swap + sizeof(champ->prog_size);
-// 	i = check_prog_size(champ, content, bit_swap);
-// 	bit_swap = i + bit_swap;
-// 	i = check_comment(champ, content, bit_swap);
-// 	bit_swap = i + bit_swap + 4;
-// 	check_program(champ, content, bit_swap);
-// }
+	read(fd, &mh, 4);
+	mh = swap_32(mh);
+	if (mh != COREWAR_EXEC_MAGIC)
+		ft_error("Magic Header error");
+}
+
+static char *get_comment(int fd)
+{
+	char	*comment;
+
+	comment = ft_strnew(COMMENT_LENGTH);
+	read(fd, comment, COMMENT_LENGTH);
+	return (comment);
+}
+
+static char *get_name(fd)
+{
+	char	*name;
+
+	name = ft_strnew(PROG_NAME_LENGTH);
+	read(fd, name, PROG_NAME_LENGTH);
+	return (name);
+}
+
+static int	get_code_size(int fd)
+{
+	int size;
+
+	read(fd, &size, 4);
+	size = swap_32(size);
+	return(size);
+}
+
+static void	skip_bytes(int fd, int amount)
+{
+	t_byte byte;
+
+	while (amount > 0)
+	{
+		read(fd, &byte, 1);
+		amount--;
+	}
+}
 
 /*
 **	Read file, put everything in content. set number of champs higher, set filename, set prog_size, send to champion checker.
 */
-void		read_file(t_vm *vm, char *argv, int num)
+
+void		read_file(t_vm *vm, char *argv, t_champ *champ)
 {
-	t_byte	*content;
 	int		fd;
-	int		size;
 
 	fd = open(argv, O_RDONLY);
-	if (fd == -1)
+	if (fd < 0)
 		ft_error(strerror(errno));
-	size = lseek(fd, 0, SEEK_END);
-	lseek(fd, 0, SEEK_SET);
-	if (size < 0)
-		ft_error("That is not a valid file");
-	content = ft_strnew((size_t)size);
-	read(fd, content, (size_t)size);
-	vm->champs[num].nb = num + 1;
-	vm->champs[num].filename = argv;
-	vm->champs[num].real_prog_size = (size_t)size;
-	// validate_champion(&vm->champs[num], content);
-	free(content);
+	check_magic_header(fd);
+	champ->name = get_name(fd);
+	skip_bytes(fd, 4);
+	champ->code_size = get_code_size(fd);
+	champ->comment = get_comment(fd);
+	skip_bytes(fd, 4);
+	decode_code(fd, champ);
+	close(fd);
 	vm->nb++;
 }

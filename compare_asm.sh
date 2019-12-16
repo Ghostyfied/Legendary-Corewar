@@ -1,16 +1,15 @@
 #!/bin/bash
 
-rm -rf Compare
-mkdir -p Compare
+rm -rf compare
+mkdir -p compare
 
 filename="${1%.*}"
 
 ./vm_champs/asm $1
-xxd -p $filename.cor > Compare/$filename.diff1
+xxd -p $filename.cor > compare/$filename.diff1
 rm -f $filename.cor
 
 ./asm $1
-xxd -p $filename.cor > Compare/$filename.diff2
-rm -f $filename.cor
+xxd -p $filename.cor > compare/$filename.diff2
 
-diff Compare/$filename.diff1 Compare/$filename.diff2 > Compare/$filename.result
+diff compare/$filename.diff1 compare/$filename.diff2 > compare/$filename.result

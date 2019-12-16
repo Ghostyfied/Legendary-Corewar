@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:16:26 by fhignett       #+#    #+#                */
-/*   Updated: 2019/12/10 16:16:26 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/12/11 19:40:07 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	check_line(char *str, int len)
 	i++;
 	while (str[i])
 	{
-		if (str[i] == COMMENT_CHAR)
+		if (str[i] == COMMENT_CHAR || str[i] == ALT_COMMENT_CHAR)
 			return ;
 		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
 			ft_error("Name or comment wrong format boii");
@@ -90,7 +90,7 @@ int			is_empty(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == COMMENT_CHAR)
+		if (str[i] == COMMENT_CHAR || str[i] == ALT_COMMENT_CHAR)
 			return (1);
 		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
 			return (0);
