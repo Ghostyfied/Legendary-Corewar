@@ -53,6 +53,7 @@ void					arg_exc_code(t_operation *tmp,
 						t_operation *head, int *size_array);
 void					get_arg_type(t_operation **op, int size);
 void					delete_comments(char **champion, char comment_char);
+void					free_labels(t_label *label);
 
 int						make_exc_code(t_operation **op, int *size);
 int						get_name_comm(char **champion, t_asm **asm_info);

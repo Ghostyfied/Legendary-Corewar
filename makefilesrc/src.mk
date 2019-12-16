@@ -1,7 +1,7 @@
 # =========== Files ============ #
 ASM_SRCS_FILES		=	op.c \
 						main.c \
-						compile.c \
+						read_file.c \
 						parse.c \
 						structs.c \
 						calculate_size.c \

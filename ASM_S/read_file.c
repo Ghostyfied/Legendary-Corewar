@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   compile.c                                          :+:    :+:            */
+/*   read_file.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:04:31 by fhignett       #+#    #+#                */
-/*   Updated: 2019/12/12 11:13:29 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/12/16 15:34:18 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,14 +97,18 @@ char		**ft_read_file(char *filename)
 	size_t		size;
 	char		**champion;
 
-	if ((fd = open(filename, O_RDONLY)) < 0)
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
 		ft_error(strerror(errno));
 	size = lseek(fd, 0, SEEK_END);
-	if ((size < 1) || !(buff = ft_memalloc(size + 1)))
+	buff = ft_memalloc(size + 1);
+	if ((size < 1) || !buff)
 		ft_error("NO VALID FILE");
 	lseek(fd, 0, SEEK_SET);
 	read(fd, buff, size);
 	close(fd);
+	if (buff[size - 1] != '\n')
+		ft_error("No newline!");
 	champion = ft_strsplit(buff, '\n');
 	ft_strdel(&buff);
 	return (champion);

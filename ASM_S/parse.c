@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:24:50 by fhignett       #+#    #+#                */
-/*   Updated: 2019/12/11 19:42:40 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/12/16 15:32:17 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_label	*get_labels(char **chmp, int *i)
 
 	j = 0;
 	label = NULL;
-	while (chmp[*i][j])
+	while (chmp[*i] && chmp[*i][j])
 	{
 		if (chmp[*i][j] == LABEL_CHAR)
 		{
@@ -87,6 +87,23 @@ static void		get_operation(t_operation **head, char *operation)
 	ft_chararrfree(&args);
 }
 
+static int		parse_champion(char **champion, t_operation **head,
+				t_operation **op, int *i)
+{
+	t_label		*labels;
+
+	labels = get_labels(champion, i);
+	if (!champion[*i])
+	{
+		free_labels(labels);
+		return (0);
+	}
+	*op = new_operation(labels);
+	get_operation(op, champion[*i]);
+	add_operation(head, *op);
+	return (1);
+}
+
 /*
 ** Returns the index of where the champion code begins
 ** after the .name and .comment.
@@ -103,8 +120,8 @@ void			parse(char **champion, t_asm **asm_info)
 {
 	int			i;
 	t_operation *head;
-	t_operation *op;
 	int			*size;
+	t_operation *op;
 
 	head = NULL;
 	i = get_name_comm(champion, asm_info);
@@ -114,9 +131,8 @@ void			parse(char **champion, t_asm **asm_info)
 	name_comm_hexify(asm_info);
 	while (champion[i])
 	{
-		op = new_operation(get_labels(champion, &i));
-		get_operation(&op, champion[i]);
-		add_operation(&head, op);
+		if (!parse_champion(champion, &head, &op, &i))
+			break ;
 		i++;
 	}
 	size = (int*)ft_memalloc(sizeof(int) * (op->size_index + 2));

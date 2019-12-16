@@ -8,7 +8,7 @@ ASM				= asm
 COREWAR			= corewar
 
 # ========== Flags ========== #
-FLAGS			= # -g -Wall -Wextra -Werror #
+FLAGS			= -g # -Wall -Wextra -Werror #
 
 # ========== Sources =========== #
 ASM_PATH		= ASM_S/

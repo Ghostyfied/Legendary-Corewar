@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:06:32 by fhignett       #+#    #+#                */
-/*   Updated: 2019/12/12 22:10:55 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/12/16 15:32:58 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void		make_file(char **champion, char *new_filename, t_asm *asm_info)
 
 int			main(int argc, char **argv)
 {
-	/* CHECK FOR NEW LINE AT END OF FILE. LABEL CAN BE AT EOF. NOT NORMINETTE+. */
 	int		res;
 	char	*new_file_ext;
 	char	**champion;
@@ -94,7 +93,8 @@ int			main(int argc, char **argv)
 	asm_info = malloc(sizeof(t_asm));
 	if (argc < 2 || argc > 3)
 		ft_error("Usage:");
-	if (!(new_file_ext = ft_check_filename(argv[1])))
+	new_file_ext = ft_check_filename(argv[1]);
+	if (!new_file_ext)
 		ft_error("Can not read file");
 	champion = ft_read_file(argv[1]);
 	parse(champion, &asm_info);

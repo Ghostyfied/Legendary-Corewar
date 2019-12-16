@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:50:34 by fhignett       #+#    #+#                */
-/*   Updated: 2019/12/12 11:10:24 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/12/16 14:58:37 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	chr_idx(char *s, int c)
 	int i;
 
 	i = 0;
+	if (!s)
+		return (0);
 	while (s[i])
 	{
 		if (s[i] == c)
