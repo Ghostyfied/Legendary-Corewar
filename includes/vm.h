@@ -48,14 +48,16 @@ typedef struct			s_champ
 
 typedef struct			s_vm
 {
-	int					index;
-	int					count;
+	int					arg_idx;
+	int					champion_count;
 	int					dump;
 	int					speed;
 	int					max_checks;
-	int					nb;
+	int					champ_nb;
 	int					car_count;
 	int					winner;
+	int					champ_position;
+	t_byte				arena[MEM_SIZE];
 	t_champ				*champs;
 }						t_vm;
 
@@ -68,6 +70,7 @@ void					retrieve_flags(t_vm *vm, int argc, char **argv);
 void					read_file(t_vm *vm, char *argv, t_champ *champ);
 void					decode_code(int fd, t_champ *champ);
 void					add_operation(t_operation **head, t_operation *new);
+void					start_vm(t_vm *vm);
 
 t_operation				*new_operation(int op_code);
 

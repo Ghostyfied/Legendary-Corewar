@@ -63,9 +63,14 @@ void		read_file(t_vm *vm, char *argv, t_champ *champ)
 	champ->name = get_name(fd);
 	skip_bytes(fd, 4);
 	champ->code_size = get_code_size(fd);
+	if (champ->code_size > CHAMP_MAX_SIZE)
+	{
+		ft_printf("ERROR AT : %s\n", champ->name);
+		ft_error("Code size overload");
+	}
 	champ->comment = get_comment(fd);
 	skip_bytes(fd, 4);
-	decode_code(fd, champ);
+	// decode_code(fd, champ);
 	close(fd);
-	vm->nb++;
+	vm->champ_nb++;
 }

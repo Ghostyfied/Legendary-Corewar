@@ -34,7 +34,7 @@ static void		find_cor(t_vm *vm, char **string)
 	{
 		if (ft_strcmp(string[i], "cor") == 0)
 		{
-			vm->count++;
+			vm->champion_count++;
 			return ;
 		}
 		i++;
@@ -62,9 +62,10 @@ void			count_champions(t_vm *vm, char **argv)
 		}
 		i++;
 	}
-	if (vm->count > 4)
+	if (vm->champion_count > MAX_PLAYERS)
 		ft_error("too many champs omegalul");
-	if (vm->count == 0)
+	if (!vm->champion_count)
 		ft_error("no players please put some in");
-	vm->champs = (t_champ*)ft_memalloc(sizeof(t_champ) * vm->count);
+	vm->champs = (t_champ*)ft_memalloc(sizeof(t_champ) * vm->champion_count);
+	vm->champ_position = MEM_SIZE / vm->champion_count;
 }

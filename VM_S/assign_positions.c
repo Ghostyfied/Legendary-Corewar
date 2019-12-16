@@ -10,7 +10,7 @@ void		set_no_flag_number(t_vm *vm, int num, int nb)
 	int		i;
 
 	i = 0;
-	while (i < vm->count)
+	while (i < vm->champion_count)
 	{
 		if (vm->champs[i].nb_set == nb)
 		{
@@ -32,12 +32,12 @@ void		arrange_champs_order(t_vm *vm)
 	t_champ	champ;
 
 	i = 0;
-	while (i < vm->count)
+	while (i < vm->champion_count)
 	{
 		n = 0;
-		while (n < vm->count)
+		while (n < vm->champion_count)
 		{
-			if (n + 1 < vm->count)
+			if (n + 1 < vm->champion_count)
 			{
 				if (vm->champs[n].nb_set < vm->champs[n + 1].nb_set)
 				{
@@ -57,7 +57,7 @@ void			check_champion_position(t_vm *vm)
 	int		i;
 
 	i = 0;
-	while (i < vm->count)
+	while (i < vm->champion_count)
 	{
 		if (vm->champs[i].nb_set == 0)
 			set_no_flag_number(vm, i, -1);
@@ -74,13 +74,13 @@ void		assign_nbr(t_vm *vm, int num)
 	int		i;
 
 	i = 0;
-	while (i < vm->count)
+	while (i < vm->champion_count)
 	{
 		if (vm->champs[i].nb_set == num)
 			vm->champs[i].nb_set = 0;
 		i++;
 	}
-	vm->champs[vm->index].nb_set = num;
+	vm->champs[vm->arg_idx].nb_set = num;
 }
 
 /*
@@ -88,18 +88,18 @@ void		assign_nbr(t_vm *vm, int num)
 */
 void			assign_champ_num(t_vm *vm, int argc, char **argv)
 {
-	vm->index++;
-	if (vm->index < argc)
+	vm->arg_idx++;
+	if (vm->arg_idx < argc)
 	{
-		if ((ft_is_a_number(argv[vm->index]) == 1))
+		if ((ft_is_a_number(argv[vm->arg_idx]) == 1))
 		{
-			if (ft_atoi(argv[vm->index]) > 4 || ft_atoi(argv[vm->index]) < 0)
+			if (ft_atoi(argv[vm->arg_idx]) > 4 || ft_atoi(argv[vm->arg_idx]) < 0)
 				ft_error("That position is not available");
-			assign_nbr(vm, ft_atoi(argv[vm->index]));
-			vm->index++;
+			assign_nbr(vm, ft_atoi(argv[vm->arg_idx]));
+			vm->arg_idx++;
 		}
-		if (vm->index < argc)
-			read_file(vm, argv[vm->index], &vm->champs[vm->nb]);
+		if (vm->arg_idx < argc)
+			read_file(vm, argv[vm->arg_idx], &vm->champs[vm->champ_nb]);
 		else
 			ft_error("That wont work");
 	}

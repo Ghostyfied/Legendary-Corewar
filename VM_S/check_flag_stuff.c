@@ -7,7 +7,7 @@
 */
 void		get_flag(t_vm *vm, int argc, char **argv)
 {
-	if (ft_strcmp(argv[vm->index], "-n") == 0)
+	if (ft_strcmp(argv[vm->arg_idx], "-n") == 0)
 		assign_champ_num(vm, argc, argv); /* Assign Champion number from the flag */
 }
 
@@ -16,15 +16,15 @@ void		get_flag(t_vm *vm, int argc, char **argv)
 */
 void		retrieve_flags(t_vm *vm, int argc, char **argv)
 {
-	if (vm->index >= argc)
+	if (vm->arg_idx >= argc)
 		return ;
-	if (argv[vm->index][0] == '-')
+	if (argv[vm->arg_idx][0] == '-')
 		get_flag(vm, argc, argv);
 	else
 	{
-		vm->champs[vm->nb].nb_set = 0;
-		read_file(vm, argv[vm->index], &vm->champs[vm->nb]);
+		vm->champs[vm->champ_nb].nb_set = 0;
+		read_file(vm, argv[vm->arg_idx], &vm->champs[vm->champ_nb]);
 	}
-	vm->index++;
+	vm->arg_idx++;
 	retrieve_flags(vm, argc, argv);
 }
