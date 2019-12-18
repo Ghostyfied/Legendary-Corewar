@@ -1,25 +1,5 @@
 #include "vm.h"
 
-static void	print_operations(t_operation *op)
-{
-	int		i;
-	char	*s;
-
-	if (!op)
-		return ;
-	ft_printf("%-10s : %d (%s)\n", "op_code", op->op_code, g_op_tab[op->op_code].name);
-	ft_printf("%-10s : %d\n\t\t", "nb_arg", op->nb_arg);
-	i = 0;
-	while (i < op->nb_arg)
-	{
-		s = op->args[i].type == T_DIR ? "T_DIR" : op->args[i].type == T_REG ? "T_REG" : "T_IND";
-		ft_printf("%s : %d, ", s, op->args[i].value);
-		i++;
-	}
-	ft_putendl("");
-	print_operations(op->next);
-}
-
 void	print_champions(t_champ *champs, int champ_nb)
 {
 	int i;
@@ -31,7 +11,6 @@ void	print_champions(t_champ *champs, int champ_nb)
 		ft_printf("%-10s : %s\n", ".name", champs[i].name);
 		ft_printf("%-10s : %s\n", ".comment", champs[i].comment);
 		ft_printf("%-10s : %d\n", "code_size", champs[i].code_size);
-		print_operations(champs[i].operations);
 		ft_putendl("");
 		i++;
 	}

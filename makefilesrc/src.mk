@@ -20,7 +20,6 @@ CORE_SRCS_FILES		=	main.c \
 						count_and_check_champs.c \
 						extra_functions.c \
 						read_file.c \
-						structs.c \
 						decode_code.c \
 						op.c \
 						startvm.c \

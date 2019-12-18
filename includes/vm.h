@@ -24,27 +24,12 @@ typedef struct			s_cursor
 	struct s_cursor		*next;
 }						t_cursor;
 
-typedef	struct			s_arg
-{
-	int					value;
-	int					type;
-}						t_arg;
-
-typedef struct			s_operation
-{
-	int					op_code;
-	int					nb_arg;
-	t_arg				*args;
-	struct s_operation	*next;
-}						t_operation;
-
 typedef struct			s_champ
 {
 	int					nb_set;
 	int					code_size;
 	char				*name;
 	char				*comment;
-	t_operation			*operations;
 }						t_champ;
 
 typedef struct			s_vm
@@ -69,11 +54,11 @@ void					ft_arrdel(char **arr);
 void					set_no_flag_number(t_vm *vm, int num, int nb);
 void					retrieve_flags(t_vm *vm, int argc, char **argv);
 void					read_file(t_vm *vm, char *argv, t_champ *champ);
-void					decode_code(int fd, t_champ *champ);
-void					add_operation(t_operation **head, t_operation *new);
+// void					decode_code(int fd, t_champ *champ);
+// void					add_operation(t_operation **head, t_operation *new);
 void					start_vm(t_vm *vm);
 
-t_operation				*new_operation(int op_code);
+// t_operation				*new_operation(int op_code);
 
 int						ft_arrlen(char **tab);
 int						ft_is_a_number(char *str);
