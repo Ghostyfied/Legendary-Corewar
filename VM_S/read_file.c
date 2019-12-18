@@ -6,7 +6,7 @@
 /*   By: awehlbur <awehlbur@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/18 15:31:23 by awehlbur       #+#    #+#                */
-/*   Updated: 2019/12/18 16:52:35 by awehlbur      ########   odam.nl         */
+/*   Updated: 2019/12/18 20:04:31 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ static void	skip_bytes(int fd, int amount)
 void		read_file(t_vm *vm, char *argv, t_champ *champ)
 {
 	int		fd;
-	int		position;
 	t_byte	*code;
 	int		size;
 
@@ -90,8 +89,8 @@ void		read_file(t_vm *vm, char *argv, t_champ *champ)
 	skip_bytes(fd, 4);
 	code = (t_byte*)ft_memalloc(sizeof(t_byte) * champ->code_size);
 	read(fd, code, champ->code_size);
-	position = vm->champ_position * vm->champ_nb;
-	ft_memcpy(&vm->arena[position], code, champ->code_size);
+	champ->starting_pos = vm->champ_position * (champ->id - 1);
+	ft_memcpy(&vm->arena[champ->starting_pos], code, champ->code_size);
 	close(fd);
 	free(code);
 	vm->champ_nb++;

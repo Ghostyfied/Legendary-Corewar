@@ -6,7 +6,7 @@
 /*   By: awehlbur <awehlbur@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/18 15:31:05 by awehlbur       #+#    #+#                */
-/*   Updated: 2019/12/18 17:57:33 by awehlbur      ########   odam.nl         */
+/*   Updated: 2019/12/18 19:50:59 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void		parse_number(t_vm *vm, char *num)
 		{
 			if (temp == vm->tab[i])
 			{
-				vm->champs[vm->champ_nb].nb_set = temp;
+				vm->champs[vm->champ_nb].id = temp;
 				vm->tab[i] *= 10;
 				return ;
 			}
@@ -53,7 +53,7 @@ void		parse_number(t_vm *vm, char *num)
 		{
 			if ((vm->tab[i] % 10) != 0)
 			{
-				vm->champs[vm->champ_nb].nb_set = vm->tab[i];
+				vm->champs[vm->champ_nb].id = vm->tab[i];
 				vm->tab[i] *= 10;
 				return ;
 			}
