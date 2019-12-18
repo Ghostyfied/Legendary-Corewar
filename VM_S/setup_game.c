@@ -15,6 +15,20 @@ static void		setup_cursors(t_vm *vm)
 	}
 }
 
+static void		introduction(t_champ *champs, int nb_champs)
+{
+	int i;
+
+	i = 0;
+	ft_putendl("Introducing contestants...");
+	while (i < nb_champs)
+	{
+		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n",
+		champs[i].id, champs[i].code_size, champs[i].name, champs[i].comment);
+		i++;
+	}
+}
+
 void			setup_game(t_vm *vm)
 {
 	GAME = MEM(t_game);
@@ -22,6 +36,5 @@ void			setup_game(t_vm *vm)
 	GAME->cycles_to_die = CYCLE_TO_DIE;
 	GAME->cursors_id = 1;
 	setup_cursors(vm);
-	print_cursors(GAME->cursors);
-	// print_champions(CHAMPS, vm->champion_count);
+	introduction(CHAMPS, vm->champion_count);
 }

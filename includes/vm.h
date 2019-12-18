@@ -75,6 +75,7 @@ void					read_file(t_vm *vm, char *argv, t_champ *champ);
 void					start_vm(t_vm *vm);
 void					setup_game(t_vm *vm);
 void					add_cursor(t_cursor **head, t_cursor *new);
+void					play_game(t_vm *vm);
 
 int						ft_arrlen(char **tab);
 int						ft_validate_format(char *format, char *str);

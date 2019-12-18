@@ -26,6 +26,7 @@ CORE_SRCS_FILES		=	main.c \
 						startvm.c \
 						cursor.c \
 						setup_game.c \
+						game.c \
 						debug.c #DELETE ME LATER
 
 DIS_SRCS_FILES		=	main.c \
