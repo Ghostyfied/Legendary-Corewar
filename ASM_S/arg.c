@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 13:03:16 by fhignett       #+#    #+#                */
-/*   Updated: 2019/12/12 11:02:13 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/12/18 11:54:43 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,10 @@ static int	check_arg(t_arg arg, int op, int arg_counter)
 	if (arg.op[i] == LABEL_CHAR)
 		return (1);
 	size = ft_strlen(arg.op) - i;
-	if (!size)
+	if (!size || (size == 1 && arg.op[i] == '-'))
 		return (0);
+	if (arg.op[i] == '-')
+		i++;
 	while (arg.op[i])
 	{
 		if (!ft_isdigit(arg.op[i]))

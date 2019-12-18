@@ -26,6 +26,14 @@ CORE_SRCS_FILES		=	main.c \
 						startvm.c \
 						debug.c #DELETE ME LATER
 
+DIS_SRCS_FILES		=	main.c \
+						decode_code.c \
+						read_file.c \
+						structs.c \
+						op.c
+
 ASM_HEADERS_FILES	=	op.h asm.h
 
 CORE_HEADERS_FILES	=	op.h vm.h
+
+DIS_HEADERS_FILES	=	op.h dis.h

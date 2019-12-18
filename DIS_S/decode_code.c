@@ -1,4 +1,28 @@
-#include "vm.h"
+#include "dis.h"
+
+short	swap_16(short nb)
+{
+	int b1;
+	int b2;
+
+	b1 = (nb & 0x00ff) << 8;
+	b2 = (nb & 0xff00) >> 8;
+	return (b1 | b2);
+}
+
+int	swap_32(int nb)
+{
+	int b1;
+	int b2;
+	int b3;
+	int b4;
+
+	b1 = (nb & 0x000000ff) << 24;
+	b2 = (nb & 0x0000ff00) << 8;
+	b3 = (nb & 0x00ff0000) >> 8;
+	b4 = (nb & 0xff000000) >> 24;
+	return (b1 | b2 | b3 | b4);
+}
 
 static int		get_arg(int fd, t_byte octal, int op_code, int *type)
 {
