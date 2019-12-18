@@ -15,6 +15,7 @@ ASM_SRCS_FILES		=	op.c \
 
 
 CORE_SRCS_FILES		=	main.c \
+						validate_format.c \
 						assign_positions.c \
 						check_flag_stuff.c \
 						count_and_check_champs.c \

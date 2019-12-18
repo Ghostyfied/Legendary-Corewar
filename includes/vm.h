@@ -35,12 +35,13 @@ typedef struct			s_champ
 typedef struct			s_vm
 {
 	int					arg_idx;
+	int					*tab;
 	int					champion_count;
 	int					dump;
 	int					speed;
 	int					max_checks;
 	int					champ_nb;
-	int					car_count;
+	int					c_count;
 	int					winner;
 	int					champ_position;
 	t_byte				arena[MEM_SIZE];
@@ -61,6 +62,7 @@ void					start_vm(t_vm *vm);
 // t_operation				*new_operation(int op_code);
 
 int						ft_arrlen(char **tab);
+int						ft_validate_format(char *format, char *str);
 int						ft_is_a_number(char *str);
 int						swap_32(int nb);
 
