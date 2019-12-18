@@ -6,7 +6,7 @@
 /*   By: awehlbur <awehlbur@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/18 15:31:05 by awehlbur       #+#    #+#                */
-/*   Updated: 2019/12/18 16:54:43 by awehlbur      ########   odam.nl         */
+/*   Updated: 2019/12/18 17:57:33 by awehlbur      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,12 @@ void		parse_number(t_vm *vm, char *num)
 		{
 			if (temp == vm->tab[i])
 			{
-				vm->champs[vm->c_count].nb_set = temp;
+				vm->champs[vm->champ_nb].nb_set = temp;
 				vm->tab[i] *= 10;
 				return ;
 			}
+			else if ((temp * 10) == vm->tab[i])
+				ft_error("that number is taken");
 			i++;
 		}
 	}
@@ -51,12 +53,28 @@ void		parse_number(t_vm *vm, char *num)
 		{
 			if ((vm->tab[i] % 10) != 0)
 			{
-				vm->champs[vm->c_count].nb_set = vm->tab[i];
+				vm->champs[vm->champ_nb].nb_set = vm->tab[i];
 				vm->tab[i] *= 10;
 				return ;
 			}
 			i++;
 		}
+	}
+}
+
+void		get_champions_noflag(t_vm *vm, int argc, char **argv)
+{
+	int		i;
+
+	i = 0;
+	while (i < argc)
+	{
+		if ((i < 3 && ft_strstr(argv[i], ".cor")) || (ft_strstr(argv[i], ".cor") && argv[i - 2][0] != '-' && argv[i - 2][1] != 'n'))
+		{
+			parse_number(vm, "-1");
+			read_file(vm, argv[i], &vm->champs[vm->champ_nb]);
+		}
+		i++;
 	}
 }
 
@@ -75,23 +93,13 @@ void		retrieve_flags(t_vm *vm, int argc, char **argv)
 			if (ft_strstr(argv[i + 2], ".cor"))
 			{
 				parse_number(vm, argv[i + 1]);
-				read_file(vm, argv[i + 2], vm->champs);
-				vm->c_count++;
+				read_file(vm, argv[i + 2], &vm->champs[vm->champ_nb]);
 			}
 			else
 				ft_error("Number does not belong to a champion");
 		}
 		i++;
 	}
-	i = 0;
-	while (i < argc)
-	{
-		if ((i < 3 && ft_strstr(argv[i], ".cor")) || (ft_strstr(argv[i], ".cor") && argv[i - 2][0] != '-' && argv[i - 2][1] != 'n'))
-		{
-			parse_number(vm, "-1");
-			read_file(vm, argv[i], vm->champs);
-			vm->c_count++;
-		}
-		i++;
-	}
+	get_champions_noflag(vm, argc, argv);
+	check_champion_position(vm);
 }

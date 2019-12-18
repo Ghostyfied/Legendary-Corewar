@@ -6,7 +6,7 @@
 /*   By: awehlbur <awehlbur@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/05 14:57:25 by awehlbur       #+#    #+#                */
-/*   Updated: 2019/12/18 16:54:08 by awehlbur      ########   odam.nl         */
+/*   Updated: 2019/12/18 17:56:08 by awehlbur      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int         main(int argc, char **argv)
 	vm = init_vm();
 	count_champions(vm, argv);
 	retrieve_flags(vm, argc, argv);
-	check_champion_position(vm);
 
 
 	/* debugggingggg */
@@ -44,14 +43,14 @@ int         main(int argc, char **argv)
 	while (i < vm->champion_count)
 	{
 		// ft_putnbr(vm->tab[i]);
-		ft_putnbr(vm->champs[i].nb_set);
+		ft_putstr(vm->champs[i].name);
 		write(1, "\n", 1);
 		i++;
 	}
-	while (j < vm->champs[0].code_size)
-	{
-		ft_printf("%d\n", vm->arena[j]);
-		j++;
-	}
+	// while (j < vm->champs[0].code_size)
+	// {
+	// 	ft_printf("%d\n", vm->arena[j]);
+	// 	j++;
+	// }
     return (0);
 }
