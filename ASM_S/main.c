@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:06:32 by fhignett       #+#    #+#                */
-/*   Updated: 2019/12/16 15:32:58 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/12/18 11:15:57 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void		make_file(char **champion, char *new_filename, t_asm *asm_info)
 		puthex(op->executable, fd);
 		op = op->next;
 	}
+	close(fd);
 }
 
 int			main(int argc, char **argv)
@@ -90,7 +91,7 @@ int			main(int argc, char **argv)
 	char	**champion;
 	t_asm	*asm_info;
 
-	asm_info = malloc(sizeof(t_asm));
+	asm_info = MEM(t_asm);
 	if (argc < 2 || argc > 3)
 		ft_error("Usage:");
 	new_file_ext = ft_check_filename(argv[1]);
