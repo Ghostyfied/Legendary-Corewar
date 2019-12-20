@@ -1,9 +1,23 @@
 #include "vm.h"
 
-void			play_game(t_vm *vm)
+/*
+** EXAMPLES:
+** int x = get_2bytes(&ARENA[i]); index vanaf waar je de bytes wilt lezen, geeft een integer terug in kleine endian!
+** int y = get_4bytes(&ARENA[i]); index vanaf waar je de bytes wilt lezen, geeft een integer terug in kleine endian!
+*/
+
+int			get_2bytes(t_byte *arena)
 {
-	while (GAME->cycles < GAME->cycles_to_die)
-	{
-		GAME->cycles = (GAME->cycles + 1) % GAME->cycles_to_die;
-	}
+	short b;
+
+	ft_memcpy(&b, arena, 2);
+	return (swap_16(b));
+}
+
+int			get_4bytes(t_byte *arena)
+{
+	int b;
+
+	ft_memcpy(&b, arena, 4);
+	return (swap_32(b));
 }
