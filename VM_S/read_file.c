@@ -6,7 +6,7 @@
 /*   By: awehlbur <awehlbur@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/18 15:31:23 by awehlbur       #+#    #+#                */
-/*   Updated: 2019/12/18 20:04:31 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/02 12:45:56 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void		read_file(t_vm *vm, char *argv, t_champ *champ)
 	code = (t_byte*)ft_memalloc(sizeof(t_byte) * champ->code_size);
 	read(fd, code, champ->code_size);
 	champ->starting_pos = vm->champ_position * (champ->id - 1);
-	ft_memcpy(&vm->arena[champ->starting_pos], code, champ->code_size);
+	ft_memcpy(&ARENA[champ->starting_pos], code, champ->code_size);
 	close(fd);
 	free(code);
 	vm->champ_nb++;

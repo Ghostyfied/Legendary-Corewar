@@ -13,6 +13,8 @@ static t_vm	*init_vm(void)
 **	control room for the program
 */
 
+void		loop_cursors(t_vm *vm);
+
 int         main(int argc, char **argv)
 {
 	t_vm	*vm;
@@ -26,18 +28,9 @@ int         main(int argc, char **argv)
 	setup_game(vm);
 
 	/* DEBUG */
-	ft_putendl("");
-	int i = 0;
-	ft_printf("%s\n", g_op_tab[ARENA[i++]].name);
-	ft_printf("%d\n", ARENA[i++]);
-	ft_printf("%d\n", ARENA[i++]);
-	ft_printf("%d\n", get_2bytes(&ARENA[i]));
-	i += 2;
-	ft_printf("%d\n", get_2bytes(&ARENA[i]));
-	i += 2;
-	ft_printf("%s\n", g_op_tab[ARENA[i++]].name);
-	ft_printf("%d\n", get_4bytes(&ARENA[i]));
-
-
+	loop_cursors(vm);
+	// GAME->cursors->position += 10;
+	// print_cursor(GAME->cursors, false);
+	/* DEBUG */
     return (0);
 }

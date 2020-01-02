@@ -8,6 +8,7 @@ t_cursor		*new_cursor(int	position, int r1, long id)
 	c->id = id;
 	c->position = position;
 	c->registry[0] = r1;
+	c->moved = true;
 	return (c);
 }
 

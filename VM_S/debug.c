@@ -43,12 +43,19 @@ void	print_byte(const void *byte, size_t size)
 	}
 }
 
-void	print_cursor(t_cursor *cursor)
+void	print_cursor(t_cursor *cursor, int reg)
 {
 	int i = 0;
 
 	ft_printf("%-8s : %d\n", "id", cursor->id);
 	ft_printf("%-8s : %d\n", "position", cursor->position);
+	ft_printf("%-8s : %d\n", "opcode", cursor->opcode);
+	ft_printf("%-8s : %d\n", "wait_cy", cursor->wait_cycles);
+	if (reg == false)
+	{
+		ft_putendl("");
+		return ;
+	}
 	while (i < REG_NUMBER)
 	{
 		ft_printf(" r%-2d : %d\n", i, cursor->registry[i]);
@@ -57,10 +64,10 @@ void	print_cursor(t_cursor *cursor)
 	ft_putendl("");
 }
 
-void	print_cursors(t_cursor *cursors)
+void	print_cursors(t_cursor *cursors, int reg)
 {
 	if (!cursors)
 		return ;
-	print_cursor(cursors);
-	print_cursors(cursors->next);
+	print_cursor(cursors, reg);
+	print_cursors(cursors->next, reg);
 }

@@ -23,6 +23,7 @@ typedef enum			e_bool
 typedef struct			s_cursor
 {
 	long				id;
+	int					moved; /* To check if cursor has moved last round, init with true */
 	int					carry;
 	int					opcode;
 	int					last_live;
@@ -94,8 +95,8 @@ t_cursor				*copy_cursor(t_cursor *src, int position, long id);
 /* DEBUG */
 void	print_byte(const void *byte, size_t size);
 void	print_champions(t_champ *champs, int champ_nb);
-void	print_cursor(t_cursor *cursor);
-void	print_cursors(t_cursor *cursors);
+void	print_cursor(t_cursor *cursor, int reg);
+void	print_cursors(t_cursor *cursors, int reg);
 /* DEBUG */
 
 // void					decode_code(int fd, t_champ *champ);
