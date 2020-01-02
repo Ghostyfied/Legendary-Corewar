@@ -12,6 +12,7 @@
 # define CODE_OFFSET	(16 + COMMENT_LENGTH + PROG_NAME_LENGTH)
 # define GAME			vm->game
 # define CHAMPS			vm->champs
+# define ARENA			vm->arena
 
 typedef enum			e_bool
 {
@@ -81,6 +82,9 @@ int						ft_arrlen(char **tab);
 int						ft_validate_format(char *format, char *str);
 int						ft_is_a_number(char *str);
 int						swap_32(int nb);
+int						get_2bytes(t_byte *arena);
+int						get_4bytes(t_byte *arena);
+
 
 short					swap_16(short nb);
 
