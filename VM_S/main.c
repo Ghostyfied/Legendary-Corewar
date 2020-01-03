@@ -29,7 +29,19 @@ int         main(int argc, char **argv)
 
 	/* DEBUG */
 	loop_cursors(vm);
-	// GAME->cursors->position += 10;
+	// int i = 0;
+
+	// ft_printf("%d\n", ARENA[i]);
+	// i++;
+	// ft_printf("%d\n", ARENA[i]);
+	// i++;
+	// ft_printf("%d\n", ARENA[i]);
+	// i++;
+	// ft_printf("%d\n", get_2bytes(&ARENA[i]));
+	// i++;
+	// i++;
+	// ft_printf("%d\n", get_2bytes(&ARENA[i]));
+	// // GAME->cursors->position += 10;
 	// print_cursor(GAME->cursors, false);
 	/* DEBUG */
     return (0);
