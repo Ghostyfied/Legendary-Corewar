@@ -40,5 +40,6 @@ int         main(int argc, char **argv)
 	check_champion_position(vm);
 	setup_game(vm);
 	game(vm);
+	free_vm(vm);
     return (0);
 }

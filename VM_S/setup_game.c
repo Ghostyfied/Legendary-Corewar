@@ -36,5 +36,5 @@ void			setup_game(t_vm *vm)
 	GAME->cycles_to_die = CYCLE_TO_DIE;
 	GAME->cursors_id = 1;
 	setup_cursors(vm);
-	// introduction(CHAMPS, vm->champion_count);
+	introduction(CHAMPS, vm->champion_count);
 }
