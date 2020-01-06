@@ -1,6 +1,6 @@
 #include "vm.h"
 
-static void free_cursors(t_cursor *cursor)
+void 		free_cursors(t_cursor *cursor)
 {
 	if (!cursor)
 		return ;

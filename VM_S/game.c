@@ -103,6 +103,10 @@ t_arg		*get_args(t_cursor *c, t_byte octal, t_byte *arena)
 	return (args);
 }
 
+/*
+** Gets size of octal
+*/
+
 int			get_size(t_byte opcode, t_byte octal, int nb_arg)
 {
 	int shift;
@@ -125,6 +129,10 @@ int			get_size(t_byte opcode, t_byte octal, int nb_arg)
 	}
 	return (size);
 }
+
+/*
+** Checks if operation is valid that cursor has to execute and then calls do_op()
+*/
 
 void		execute_op(t_cursor *c, t_vm *vm)
 {
@@ -172,7 +180,25 @@ void		execute_op(t_cursor *c, t_vm *vm)
 	}
 }
 
-void		loop_cursors(t_vm *vm)
+/*
+** Returns the correct index of the amount of moved bytes in the arena
+*/
+
+int			get_arena_index(int current, int move)
+{
+	if (move >= 0)
+		return ((current + move) % MEM_SIZE);
+	current += move;
+	if (current < 0)
+		return ((MEM_SIZE - 1) + current);
+	return (current);
+}
+
+/*
+** Loops over all the cursors and executes a command for all of them
+*/
+
+void		cursor_operations(t_vm *vm)
 {
 	t_cursor *c;
 
@@ -187,17 +213,52 @@ void		loop_cursors(t_vm *vm)
 			execute_op(c, vm);
 		else if (!c->wait_cycles)
 		{
-			c->position = (c->position + 1) % MEM_SIZE;
+			c->position = get_arena_index(c->position, 1); // (c->position + 1) % MEM_SIZE;
 			c->moved = true;
 		}
 		c = c->next;
 	}
 }
 
+void		check_cursors_live(t_vm *vm, int cycles)
+{
+	t_cursor *c;
+	t_cursor *nxt;
+
+	c = CURSORS;
+	while (c)
+	{
+		nxt = c->next;
+		if (GAME->cycles_to_die < 1 || c->last_live <= (GAME->cycles_counter - cycles))
+			CURSORS = delete_cursor(CURSORS, c->id);
+		c = nxt;
+	}
+}
+
 void		game(t_vm *vm)
 {
-	// while (CURSORS)
-	// {
-		loop_cursors(vm);
-	// }
+	int cycles;
+
+	cycles = 0;
+	while (CURSORS)
+	{
+		cycles++; // Hier of onderaan???
+		GAME->cycles_counter += cycles; // Hier of onderaan???
+		cursor_operations(vm);
+		if (GAME->cycles_to_die < 1 || cycles == GAME->cycles_to_die)
+		{
+			GAME->checks++;
+			check_cursors_live(vm, cycles);
+			if (GAME->live_counter >= NBR_LIVE || GAME->checks > MAX_CHECKS)
+			{
+				GAME->cycles_to_die -= CYCLE_DELTA;
+				GAME->checks = 0;
+			}
+			GAME->live_counter = 0;
+			cycles = 0;
+		}
+		if (vm->dump == GAME->cycles_counter) // If dump flag is active, dump the arena in hex at given cycle and exit program
+			dump64(vm);
+	}
+	ft_printf("Contestant %d, \"%s\", has won !\n", GAME->winner, CHAMPS[GAME->winner - 1].name);
 }

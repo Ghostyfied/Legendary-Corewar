@@ -55,7 +55,7 @@ typedef struct			s_champ
 typedef struct			s_game
 {
 	int					winner; /* This is the variable showing the winner. It is initialised with the highest player id, and is updated every time operation live is performed. */
-	int					cycles;
+	int					cycles_counter;
 	int					live_counter;
 	int					cycles_to_die;
 	int					checks;
@@ -70,6 +70,7 @@ typedef struct			s_vm
 	int					champion_count; /* Amount of Champions */
 	int					champ_nb; /* Current index of Champs in array */
 	int					champ_position; /* Position to multiply for champions in arena */
+	int					dump;
 	t_byte				arena[MEM_SIZE];
 	t_champ				*champs;
 	t_game				*game;
@@ -89,6 +90,8 @@ void					play_game(t_vm *vm);
 void					free_vm(t_vm *vm);
 void					dump64(t_vm *vm);
 void					dump32(t_vm *vm);
+void					game(t_vm *vm);
+void					free_cursors(t_cursor *cursor);
 
 int						ft_arrlen(char **tab);
 int						ft_validate_format(char *format, char *str);
@@ -96,11 +99,13 @@ int						ft_is_a_number(char *str);
 int						swap_32(int nb);
 int						get_2bytes(t_byte *arena);
 int						get_4bytes(t_byte *arena);
+int						get_arena_index(int current, int move);
 
 short					swap_16(short nb);
 
 t_cursor				*new_cursor(int	position, int r1, long id);
 t_cursor				*copy_cursor(t_cursor *src, int position, long id);
+t_cursor				*delete_cursor(t_cursor *head, long cursor_id);
 
 /* DEBUG */
 void	print_byte(const void *byte, size_t size);
