@@ -1,6 +1,6 @@
 #include "vm.h"
 
-t_cursor		*new_cursor(int	position, int r1, long id)
+t_cursor	*new_cursor(int	position, int r1, long id)
 {
 	t_cursor *c;
 
@@ -29,4 +29,20 @@ t_cursor	*copy_cursor(t_cursor *src, int position, long id)
 	cpy->position = position;
 	cpy->id = id;
 	return (cpy);
+}
+
+t_cursor	*delete_cursor(t_cursor *head, long cursor_id)
+{
+	t_cursor *ret;
+
+	if (!head)
+		return (head);
+	if (head->id == cursor_id)
+	{
+		ret = head->next;
+		free(head);
+		return (ret);
+	}
+	head->next = delete_cursor(head->next, cursor_id);
+	return (head);
 }

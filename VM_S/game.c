@@ -176,10 +176,9 @@ void		loop_cursors(t_vm *vm)
 {
 	t_cursor *c;
 
-	c = GAME->cursors;
+	c = CURSORS;
 	while (c)
 	{
-		c->position += 7;
 		if (c->moved)
 			get_opcode(c, ARENA[c->position]);
 		if (c->wait_cycles > 0)
@@ -193,4 +192,12 @@ void		loop_cursors(t_vm *vm)
 		}
 		c = c->next;
 	}
+}
+
+void		game(t_vm *vm)
+{
+	// while (CURSORS)
+	// {
+		loop_cursors(vm);
+	// }
 }

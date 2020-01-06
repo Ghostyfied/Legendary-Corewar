@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 11:27:18 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/06 11:28:25 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/06 12:50:52 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char			*get_hex(unsigned int nb, int bytesize)
 	return (hex);
 }
 
-void				dump64(t_byte *arena)
+void				dump64(t_vm *vm)
 {
 	int	i;
 	int	j;
@@ -44,7 +44,7 @@ void				dump64(t_byte *arena)
 		ft_printf("0x%s : ", get_hex(line, 2));
 		while (j < 64)
 		{
-			ft_printf("%s ", get_hex(arena[idx], 1));
+			ft_printf("%s ", get_hex(ARENA[idx], 1));
 			idx++;
 			j++;
 		}
@@ -52,9 +52,11 @@ void				dump64(t_byte *arena)
 		line += 64;
 		i++;
 	}
+	free_vm(vm);
+	exit(0);
 }
 
-void				dump32(t_byte *arena)
+void				dump32(t_vm *vm)
 {
 	int i;
 	int j;
@@ -70,7 +72,7 @@ void				dump32(t_byte *arena)
 		ft_printf("0x%s : ", get_hex(line, 2));
 		while (j < 32)
 		{
-			ft_printf("%s ", get_hex(arena[idx], 1));
+			ft_printf("%s ", get_hex(ARENA[idx], 1));
 			idx++;
 			j++;
 		}
@@ -78,4 +80,6 @@ void				dump32(t_byte *arena)
 		line += 32;
 		i++;
 	}
+	free_vm(vm);
+	exit(0);
 }
