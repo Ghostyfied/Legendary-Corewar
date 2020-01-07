@@ -3,17 +3,15 @@
 /*                                                        ::::::::            */
 /*   op.h                                               :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: kcosta <kcosta@student.42.fr>                +#+                     */
+/*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2017/02/09 13:11:06 by kcosta         #+#    #+#                */
-/*   Updated: 2019/11/01 15:56:50 by awehlbur      ########   odam.nl         */
+/*   Created: 2019/12/05 17:56:24 by fhignett       #+#    #+#                */
+/*   Updated: 2019/12/12 21:04:18 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OP_H
 # define OP_H
-
-# include "../libft/libft.h"
 
 /*
 ** Toutes les tailles sont en octets.
@@ -35,6 +33,7 @@
 # define CHAMP_MAX_SIZE			(MEM_SIZE / 6)
 
 # define COMMENT_CHAR			'#'
+# define ALT_COMMENT_CHAR		';'
 # define LABEL_CHAR				':'
 # define DIRECT_CHAR			'%'
 # define SEPARATOR_CHAR			','
@@ -51,8 +50,7 @@
 # define NBR_LIVE				21
 # define MAX_CHECKS				10
 
-typedef unsigned char			t_arg_type;
-typedef unsigned char			t_uchar;
+typedef unsigned char			t_byte;
 
 # define T_REG					1
 # define T_DIR					2
@@ -71,37 +69,17 @@ typedef struct					s_header
 	char						comment[COMMENT_LENGTH + 1];
 }								t_header;
 
-typedef	struct s_vm				t_vm;
-
 typedef struct					s_op
 {
 	char						*name;
-	unsigned char				nb_arg;
-	t_arg_type					args[3];
-	unsigned char				opcode;
+	t_byte						nb_arg;
+	t_byte						args[3];
+	t_byte						opcode;
 	unsigned int				cycle;
 	char						*description;
-	unsigned char				octal;
-	unsigned char				label;
-	void						(*f)(t_vm *v, t_list *process);
+	t_byte						octal;
+	t_byte						dir_size;
 }								t_op;
-
-void							op_live(t_vm *v, t_list *process);
-void							op_ld(t_vm *v, t_list *process);
-void							op_st(t_vm *v, t_list *process);
-void							op_add(t_vm *v, t_list *process);
-void							op_sub(t_vm *v, t_list *process);
-void							op_and(t_vm *v, t_list *process);
-void							op_or(t_vm *v, t_list *process);
-void							op_xor(t_vm *v, t_list *process);
-void							op_zjmp(t_vm *v, t_list *process);
-void							op_ldi(t_vm *v, t_list *process);
-void							op_sti(t_vm *v, t_list *process);
-void							op_fork(t_vm *v, t_list *process);
-void							op_lld(t_vm *v, t_list *process);
-void							op_lldi(t_vm *v, t_list *process);
-void							op_lfork(t_vm *v, t_list *process);
-void							op_aff(t_vm *v, t_list *process);
 
 extern t_op						g_op_tab[17];
 

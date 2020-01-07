@@ -3,19 +3,19 @@
 /*                                                        ::::::::            */
 /*   main.c                                             :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: awehlbur <awehlbur@student.codam.nl>         +#+                     */
+/*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
+<<<<<<< HEAD
 /*   Created: 2019/10/30 13:42:40 by awehlbur       #+#    #+#                */
 /*   Updated: 2019/12/05 15:19:49 by awehlbur      ########   odam.nl         */
+=======
+/*   Created: 2019/12/10 16:06:32 by fhignett       #+#    #+#                */
+/*   Updated: 2020/01/06 14:58:09 by fhignett      ########   odam.nl         */
+>>>>>>> master
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-
-int			ft_free_all(int	l)
-{
-	return (l);
-}
 
 char		*ft_check_filename(char *file)
 {
@@ -28,18 +28,65 @@ char		*ft_check_filename(char *file)
 		return (NULL);
 	if (ft_strcmp(end, ".s"))
 		return (NULL);
-	new_file_ext = ft_strnew(end - file  + 2);
+	new_file_ext = ft_strnew(end - file + 2);
 	ft_strncpy(new_file_ext, file, end - file + 1);
 	ft_strncpy(ft_strrchr(new_file_ext, '.') + 1, "cor", 3);
 	return (new_file_ext);
 }
 
-void	make_file(char **champion, char *new_filename)
+int			calchex(char one, char two)
 {
-	int fd;
+	int		i;
+	int		j;
+	char	*hex;
+
+	hex = ft_strdup("0123456789abcdef");
+	i = ft_strchr(hex, one) - hex;
+	j = ft_strchr(hex, two) - hex;
+	free(hex);
+	return (16 * i + j);
+}
+
+void		puthex(char *str, int fd)
+{
+	int i;
+	int	len;
+
+	i = 0;
+	len = ft_strlen(str);
+	while (i < len)
+	{
+		ft_putchar_fd(calchex(str[i], str[i + 1]), fd);
+		i += 2;
+	}
+}
+
+void		make_file(char **champion, char *new_filename, t_asm *asm_info)
+{
+	int				fd;
+	t_operation		*op;
+	char			*exec_size;
+	unsigned char	byte;
 
 	fd = open(new_filename, O_CREAT | O_RDWR, 0666);
-	ft_putstr_fd("00ea 83f3 ", fd);
+	if (fd < 0)
+		ft_error(strerror(errno));
+	ft_printf("Writing output program to %s\n", new_filename);
+	puthex(get_hex(COREWAR_EXEC_MAGIC, 4), fd);
+	puthex(asm_info->name, fd);
+	puthex("00000000", fd);
+	exec_size = get_hex(asm_info->exec_code_size, 4);
+	puthex(exec_size, fd);
+	free(exec_size);
+	puthex(asm_info->comment, fd);
+	puthex("00000000", fd);
+	op = asm_info->operations;
+	while (op)
+	{
+		puthex(op->executable, fd);
+		op = op->next;
+	}
+	close(fd);
 }
 
 int			main(int argc, char **argv)
@@ -47,14 +94,17 @@ int			main(int argc, char **argv)
 	int		res;
 	char	*new_file_ext;
 	char	**champion;
+	t_asm	*asm_info;
 
+	asm_info = MEM(t_asm);
 	if (argc < 2 || argc > 3)
 		ft_error("Usage:");
-	if (!(new_file_ext = ft_check_filename(argv[1])))
+	new_file_ext = ft_check_filename(argv[1]);
+	if (!new_file_ext)
 		ft_error("Can not read file");
 	champion = ft_read_file(argv[1]);
-	// parse(champion);
-	// make_file(champion, new_file_ext);
-	// ft_chararrfree(&champion);
-	return (ft_free_all(0));
+	parse(champion, &asm_info);
+	make_file(champion, new_file_ext, asm_info);
+	free_asm(asm_info);
+	return (0);
 }
