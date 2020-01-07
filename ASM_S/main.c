@@ -5,13 +5,8 @@
 /*                                                     +:+                    */
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-<<<<<<< HEAD
-/*   Created: 2019/10/30 13:42:40 by awehlbur       #+#    #+#                */
-/*   Updated: 2019/12/05 15:19:49 by awehlbur      ########   odam.nl         */
-=======
 /*   Created: 2019/12/10 16:06:32 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/06 14:58:09 by fhignett      ########   odam.nl         */
->>>>>>> master
+/*   Updated: 2020/01/07 14:50:21 by awehlbur      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
