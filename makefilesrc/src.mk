@@ -35,7 +35,9 @@ CORE_SRCS_FILES		=	main.c \
 DIS_SRCS_FILES		=	main.c \
 						decode_code.c \
 						read_file.c \
+						read_file_functions.c \
 						structs.c \
+						misc.c \
 						op.c
 
 ASM_HEADERS_FILES	=	op.h asm.h
