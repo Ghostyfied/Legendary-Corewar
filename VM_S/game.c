@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 14:38:02 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/07 15:20:23 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/07 16:57:38 by rvan-ket      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void			game(t_vm *vm)
 	while (CURSORS)
 	{
 		cycles++;
-		GAME->cycles_counter += cycles;
+		GAME->cycles_counter++;
 		cursor_operations(vm);
 		if (GAME->cycles_to_die < 1 || cycles == GAME->cycles_to_die)
 		{
