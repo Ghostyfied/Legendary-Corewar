@@ -6,7 +6,7 @@
 /*   By: awehlbur <awehlbur@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/18 15:31:05 by awehlbur       #+#    #+#                */
-/*   Updated: 2020/01/07 16:03:22 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/07 16:45:37 by awehlbur      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,19 +80,46 @@ void		get_champions_noflag(t_vm *vm, int argc, char **argv)
 	}
 }
 
+void		check_valid_input(char **argv, int argc)
+{
+	int		i;
+
+	i = 1;
+	while (i < argc)
+	{
+		if (argv[i][0] == '-' || ft_validate_format("%d", argv[i]) || ft_strstr(argv[i], ".cor"))
+			i++;
+		else
+			ft_error("that is not a valid input");
+	}
+}
+
 void		retrieve_flags(t_vm *vm, int argc, char **argv)
 {
 	int		i;
 
 	i = 0;
 	set_tab(vm);
+	check_valid_input(argv, argc);
 	while (i < argc)
 	{
 		if (argv[i][0] == '-' && argv[i][1] == 'n' &&
 			argv[i][2] == '\0' && (i + 2) < argc)
 		{
-			// if (!ft_validate_format("%d", argv[i + 1]))
-			// 	ft_error("-n flag without valid number");
+			if (!ft_validate_format("%d", argv[i + 1]))
+				ft_error("That is not a valid number for the hexdump");
+			vm->dump = ft_atoi(argv[i + 1]);
+		}
+		if (argv[i][0] == '-' && argv[i][1] == 'n')
+			{
+			if ((i + 2) >= argc)
+				ft_error("Invalid flag");
+			if (argv[i][2] != '\0')
+				ft_error("Invalid -n flag");
+			if (ft_validate_format("%d", argv[i + 1]) != 1)
+				ft_error("Please enter the number the champion should be!");
+			if (vm->champion_count < ft_atoi(argv[i + 1]))
+				ft_error("That number is bigger than there are positions...");
 			if (ft_strstr(argv[i + 2], ".cor"))
 			{
 				parse_number(vm, argv[i + 1]);

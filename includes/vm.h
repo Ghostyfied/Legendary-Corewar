@@ -94,6 +94,7 @@ void					free_cursors(t_cursor *cursor);
 void					execute_op(t_vm *vm, t_cursor *c);
 void					check_magic_header(int fd);
 void					skip_bytes(int fd, int amount);
+void					do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size);
 
 char					*get_comment(int fd);
 char					*get_name(int fd);
