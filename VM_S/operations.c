@@ -35,7 +35,7 @@ void	ld(t_vm *vm, t_cursor *c, t_arg *argument)
 	}
 	else if (arg1.type == 2)
 	{
-		ft_memcpy(c->registry[arg2.value], arg1.value, 4);
+		ft_memcpy(&c->registry[arg2.value], &arg1.value, 4);
 		if (arg1.value == 0)
 			c->carry = 0;
 		else
@@ -54,11 +54,11 @@ void	st(t_vm *vm, t_cursor *c, t_arg *argument)
 
 	if (arg2.type == 1)
 	{
-		ft_memcpy(c->registry[arg2.value], arg1.value, 4);
+		ft_memcpy(&c->registry[arg2.value], &arg1.value, 4);
 	}
 	else if (arg2.type == 4)
 	{
-		ft_memcpy(ARENA[(c->position + arg2.value % IDX_MOD) % IDX_MOD], c->registry[arg1.value], 4);
+		ft_memcpy(&ARENA[(c->position + arg2.value % IDX_MOD) % IDX_MOD], &c->registry[arg1.value], 4);
 		// swap_32();
 	}
 }
@@ -75,7 +75,7 @@ void	add(t_vm *vm, t_cursor *c, t_arg *argument)
 	arg2 = argument[1];
 	arg3 = argument[2];
 	value = arg1.value + arg2.value;
-	ft_memcpy(c->registry[arg3.value], value, 4);
+	ft_memcpy(&c->registry[arg3.value], &value, 4);
 	if (value == 0)
 		c->carry = 1;
 	else
@@ -94,7 +94,7 @@ void	sub(t_vm *vm, t_cursor *c, t_arg *argument)
 	arg2 = argument[1];
 	arg3 = argument[2];
 	value = arg1.value - arg2.value;
-	ft_memcpy(c->registry[arg3.value], value, 4);
+	ft_memcpy(&c->registry[arg3.value], &value, 4);
 	if (value == 0)
 		c->carry = 1;
 	else
@@ -116,11 +116,11 @@ void	and(t_vm *vm, t_cursor *c, t_arg *argument)
 		if (argument[i].type == 2)
 			value[i] = argument[i].value;
 		if (argument[i].type == 4)
-			ft_memcpy(value[i], ARENA[c->position + argument[i].value % IDX_MOD], 4);		
+			ft_memcpy(&value[i], &ARENA[c->position + argument[i].value % IDX_MOD], 4);		
 		i++;
 	}
 	val = value[0] & value[1];
-	ft_memcpy(c->registry[argument[2].value], val, 4);
+	ft_memcpy(&c->registry[argument[2].value], &val, 4);
 }
 
 void	or(t_vm *vm, t_cursor *c, t_arg *argument)
@@ -137,11 +137,11 @@ void	or(t_vm *vm, t_cursor *c, t_arg *argument)
 		if (argument[i].type == 2)
 			value[i] = argument[i].value;
 		if (argument[i].type == 4)
-			ft_memcpy(value[i], ARENA[c->position + argument[i].value % IDX_MOD], 4);		
+			ft_memcpy(&value[i], &ARENA[c->position + argument[i].value % IDX_MOD], 4);		
 		i++;
 	}
 	val = value[0] | value[1];
-	ft_memcpy(c->registry[argument[2].value], val, 4);
+	ft_memcpy(&c->registry[argument[2].value], &val, 4);
 }
 
 void	xor(t_vm *vm, t_cursor *c, t_arg *argument)
@@ -158,11 +158,11 @@ void	xor(t_vm *vm, t_cursor *c, t_arg *argument)
 		if (argument[i].type == 2)
 			value[i] = argument[i].value;
 		if (argument[i].type == 4)
-			ft_memcpy(value[i], ARENA[c->position + argument[i].value % IDX_MOD], 4);		
+			ft_memcpy(&value[i], &ARENA[c->position + argument[i].value % IDX_MOD], 4);		
 		i++;
 	}
 	val = value[0] ^ value[1];
-	ft_memcpy(c->registry[argument[2].value], val, 4);
+	ft_memcpy(&c->registry[argument[2].value], &val, 4);
 }
 
 void zjmp(t_vm *vm, t_cursor *c, t_arg *argument)
