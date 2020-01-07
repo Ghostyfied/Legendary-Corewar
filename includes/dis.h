@@ -37,10 +37,17 @@ typedef struct			s_champ
 void					decode_code(int fd, t_champ *champ);
 void					read_file(t_champ *vm, char *file);
 void					add_operation(t_operation **head, t_operation *new);
+void					check_magic_header(int fd);
+void					skip_bytes(int fd, int amount);
+
+char					*get_comment(int fd);
+char					*get_name(int fd);
 
 short					swap_16(short nb);
 
 int						swap_32(int nb);
+int						octal_valid(t_byte octal, int nb_arg);
+int						get_code_size(int fd);
 
 t_operation 			*new_operation(int op_code);
 

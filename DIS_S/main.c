@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   main.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/01/07 16:07:50 by fhignett       #+#    #+#                */
+/*   Updated: 2020/01/07 16:15:57 by fhignett      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "dis.h"
 
-char		*ft_check_filename(char *file)
+static char		*ft_check_filename(char *file)
 {
 	char	*end;
 	char	*new_file_ext;
@@ -17,12 +29,33 @@ char		*ft_check_filename(char *file)
 	return (new_file_ext);
 }
 
-void		make_file(t_champ *champ, char *new_filename)
+static void		put_code(int fd, t_operation *op)
+{
+	int		i;
+	char	*arg;
+
+	ft_putstr_fd(g_op_tab[op->op_code].name, fd);
+	i = 0;
+	while (i < op->nb_arg)
+	{
+		if (op->args[i].type == T_REG)
+			arg = "r";
+		else if (op->args[i].type == T_DIR)
+			arg = "\%";
+		else
+			arg = "";
+		dprintf(fd, " %s%d", arg, op->args[i].value);
+		i++;
+		if (i < op->nb_arg)
+			ft_putchar_fd(',', fd);
+	}
+	ft_putendl_fd("", fd);
+}
+
+static void		make_file(t_champ *champ, char *new_filename)
 {
 	int				fd;
 	t_operation		*op;
-	int				i;
-	char			*arg;
 
 	fd = open(new_filename, O_CREAT | O_RDWR, 0666);
 	if (fd < 0)
@@ -33,23 +66,13 @@ void		make_file(t_champ *champ, char *new_filename)
 	op = champ->operations;
 	while (op)
 	{
-		ft_putstr_fd(g_op_tab[op->op_code].name, fd);
-		i = 0;
-		while (i < op->nb_arg)
-		{
-			arg = op->args[i].type == T_REG ? "r" : op->args[i].type == T_DIR ? "\%" : "";
-			dprintf(fd, " %s%d", arg, op->args[i].value);
-			i++;
-			if (i < op->nb_arg)
-				ft_putchar_fd(',', fd);
-		}
-		ft_putendl_fd("", fd);
+		put_code(fd, op);
 		op = op->next;
 	}
 	close(fd);
 }
 
-int			main(int argc, char **argv)
+int				main(int argc, char **argv)
 {
 	char	*new_file_ext;
 	char	*tmp;

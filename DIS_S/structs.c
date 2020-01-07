@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   structs.c                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/01/07 16:08:04 by fhignett       #+#    #+#                */
+/*   Updated: 2020/01/07 16:17:18 by fhignett      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "dis.h"
 
-t_operation *new_operation(int op_code)
+t_operation	*new_operation(int op_code)
 {
 	t_operation *new;
 

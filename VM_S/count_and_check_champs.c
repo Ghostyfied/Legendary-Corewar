@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   count_and_check_champs.c                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/01/07 16:00:54 by fhignett       #+#    #+#                */
+/*   Updated: 2020/01/07 16:01:28 by fhignett      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "vm.h"
 
@@ -42,7 +52,8 @@ static void		find_cor(t_vm *vm, char **string)
 }
 
 /*
-**	Count champions and split the string on spaces, then look for .cor extension to count
+** Count champions and split the string on spaces,
+** then look for .cor extension to count
 */
 
 void			count_champions(t_vm *vm, char **argv)

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   setup_game.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/01/07 15:51:45 by fhignett       #+#    #+#                */
+/*   Updated: 2020/01/07 15:53:27 by fhignett      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vm.h"
 
 static void		setup_cursors(t_vm *vm)
@@ -9,7 +21,8 @@ static void		setup_cursors(t_vm *vm)
 	while (i < vm->champion_count)
 	{
 		c = CHAMPS[i];
-		add_cursor(&GAME->cursors, new_cursor(c.starting_pos, -c.id, GAME->cursors_id));
+		add_cursor(&GAME->cursors,
+					new_cursor(c.starting_pos, -c.id, GAME->cursors_id));
 		GAME->cursors_id++;
 		i++;
 	}
