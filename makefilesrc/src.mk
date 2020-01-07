@@ -28,6 +28,8 @@ CORE_SRCS_FILES		=	main.c \
 						game.c \
 						dump.c \
 						free.c \
+						check_op.c \
+						misc.c \
 						debug.c #DELETE ME LATER
 
 DIS_SRCS_FILES		=	main.c \

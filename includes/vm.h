@@ -92,11 +92,17 @@ void					dump64(t_vm *vm);
 void					dump32(t_vm *vm);
 void					game(t_vm *vm);
 void					free_cursors(t_cursor *cursor);
+void					execute_op(t_cursor *c, t_vm *vm);
 
 int						ft_arrlen(char **tab);
 int						ft_validate_format(char *format, char *str);
 int						ft_is_a_number(char *str);
 int						swap_32(int nb);
+int						get_2bytes(t_byte *arena);
+int						get_4bytes(t_byte *arena);
+int						get_arena_index(int current, int move);
+int						octal_valid(t_byte octal, int nb_arg);
+int						valid_opcode(t_byte opcode);
 int						get_2bytes(t_byte *arena);
 int						get_4bytes(t_byte *arena);
 int						get_arena_index(int current, int move);
