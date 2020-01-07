@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 15:53:57 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/07 16:44:24 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/07 17:44:53 by awehlbur      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static	t_vm	*init_vm(void)
 
 	vm = MEM(t_vm);
 	vm->arg_idx = 1;
+	vm->dump = -1;
 	return (vm);
 }
 
