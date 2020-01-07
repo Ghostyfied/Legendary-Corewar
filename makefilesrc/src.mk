@@ -22,18 +22,22 @@ CORE_SRCS_FILES		=	main.c \
 						extra_functions.c \
 						read_file.c \
 						op.c \
-						startvm.c \
 						cursor.c \
 						setup_game.c \
 						game.c \
 						dump.c \
 						free.c \
+						check_op.c \
+						misc.c \
+						read_file_functions.c \
 						debug.c #DELETE ME LATER
 
 DIS_SRCS_FILES		=	main.c \
 						decode_code.c \
 						read_file.c \
+						read_file_functions.c \
 						structs.c \
+						misc.c \
 						op.c
 
 ASM_HEADERS_FILES	=	op.h asm.h

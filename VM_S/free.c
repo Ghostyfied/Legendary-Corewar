@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   free.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/01/07 15:58:03 by fhignett       #+#    #+#                */
+/*   Updated: 2020/01/07 15:58:47 by fhignett      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vm.h"
 
-void 		free_cursors(t_cursor *cursor)
+void			free_cursors(t_cursor *cursor)
 {
 	if (!cursor)
 		return ;
@@ -9,7 +21,7 @@ void 		free_cursors(t_cursor *cursor)
 	cursor = NULL;
 }
 
-static void free_champs(t_champ *champs, int champ_nb)
+static	void	free_champs(t_champ *champs, int champ_nb)
 {
 	int i;
 
@@ -23,7 +35,7 @@ static void free_champs(t_champ *champs, int champ_nb)
 	free(champs);
 }
 
-void		free_vm(t_vm *vm)
+void			free_vm(t_vm *vm)
 {
 	free_champs(CHAMPS, vm->champion_count);
 	free_cursors(CURSORS);

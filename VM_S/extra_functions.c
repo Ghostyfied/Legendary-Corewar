@@ -1,11 +1,22 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   extra_functions.c                                  :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/01/07 15:59:07 by fhignett       #+#    #+#                */
+/*   Updated: 2020/01/07 16:00:05 by fhignett      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "vm.h"
 
 /*
 **	Check whether the argument after -n is a number
 */
-int			ft_is_a_number(char *str)
+
+int		ft_is_a_number(char *str)
 {
 	int		i;
 
@@ -30,7 +41,7 @@ short	swap_16(short nb)
 	return (b1 | b2);
 }
 
-int	swap_32(int nb)
+int		swap_32(int nb)
 {
 	int b1;
 	int b2;

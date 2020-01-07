@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   debug.c                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/01/07 16:00:30 by fhignett       #+#    #+#                */
+/*   Updated: 2020/01/07 16:01:48 by fhignett      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vm.h"
 
 void	print_champions(t_champ *champs, int champ_nb)
@@ -45,8 +57,9 @@ void	print_byte(const void *byte, size_t size)
 
 void	print_cursor(t_cursor *cursor, int reg)
 {
-	int i = 0;
+	int i;
 
+	i = 0;
 	ft_printf("%-8s : %d\n", "id", cursor->id);
 	ft_printf("%-8s : %d\n", "position", cursor->position);
 	ft_printf("%-8s : %d\n", "opcode", cursor->opcode);

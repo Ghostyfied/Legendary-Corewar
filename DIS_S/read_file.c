@@ -1,55 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   read_file.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/01/07 16:08:01 by fhignett       #+#    #+#                */
+/*   Updated: 2020/01/07 16:32:00 by fhignett      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "dis.h"
 
-static void check_magic_header(int fd)
-{
-	int mh;
-
-	read(fd, &mh, 4);
-	mh = swap_32(mh);
-	if (mh != COREWAR_EXEC_MAGIC)
-		ft_error("Magic Header error");
-}
-
-static char *get_comment(int fd)
-{
-	char	*comment;
-
-	comment = ft_strnew(COMMENT_LENGTH);
-	read(fd, comment, COMMENT_LENGTH);
-	return (comment);
-}
-
-static char *get_name(fd)
-{
-	char	*name;
-
-	name = ft_strnew(PROG_NAME_LENGTH);
-	read(fd, name, PROG_NAME_LENGTH);
-	return (name);
-}
-
-static int	get_code_size(int fd)
-{
-	int size;
-
-	read(fd, &size, 4);
-	size = swap_32(size);
-	return(size);
-}
-
-static void	skip_bytes(int fd, int amount)
-{
-	t_byte byte;
-
-	while (amount > 0)
-	{
-		read(fd, &byte, 1);
-		amount--;
-	}
-}
-
 /*
-** Read file, put everything in content. set number of champs higher, set filename, set prog_size, send to champion checker.
+** Read file, put everything in content. set number of champs higher,
+** set filename, set prog_size, send to champion checker.
 ** Copies the champions code into the correct position in the arena.
 */
 
