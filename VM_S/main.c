@@ -13,7 +13,20 @@ static t_vm	*init_vm(void)
 **	control room for the program
 */
 
-void		loop_cursors(t_vm *vm); //-n2 doesn't give error
+/*
+** Reminder/to do:
+** • Basic operations
+** • Add size to cursor-ßß>position after successful executed operation. And set cursor->moved to true
+** • Everytime live is performed GAME->live_counter++. Will be reset during the cursor live check.
+** • -d flag needs to be implemented, function already written.
+** • When doing an operation, when copying a value into the arena, watch out for max index, for example if
+**   	4 bytes are placed into the arena at index 4094, the last 2 bytes will be placed at index 0 and 1, right?
+** • function get_arena_index() added, might be usefull. Gives you the correct index back after saying how many steps
+**   	+ or - you want from current index.
+** • ./corewar batman.cor buttman.s doesn't give an error?
+** Visualizer if we have time/want to do it???
+** Norminette ofcourse
+*/
 
 int         main(int argc, char **argv)
 {
@@ -26,12 +39,7 @@ int         main(int argc, char **argv)
 	retrieve_flags(vm, argc, argv);
 	check_champion_position(vm);
 	setup_game(vm);
-
-	/* DEBUG */
-	// loop_cursors(vm);
-	// GAME->cursors->position += 10;
-	// print_cursor(GAME->cursors, false);
-	print_champions(CHAMPS, vm->champ_nb);
-	/* DEBUG */
+	game(vm);
+	free_vm(vm);
     return (0);
 }
