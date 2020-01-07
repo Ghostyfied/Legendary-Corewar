@@ -22,7 +22,6 @@ CORE_SRCS_FILES		=	main.c \
 						extra_functions.c \
 						read_file.c \
 						op.c \
-						startvm.c \
 						cursor.c \
 						setup_game.c \
 						game.c \
@@ -30,6 +29,7 @@ CORE_SRCS_FILES		=	main.c \
 						free.c \
 						check_op.c \
 						misc.c \
+						read_file_functions.c \
 						debug.c #DELETE ME LATER
 
 DIS_SRCS_FILES		=	main.c \

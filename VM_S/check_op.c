@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   check_op.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/01/07 15:20:46 by fhignett       #+#    #+#                */
+/*   Updated: 2020/01/07 15:37:03 by fhignett      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vm.h"
 
 /*
@@ -57,10 +69,10 @@ static t_arg	get_arg(t_byte opcode, t_byte arg_type)
 
 static t_arg	*get_args(t_cursor *c, t_byte octal, t_byte *arena)
 {
-	t_arg *args;
-	int shift;
-	int i;
-	int op_idx;
+	t_arg	*args;
+	int		shift;
+	int		i;
+	int		op_idx;
 
 	op_idx = 2;
 	shift = 6;
@@ -82,45 +94,54 @@ static t_arg	*get_args(t_cursor *c, t_byte octal, t_byte *arena)
 	return (args);
 }
 
-/*
-** Checks if operation is valid that cursor has to execute and then calls do_op()
-*/
-
-void		execute_op(t_cursor *c, t_vm *vm)
+static void		check_octal_code(t_vm *vm, t_cursor *c)
 {
-	int i;
-	int size;
-	t_arg *args;
+	int		i;
+	int		size;
+	t_arg	*args;
 
-	if (g_op_tab[c->opcode].octal)
+	size = get_size(c->opcode, ARENA[c->position + 1],
+					g_op_tab[c->opcode].nb_arg) + 2;
+	if (!octal_valid(ARENA[c->position + 1], g_op_tab[c->opcode].nb_arg))
 	{
-		size = get_size(c->opcode, ARENA[c->position + 1], g_op_tab[c->opcode].nb_arg) + 2;
-		if (!octal_valid(ARENA[c->position + 1], g_op_tab[c->opcode].nb_arg))
+		c->position += size;
+		return ;
+	}
+	args = get_args(c, ARENA[c->position + 1], ARENA);
+	i = 0;
+	while (i < g_op_tab[c->opcode].nb_arg)
+	{
+		if ((args[i].type == T_REG && (args[i].value < 1 || args[i].value > 16))
+			|| !(args[i].type & g_op_tab[c->opcode].args[i]))
 		{
+			free(args);
 			c->position += size;
 			return ;
 		}
-		args = get_args(c, ARENA[c->position + 1], ARENA);
-		i = 0;
-		while (i < g_op_tab[c->opcode].nb_arg)
-		{
-			if ((args[i].type == T_REG && (args[i].value < 1 || args[i].value > 16)) ||
-				!(args[i].type & g_op_tab[c->opcode].args[i]))
-			{
-				free(args);
-				c->position += size;
-				return ;
-			}
-			i++;
-		}
-		// do_op(vm, c, args, size);
+		i++;
 	}
+	// do_op(vm, c, args, size);
+}
+
+/*
+** Checks if operation/octal is valid that cursor has to execute
+** and then calls do_op()
+*/
+
+void			execute_op(t_vm *vm, t_cursor *c)
+{
+	int		size;
+	t_arg	*args;
+
+	if (g_op_tab[c->opcode].octal)
+		check_octal_code(vm, c);
 	else
 	{
 		args = MEM(t_arg);
 		size = 1 + g_op_tab[c->opcode].dir_size;
 		args->size = g_op_tab[c->opcode].dir_size;
-		args->value = args->size == 4 ? get_4bytes(&ARENA[c->position + 1]) : get_2bytes(&ARENA[c->position + 1]);
+		args->value = args->size == 4 ? get_4bytes(&ARENA[c->position + 1])
+		: get_2bytes(&ARENA[c->position + 1]);
 		if (args->value < 1 || args->value > 16)
 		{
 			free(args);

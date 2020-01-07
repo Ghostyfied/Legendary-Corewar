@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   cursor.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/01/07 15:56:22 by fhignett       #+#    #+#                */
+/*   Updated: 2020/01/07 15:56:56 by fhignett      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vm.h"
 
-t_cursor	*new_cursor(int	position, int r1, long id)
+t_cursor	*new_cursor(int position, int r1, long id)
 {
 	t_cursor *c;
 

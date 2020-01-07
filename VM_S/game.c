@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 14:38:02 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/07 14:39:15 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/07 15:20:23 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void		cursor_operations(t_vm *vm)
 		if (c->wait_cycles > 0)
 			c->wait_cycles--;
 		if (c->wait_cycles == 0 && valid_opcode(c->opcode))
-			execute_op(c, vm);
+			execute_op(vm, c);
 		else if (!c->wait_cycles)
 		{
 			c->position = get_arena_index(c->position, 1);

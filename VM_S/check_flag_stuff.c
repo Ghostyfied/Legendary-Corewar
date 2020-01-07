@@ -6,7 +6,7 @@
 /*   By: awehlbur <awehlbur@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/18 15:31:05 by awehlbur       #+#    #+#                */
-/*   Updated: 2019/12/18 19:50:59 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/07 16:03:22 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,9 @@ void		get_champions_noflag(t_vm *vm, int argc, char **argv)
 	i = 0;
 	while (i < argc)
 	{
-		if ((i < 3 && ft_strstr(argv[i], ".cor")) || (ft_strstr(argv[i], ".cor") && argv[i - 2][0] != '-' && argv[i - 2][1] != 'n'))
+		if ((i < 3 && ft_strstr(argv[i], ".cor")) ||
+		(ft_strstr(argv[i], ".cor") &&
+		argv[i - 2][0] != '-' && argv[i - 2][1] != 'n'))
 		{
 			parse_number(vm, "-1");
 			read_file(vm, argv[i], &vm->champs[vm->champ_nb]);
@@ -86,7 +88,8 @@ void		retrieve_flags(t_vm *vm, int argc, char **argv)
 	set_tab(vm);
 	while (i < argc)
 	{
-		if (argv[i][0] == '-' && argv[i][1] == 'n' && argv[i][2] == '\0' && (i + 2) < argc)
+		if (argv[i][0] == '-' && argv[i][1] == 'n' &&
+			argv[i][2] == '\0' && (i + 2) < argc)
 		{
 			// if (!ft_validate_format("%d", argv[i + 1]))
 			// 	ft_error("-n flag without valid number");
