@@ -6,7 +6,7 @@
 /*   By: awehlbur <awehlbur@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/18 15:31:23 by awehlbur       #+#    #+#                */
-/*   Updated: 2020/01/02 12:45:56 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/07 15:45:03 by awehlbur      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char *get_comment(int fd)
 	return (comment);
 }
 
-static char *get_name(fd)
+static char *get_name(int fd)
 {
 	char	*name;
 
