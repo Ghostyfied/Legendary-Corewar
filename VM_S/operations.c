@@ -12,7 +12,7 @@ void	live(t_vm *vm, t_cursor *c, t_arg *argument)
 	r1 = c->registry[0] * -1;
 	if (r1 > 0 && r1 <= vm->champ_nb && r1 == argument->value)
 		vm->champs[r1 - 1].lives++;
-	c->last_live = vm->game->cycles;
+	c->last_live = vm->game->cycles_counter;
 	
 }
 
