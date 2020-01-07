@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 14:38:02 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/07 15:20:23 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/07 17:17:49 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ void			game(t_vm *vm)
 	cycles = 0;
 	while (CURSORS)
 	{
-		cycles++;
-		GAME->cycles_counter += cycles;
 		cursor_operations(vm);
 		if (GAME->cycles_to_die < 1 || cycles == GAME->cycles_to_die)
 		{
@@ -86,8 +84,10 @@ void			game(t_vm *vm)
 			GAME->live_counter = 0;
 			cycles = 0;
 		}
-		if (vm->dump == GAME->cycles_counter)
+		if (vm->dump == GAME->cycles_counter) // What if -d 0?
 			dump64(vm);
+		cycles++;
+		GAME->cycles_counter++;
 	}
 	ft_printf("Contestant %d, \"%s\", has won !\n",
 	GAME->winner, CHAMPS[GAME->winner - 1].name);

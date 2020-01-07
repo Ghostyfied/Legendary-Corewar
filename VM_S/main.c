@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 15:53:57 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/07 17:44:53 by awehlbur      ########   odam.nl         */
+/*   Updated: 2020/01/07 17:54:27 by awehlbur      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static	t_vm	*init_vm(void)
 ** - ./corewar batman.cor buttman.s doesn't give an error?
 ** Visualizer if we have time/want to do it???
 ** Norminette ofcourse
+** alles met een '-' accepteert het. En ook alle getallen. en dit klopt ook niet ./corewar -bla 3 batman.cor
 */
 
 int				main(int argc, char **argv)
