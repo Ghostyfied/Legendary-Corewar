@@ -242,8 +242,8 @@ void		game(t_vm *vm)
 	cycles = 0;
 	while (CURSORS)
 	{
-		cycles++; // Hier of onderaan???
-		GAME->cycles_counter += cycles; // Hier of onderaan???
+		cycles++;
+		GAME->cycles_counter += cycles;
 		cursor_operations(vm);
 		if (GAME->cycles_to_die < 1 || cycles == GAME->cycles_to_die)
 		{
