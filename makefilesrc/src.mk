@@ -30,6 +30,7 @@ CORE_SRCS_FILES		=	main.c \
 						check_op.c \
 						misc.c \
 						read_file_functions.c \
+						operations.c \
 						debug.c #DELETE ME LATER
 
 DIS_SRCS_FILES		=	main.c \
