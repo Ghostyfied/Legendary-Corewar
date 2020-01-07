@@ -13,7 +13,7 @@ static t_vm	*init_vm(void)
 **	control room for the program
 */
 
-void		loop_cursors(t_vm *vm);
+void		loop_cursors(t_vm *vm); //-n2 doesn't give error
 
 int         main(int argc, char **argv)
 {
@@ -28,9 +28,10 @@ int         main(int argc, char **argv)
 	setup_game(vm);
 
 	/* DEBUG */
-	loop_cursors(vm);
+	// loop_cursors(vm);
 	// GAME->cursors->position += 10;
 	// print_cursor(GAME->cursors, false);
+	print_champions(CHAMPS, vm->champ_nb);
 	/* DEBUG */
     return (0);
 }

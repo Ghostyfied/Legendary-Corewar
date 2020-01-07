@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:16:26 by fhignett       #+#    #+#                */
-/*   Updated: 2019/12/11 19:40:07 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/12/19 17:20:32 by rvan-ket      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ static char	*get_other_lines(char **champion, char *str, int *i, int j)
 	while (champion[j])
 	{
 		j++;
+		if (!champion[j])
+			ft_error("Name or comment wrong format boi maybe u forgot a  \" ");
+		str = ft_strjoinfree(str, ft_strdup("\n"));
 		if (ft_strchr(champion[j], '"'))
 		{
 			str = ft_strjoinfree(str, ft_strsub(champion[j],
@@ -25,9 +28,9 @@ static char	*get_other_lines(char **champion, char *str, int *i, int j)
 			return (str);
 		}
 		else
-			str = ft_strjoinfree(str, champion[j]);
+			str = ft_strjoin(str, champion[j]);
 	}
-	printf("ERROR ? \n parse_nc.c <-");
+	ft_error("Name or comment wrong format boi");
 	return (str);
 }
 

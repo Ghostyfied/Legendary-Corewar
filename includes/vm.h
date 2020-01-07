@@ -20,6 +20,13 @@ typedef enum			e_bool
 	true
 }						t_bool;
 
+typedef struct			s_arg
+{
+	int					size;
+	int					value;
+	int					type;
+}						t_arg;
+
 typedef struct			s_cursor
 {
 	long				id;
