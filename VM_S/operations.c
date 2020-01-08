@@ -1,6 +1,22 @@
 #include "vm.h"
 
 
+void			put_value(t_byte *arena, int idx, void *value)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		arena[get_arena_index(idx, i)] = ((t_byte*)value)[i];
+		i++;
+	}
+}
+
+/* add size // big andian?*/
+
+
+ /*nog niet getest */
 void	live(t_vm *vm, t_cursor *c, t_arg *argument)
 {
 	int r1;

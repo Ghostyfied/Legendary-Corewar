@@ -6,7 +6,7 @@
 #    By: awehlbur <awehlbur@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/11/05 14:49:04 by awehlbur       #+#    #+#                 #
-#    Updated: 2019/12/18 10:44:27 by fhignett      ########   odam.nl          #
+#    Updated: 2020/01/08 12:45:08 by fhignett      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,12 @@ all: $(ASM) $(COREWAR) $(DISASSEMBLER)
 
 $(LIBFT_PATH)libft.a:
 	@make -C $(LIBFT_PATH)
+
+$(COMM_OBJS_PATH)%.o: $(COMM_PATH)%.c $(COMM_HEADERS) $(LIBFT_PATH)libft.a
+	@mkdir -p $(OBJS_PATH)
+	@mkdir -p $(COMM_OBJS_PATH)
+	@$(CC) $(FLAGS) $(INCLUDES) $(LIBFT_INCLUDES) -o $@ -c $<
+	@echo "$(PLUS) $@"
 
 $(ASM_OBJS_PATH)%.o: $(ASM_PATH)%.c $(ASM_HEADERS) $(LIBFT_PATH)libft.a
 	@mkdir -p $(OBJS_PATH)
@@ -38,16 +44,16 @@ $(DIS_OBJS_PATH)%.o: $(DIS_PATH)%.c $(DIS_HEADERS) $(LIBFT_PATH)libft.a
 	@$(CC) $(FLAGS) $(INCLUDES) $(LIBFT_INCLUDES) -o $@ -c $<
 	@echo "$(PLUS) $@"
 
-$(ASM): $(ASM_OBJS) $(ASM_HEADERS)
-	@$(CC) $(FLAGS) $(LIBFT) $(ASM_OBJS) -o $@
+$(ASM): $(COMM_OBJS) $(ASM_OBJS) $(ASM_HEADERS)
+	@$(CC) $(FLAGS) $(LIBFT) $(COMM_OBJS) $(ASM_OBJS) -o $@
 	@echo Assembler compiled
 
-$(COREWAR): $(CORE_OBJS) $(CORE_HEADERS)
-	@$(CC) $(FLAGS) $(LIBFT) $(CORE_OBJS) -o $@
+$(COREWAR): $(COMM_OBJS) $(CORE_OBJS) $(CORE_HEADERS)
+	@$(CC) $(FLAGS) $(LIBFT) $(COMM_OBJS) $(CORE_OBJS) -o $@
 	@echo Virtual Machine compiled
 
-$(DISASSEMBLER): $(DIS_OBJS) $(DIS_HEADERS)
-	@$(CC) $(FLAGS) $(LIBFT) $(DIS_OBJS) -o $@
+$(DISASSEMBLER): $(COMM_OBJS) $(DIS_OBJS) $(DIS_HEADERS)
+	@$(CC) $(FLAGS) $(LIBFT) $(COMM_OBJS) $(DIS_OBJS) -o $@
 	@echo Disassembler compiled
 
 clean:
