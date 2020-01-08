@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 15:58:03 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/07 15:58:47 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/08 11:03:44 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ static	void	free_champs(t_champ *champs, int champ_nb)
 void			free_vm(t_vm *vm)
 {
 	free_champs(CHAMPS, vm->champion_count);
-	free_cursors(CURSORS);
+	if (GAME)
+		free_cursors(CURSORS);
 	free(GAME);
 	free(vm->tab);
 	free(vm);
