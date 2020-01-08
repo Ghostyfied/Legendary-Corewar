@@ -6,27 +6,11 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 11:27:18 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/08 11:35:34 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/08 13:52:14 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-
-static char			*get_hex(unsigned int nb, int bytesize)
-{
-	char *hex;
-
-	bytesize *= 2;
-	hex = ft_strnew(bytesize);
-	bytesize--;
-	while (bytesize >= 0)
-	{
-		hex[bytesize] = "0123456789abcdef"[nb % 16];
-		nb /= 16;
-		bytesize--;
-	}
-	return (hex);
-}
 
 void				dump64(t_vm *vm)
 {

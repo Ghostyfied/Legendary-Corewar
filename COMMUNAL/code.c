@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   read_file_functions.c                              :+:    :+:            */
+/*   code.c                                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/07 16:22:15 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/07 16:32:18 by fhignett      ########   odam.nl         */
+/*   Created: 2020/01/08 13:58:18 by fhignett       #+#    #+#                */
+/*   Updated: 2020/01/08 14:06:58 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dis.h"
+#include "communal.h"
 
 void	check_magic_header(int fd)
 {

@@ -6,25 +6,11 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 14:35:54 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/07 16:53:17 by rvan-ket      ########   odam.nl         */
+/*   Updated: 2020/01/08 13:06:55 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-
-int			octal_valid(t_byte octal, int nb_arg)
-{
-	int shift;
-
-	if (octal & 3)
-		return (0);
-	if (nb_arg == 3)
-		return (1);
-	shift = nb_arg * 2;
-	if (((octal << shift) & 0xff))
-		return (0);
-	return (1);
-}
 
 int			valid_opcode(t_byte opcode)
 {

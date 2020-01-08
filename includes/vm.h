@@ -1,11 +1,8 @@
 #ifndef VM_H
 # define VM_H
 
-# include "op.h"
-# include "libft.h"
-# include <errno.h>
+# include "communal.h"
 
-# define MEM(x)			(x*)ft_memalloc(sizeof(x))
 # define REG			1
 # define DIR			2
 # define IND			3
@@ -14,12 +11,6 @@
 # define CURSORS		GAME->cursors
 # define CHAMPS			vm->champs
 # define ARENA			vm->arena
-
-typedef enum			e_bool
-{
-	false,
-	true
-}						t_bool;
 
 typedef struct			s_arg
 {
@@ -92,38 +83,32 @@ void					dump32(t_vm *vm);
 void					game(t_vm *vm);
 void					free_cursors(t_cursor *cursor);
 void					execute_op(t_vm *vm, t_cursor *c);
-void					check_magic_header(int fd);
-void					skip_bytes(int fd, int amount);
 void					do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size);
 
-char					*get_comment(int fd);
-char					*get_name(int fd);
-
-int						get_code_size(int fd);
 int						ft_arrlen(char **tab);
 int						ft_validate_format(char *format, char *str);
 int						ft_is_a_number(char *str);
-int						swap_32(int nb);
 int						get_2bytes(t_byte *arena);
 int						get_4bytes(t_byte *arena);
 int						get_arena_index(int current, int move);
-int						octal_valid(t_byte octal, int nb_arg);
 int						valid_opcode(t_byte opcode);
-int						get_2bytes(t_byte *arena);
-int						get_4bytes(t_byte *arena);
 int						get_arena_index(int current, int move);
-
-short					swap_16(short nb);
 
 t_cursor				*new_cursor(int	position, int r1, long id);
 t_cursor				*copy_cursor(t_cursor *src, int position, long id);
 t_cursor				*delete_cursor(t_cursor *head, long cursor_id);
 
-/* DEBUG */
-void	print_byte(const void *byte, size_t size);
-void	print_champions(t_champ *champs, int champ_nb);
-void	print_cursor(t_cursor *cursor, int reg);
-void	print_cursors(t_cursor *cursors, int reg);
-/* DEBUG */
+/*
+** ****************************** DEBUG ******************************
+*/
+
+void					print_byte(const void *byte, size_t size);
+void					print_champions(t_champ *champs, int champ_nb);
+void					print_cursor(t_cursor *cursor, int reg);
+void					print_cursors(t_cursor *cursors, int reg);
+
+/*
+** ****************************** DEBUG ******************************
+*/
 
 #endif
