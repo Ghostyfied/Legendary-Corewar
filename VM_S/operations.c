@@ -39,21 +39,13 @@ void	ld(t_vm *vm, t_cursor *c, t_arg *argument)
 	arg1 = argument[0];
 	arg2 = argument[1];
 	if (arg1.type == 4)
-	{
 		c->registry[arg2.value - 1] = get_4bytes(&ARENA[c->position + arg1.value % IDX_MOD]);
-		if (c->registry[arg2.value - 1] == 0)
-			c->carry = 1;
-		else
-			c->carry = 0;
-	}
 	else if (arg1.type == 2)
-	{
 		c->registry[arg2.value - 1] = arg1.value;
-		if (arg1.value == 0)
-			c->carry = 0;
-		else
+	if (c->registry[arg2.value - 1] == 0)
 			c->carry = 1;
-	}
+		else
+			c->carry = 0;
 }
 
 /* not sure of die IDX_MOD daar juist is brobro*/
@@ -208,6 +200,26 @@ void zjmp(t_vm *vm, t_cursor *c, t_arg *argument)
 
 void	ldi(t_vm *vm, t_cursor *c, t_arg *argument)
 {
+	int value[2];
+	int i;
+
+	i = 0;
+	ft_printf("hierzo 22xd \n");
+
+	while (i < 2)
+	{
+		ft_printf("hierzo xd \n");
+
+		if (argument[i].type == 1)
+			value[i] = c->registry[argument[i].value - 1];
+		if (argument[i].type == 2)
+			value[i] = argument[i].value;
+		if (argument[i].type == 4)
+			value[i] = get_4bytes(&ARENA[c->position + argument[i].value % IDX_MOD]);
+		i++;
+	}
+	ft_printf("hierzo xd \n");
+	c->registry[argument[2].value - 1] = get_4bytes(&ARENA[c->position + (value[0] + value[1]) % IDX_MOD]);
 
 }
 
@@ -234,8 +246,8 @@ void	do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size)
 		xor(vm, cursor, args);
 	else if (opcode == 9)
 		zjmp(vm, cursor, args);
-	// else if (opcode == 10)
-	// 	ldi(vm, cursor, args);
+	else if (opcode == 10)
+		ldi(vm, cursor, args);
 	// else if (opcode == 11)
 	// 	sti(vm, cursor, args);
 	// else if (opcode == 12)
@@ -248,7 +260,6 @@ void	do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size)
 	// 	lfork(vm, cursor, args);
 	// else if (opcode == 16)
 	// 	aff(vm, cursor, args);
-	// ft_memcpy(ARENA[c->pos +/- x], value, 4);
 	cursor->position += size;
 	cursor->moved = true;
 }

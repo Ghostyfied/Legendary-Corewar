@@ -6,6 +6,7 @@ live:
         live %-1
 		ld 0, r2
 		ld 2, r3
+		ldi 6, %2, r9
 		add r1, r2, r4
 		sub r2, r3, r5
 		or r4, r5, r6
@@ -17,6 +18,7 @@ live:
 		st r6, 0
 		st r7, 0
 		st r8, 0
+		st r9, 0
 		add r10, r10, r10
 		zjmp %:live
 		#st r2, 0
