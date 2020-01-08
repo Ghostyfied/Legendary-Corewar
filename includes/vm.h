@@ -67,7 +67,7 @@ typedef struct			s_vm
 	t_game				*game;
 }						t_vm;
 
-void					check_champion_position(t_vm *vm);
+void					check_champion_position(t_champ *champs, int champ_count);
 void					count_champions(t_vm *vm, char **argv);
 void					assign_champ_num(t_vm *vm, int argc, char **argv);
 void					ft_arrdel(char **arr);
@@ -84,12 +84,12 @@ void					game(t_vm *vm);
 void					free_cursors(t_cursor *cursor);
 void					execute_op(t_vm *vm, t_cursor *c);
 void					do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size);
+void					put_value(t_byte *arena, int idx, void *value);
 
 int						ft_arrlen(char **tab);
 int						ft_validate_format(char *format, char *str);
 int						ft_is_a_number(char *str);
-int						get_2bytes(t_byte *arena);
-int						get_4bytes(t_byte *arena);
+int						get_bytes(t_byte *arena, int idx, int amount);
 int						get_arena_index(int current, int move);
 int						valid_opcode(t_byte opcode);
 int						get_arena_index(int current, int move);
