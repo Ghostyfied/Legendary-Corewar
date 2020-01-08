@@ -10,9 +10,12 @@ void	live(t_vm *vm, t_cursor *c, t_arg *argument)
 	int r1;
 
 	r1 = c->registry[0] * -1;
-	if (r1 > 0 && r1 <= vm->champ_nb && r1 == argument->value)
+	if (r1 > 0 && r1 <= vm->champ_nb && -r1 == argument->value)
+	{
 		vm->champs[r1 - 1].lives++;
-	c->last_live = vm->game->cycles_counter;
+		c->last_live = vm->game->cycles_counter;
+		GAME->live_counter++;
+	}
 	
 }
 
@@ -48,6 +51,7 @@ void	st(t_vm *vm, t_cursor *c, t_arg *argument)
 {
 	t_arg arg1;
 	t_arg arg2;
+	int value;
 
 	arg1 = argument[0];
 	arg2 = argument[1];
@@ -58,7 +62,8 @@ void	st(t_vm *vm, t_cursor *c, t_arg *argument)
 	}
 	else if (arg2.type == 4)
 	{
-		ft_memcpy(&ARENA[(c->position + arg2.value % IDX_MOD) % IDX_MOD], &c->registry[arg1.value], 4);
+		value = swap_32(c->registry[arg1.value]);
+		ft_memcpy(&ARENA[(c->position + arg2.value % IDX_MOD) % IDX_MOD], &value, 4);
 		// swap_32();
 	}
 }
@@ -74,8 +79,9 @@ void	add(t_vm *vm, t_cursor *c, t_arg *argument)
 	arg1 = argument[0];
 	arg2 = argument[1];
 	arg3 = argument[2];
-	value = arg1.value + arg2.value;
-	ft_memcpy(&c->registry[arg3.value], &value, 4);
+	value = swap_32(arg1.value) + swap_32(arg2.value);
+	// ft_memcpy(&c->registry[arg3.value], &value, 4);
+	c->registry[arg3.value] = value;
 	if (value == 0)
 		c->carry = 1;
 	else
@@ -182,10 +188,37 @@ void	do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size)
 	opcode = cursor->opcode;
 	if (opcode == 1)
 		live(vm, cursor, args);
-	if (opcode == 2)
+	else if (opcode == 2)
 		ld(vm, cursor, args);
-	if (opcode == 3)
+	else if (opcode == 3)
 		st(vm, cursor, args);
+	else if (opcode == 4)
+		add(vm, cursor, args);
+	else if (opcode == 5)
+		sub(vm, cursor, args);
+	else if (opcode == 6)
+		and(vm, cursor, args);
+	else if (opcode == 7)
+		or(vm, cursor, args);
+	else if (opcode == 8)
+		xor(vm, cursor, args);
+	else if (opcode == 9)
+		zjmp(vm, cursor, args);
+	// else if (opcode == 10)
+	// 	ldi(vm, cursor, args);
+	// else if (opcode == 11)
+	// 	sti(vm, cursor, args);
+	// else if (opcode == 12)
+	// 	ftfork(vm, cursor, args);
+	// else if (opcode == 13)
+	// 	lld(vm, cursor, args);
+	// else if (opcode == 14)
+	// 	lldi(vm, cursor, args);
+	// else if (opcode == 15)
+	// 	lfork(vm, cursor, args);
+	// else if (opcode == 16)
+	// 	aff(vm, cursor, args);
 	// ft_memcpy(ARENA[c->pos +/- x], value, 4);
 	cursor->position += size;
+	cursor->moved = true;
 }

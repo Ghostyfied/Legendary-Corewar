@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 15:20:46 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/07 17:11:15 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/07 18:21:53 by rvan-ket      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ static void		check_octal_code(t_vm *vm, t_cursor *c)
 		}
 		i++;
 	}
-	// do_op(vm, c, args, size);
+	do_op(vm, c, args, size);
 }
 
 /*
@@ -142,13 +142,7 @@ void			execute_op(t_vm *vm, t_cursor *c)
 		args->size = g_op_tab[c->opcode].dir_size;
 		args->value = args->size == 4 ? get_4bytes(&ARENA[c->position + 1])
 		: get_2bytes(&ARENA[c->position + 1]);
-		if (args->value < 1 || args->value > 16)
-		{
-			free(args);
-			c->position += size;
-			return ;
-		}
 		args->type = T_DIR;
-		// do_op(vm, c, args, size);
+		do_op(vm, c, args, size);
 	}
 }
