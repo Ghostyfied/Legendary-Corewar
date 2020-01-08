@@ -1,10 +1,6 @@
 #include "vm.h"
 
 
-/* add size // big andian?*/
-
-
- /*nog niet getest */
 void	live(t_vm *vm, t_cursor *c, t_arg *argument)
 {
 	int r1;
@@ -19,7 +15,6 @@ void	live(t_vm *vm, t_cursor *c, t_arg *argument)
 	
 }
 
- /*nog niet getest */
 void	ld(t_vm *vm, t_cursor *c, t_arg *argument)
 {
 	t_arg arg1;
@@ -29,16 +24,15 @@ void	ld(t_vm *vm, t_cursor *c, t_arg *argument)
 	arg2 = argument[1];
 	if (arg1.type == 4)
 	{
-		// ft_memcpy(c->registry[arg2.value], ARENA[c->position + arg1.value % IDX_MOD], 4);
-		c->registry[arg2.value] = get_4bytes(&ARENA[c->position + arg1.value % IDX_MOD]);
-		if (c->registry[arg2.value] == 0)
+		c->registry[arg2.value - 1] = get_4bytes(&ARENA[c->position + arg1.value % IDX_MOD]);
+		if (c->registry[arg2.value - 1] == 0)
 			c->carry = 1;
 		else
 			c->carry = 0;
 	}
 	else if (arg1.type == 2)
 	{
-		ft_memcpy(&c->registry[arg2.value], &arg1.value, 4);
+		ft_memcpy(&c->registry[arg2.value - 1], &arg1.value, 4);
 		if (arg1.value == 0)
 			c->carry = 0;
 		else
@@ -46,7 +40,7 @@ void	ld(t_vm *vm, t_cursor *c, t_arg *argument)
 	}
 }
 
- /*nog niet getest // not sure of die IDX_MOD daar juist is brobro*/
+/* not sure of die IDX_MOD daar juist is brobro*/
 void	st(t_vm *vm, t_cursor *c, t_arg *argument)
 {
 	t_arg arg1;
@@ -58,11 +52,12 @@ void	st(t_vm *vm, t_cursor *c, t_arg *argument)
 
 	if (arg2.type == 1)
 	{
-		ft_memcpy(&c->registry[arg2.value], &arg1.value, 4);
+		// ft_memcpy(&c->registry[arg2.value - 1], &arg1.value, 4);
+		c->registry[arg2.value - 1] = arg1.value;
 	}
 	else if (arg2.type == 4)
 	{
-		value = swap_32(c->registry[arg1.value]);
+		value = swap_32(c->registry[arg1.value - 1]);
 		ft_memcpy(&ARENA[(c->position + arg2.value % IDX_MOD) % IDX_MOD], &value, 4);
 		// swap_32();
 	}
@@ -79,9 +74,8 @@ void	add(t_vm *vm, t_cursor *c, t_arg *argument)
 	arg1 = argument[0];
 	arg2 = argument[1];
 	arg3 = argument[2];
-	value = swap_32(arg1.value) + swap_32(arg2.value);
-	// ft_memcpy(&c->registry[arg3.value], &value, 4);
-	c->registry[arg3.value] = value;
+	value = c->registry[arg1.value - 1] + c->registry[arg2.value - 1];
+	c->registry[arg3.value - 1] = value;
 	if (value == 0)
 		c->carry = 1;
 	else
@@ -99,8 +93,8 @@ void	sub(t_vm *vm, t_cursor *c, t_arg *argument)
 	arg1 = argument[0];
 	arg2 = argument[1];
 	arg3 = argument[2];
-	value = arg1.value - arg2.value;
-	ft_memcpy(&c->registry[arg3.value], &value, 4);
+	value = c->registry[arg1.value - 1] - c->registry[arg2.value - 1];
+	c->registry[arg3.value - 1] = value;
 	if (value == 0)
 		c->carry = 1;
 	else
@@ -147,7 +141,7 @@ void	or(t_vm *vm, t_cursor *c, t_arg *argument)
 		i++;
 	}
 	val = value[0] | value[1];
-	ft_memcpy(&c->registry[argument[2].value], &val, 4);
+	c->registry[argument[2].value - 1] = val;
 }
 
 void	xor(t_vm *vm, t_cursor *c, t_arg *argument)
