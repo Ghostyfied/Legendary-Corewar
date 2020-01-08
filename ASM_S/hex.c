@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:43:46 by fhignett       #+#    #+#                */
-/*   Updated: 2019/12/11 19:10:09 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/08 13:52:41 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,25 +51,4 @@ void			name_comm_hexify(t_asm **asm_info)
 	free((*asm_info)->name);
 	(*asm_info)->name = name;
 	(*asm_info)->comment = comment;
-}
-
-/*
-** Returns a string with size bytesize.
-** String contains the hex of nb.
-*/
-
-char			*get_hex(unsigned int nb, int bytesize)
-{
-	char *hex;
-
-	bytesize *= 2;
-	hex = ft_strnew(bytesize);
-	bytesize--;
-	while (bytesize >= 0)
-	{
-		hex[bytesize] = "0123456789abcdef"[nb % 16];
-		nb /= 16;
-		bytesize--;
-	}
-	return (hex);
 }

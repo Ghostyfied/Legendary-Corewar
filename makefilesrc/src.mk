@@ -1,5 +1,9 @@
 # =========== Files ============ #
-COMM_SRCS_FILES		=	op.c
+COMM_SRCS_FILES		=	op.c \
+						swap.c \
+						valid.c \
+						hex.c \
+						code.c \
 
 ASM_SRCS_FILES		=	main.c \
 						read_file.c \
@@ -28,16 +32,13 @@ CORE_SRCS_FILES		=	main.c \
 						free.c \
 						check_op.c \
 						misc.c \
-						read_file_functions.c \
 						operations.c \
 						debug.c #DELETE ME LATER
 
 DIS_SRCS_FILES		=	main.c \
 						decode_code.c \
 						read_file.c \
-						read_file_functions.c \
 						structs.c \
-						misc.c \
 
 ASM_HEADERS_FILES	=	communal.h op.h asm.h
 

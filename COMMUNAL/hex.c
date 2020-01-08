@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   extra_functions.c                                  :+:    :+:            */
+/*   hex.c                                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/07 15:59:07 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/08 12:59:24 by fhignett      ########   odam.nl         */
+/*   Created: 2020/01/08 13:52:07 by fhignett       #+#    #+#                */
+/*   Updated: 2020/01/08 13:52:32 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vm.h"
+#include "communal.h"
 
-/*
-**	Check whether the argument after -n is a number
-*/
-
-int		ft_is_a_number(char *str)
+char			*get_hex(unsigned int nb, int bytesize)
 {
-	int		i;
+	char *hex;
 
-	i = -1;
-	if (str[0] == '-' && str[1])
-		i++;
-	while (i < ft_strlen(str))
+	bytesize *= 2;
+	hex = ft_strnew(bytesize);
+	bytesize--;
+	while (bytesize >= 0)
 	{
-		if (ft_isdigit(str[i] == 0))
-			return (0);
+		hex[bytesize] = "0123456789abcdef"[nb % 16];
+		nb /= 16;
+		bytesize--;
 	}
-	return (1);
+	return (hex);
 }

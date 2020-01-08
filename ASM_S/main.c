@@ -6,13 +6,13 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:06:32 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/07 14:50:21 by awehlbur      ########   odam.nl         */
+/*   Updated: 2020/01/08 14:13:42 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-char		*ft_check_filename(char *file)
+static char		*ft_check_filename(char *file)
 {
 	char	*end;
 	char	*new_file_ext;
@@ -29,7 +29,7 @@ char		*ft_check_filename(char *file)
 	return (new_file_ext);
 }
 
-int			calchex(char one, char two)
+static int		calchex(char one, char two)
 {
 	int		i;
 	int		j;
@@ -42,7 +42,7 @@ int			calchex(char one, char two)
 	return (16 * i + j);
 }
 
-void		puthex(char *str, int fd)
+static void		puthex(char *str, int fd)
 {
 	int i;
 	int	len;
@@ -56,7 +56,7 @@ void		puthex(char *str, int fd)
 	}
 }
 
-void		make_file(char **champion, char *new_filename, t_asm *asm_info)
+static void		make_file(char **champion, char *new_filename, t_asm *asm_info)
 {
 	int				fd;
 	t_operation		*op;

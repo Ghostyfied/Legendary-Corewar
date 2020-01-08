@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   op.c                                               :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: awehlbur <awehlbur@student.codam.nl>         +#+                     */
+/*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/11/05 15:37:39 by awehlbur       #+#    #+#                */
-/*   Updated: 2019/12/10 16:16:06 by fhignett      ########   odam.nl         */
+/*   Created: 2020/01/08 12:58:06 by fhignett       #+#    #+#                */
+/*   Updated: 2020/01/08 12:58:08 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 

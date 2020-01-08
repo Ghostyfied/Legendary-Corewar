@@ -1,12 +1,7 @@
 #ifndef ASM_H
 # define ASM_H
 
-# include "libft.h"
-# include "op.h"
-# include <stdio.h>
-# include <errno.h>
-
-# define MEM(x) (x*)ft_memalloc(sizeof(x))
+# include "communal.h"
 
 typedef	struct			s_arg
 {
@@ -40,7 +35,6 @@ typedef	struct			s_asm
 
 char					**ft_read_file(char *filename);
 char					*strtrim(char *s);
-char					*get_hex(unsigned int nb, int bytesize);
 char					**delete_empty_lines(char **old, int *idx);
 
 void					name_comm_hexify(t_asm **asm_info);
