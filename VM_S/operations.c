@@ -32,7 +32,7 @@ void	ld(t_vm *vm, t_cursor *c, t_arg *argument)
 	}
 	else if (arg1.type == 2)
 	{
-		ft_memcpy(&c->registry[arg2.value - 1], &arg1.value, 4);
+		c->registry[arg2.value - 1] = arg1.value;
 		if (arg1.value == 0)
 			c->carry = 0;
 		else
@@ -112,7 +112,7 @@ void	and(t_vm *vm, t_cursor *c, t_arg *argument)
 	while (i < 2)
 	{
 		if (argument[i].type == 1)
-			value[i] = c->registry[argument[i].value];
+			value[i] = c->registry[argument[i].value - 1];
 		if (argument[i].type == 2)
 			value[i] = argument[i].value;
 		if (argument[i].type == 4)
@@ -120,7 +120,11 @@ void	and(t_vm *vm, t_cursor *c, t_arg *argument)
 		i++;
 	}
 	val = value[0] & value[1];
-	ft_memcpy(&c->registry[argument[2].value], &val, 4);
+	ft_memcpy(&c->registry[argument[2].value - 1], &val, 4);
+	if (val == 0)
+		c->carry = 1;
+	else
+		c->carry = 0;
 }
 
 void	or(t_vm *vm, t_cursor *c, t_arg *argument)
@@ -133,15 +137,22 @@ void	or(t_vm *vm, t_cursor *c, t_arg *argument)
 	while (i < 2)
 	{
 		if (argument[i].type == 1)
-			value[i] = c->registry[argument[i].value];
+			value[i] = c->registry[argument[i].value - 1];
 		if (argument[i].type == 2)
 			value[i] = argument[i].value;
 		if (argument[i].type == 4)
-			ft_memcpy(&value[i], &ARENA[c->position + argument[i].value % IDX_MOD], 4);		
+		{
+			val = swap_32(ARENA[c->position + argument[i].value % IDX_MOD]);
+			ft_memcpy(&value[i], &val, 4);		
+		}
 		i++;
 	}
 	val = value[0] | value[1];
 	c->registry[argument[2].value - 1] = val;
+	if (val == 0)
+		c->carry = 1;
+	else
+		c->carry = 0;
 }
 
 void	xor(t_vm *vm, t_cursor *c, t_arg *argument)
@@ -154,7 +165,7 @@ void	xor(t_vm *vm, t_cursor *c, t_arg *argument)
 	while (i < 2)
 	{
 		if (argument[i].type == 1)
-			value[i] = c->registry[argument[i].value];
+			value[i] = c->registry[argument[i].value - 1];
 		if (argument[i].type == 2)
 			value[i] = argument[i].value;
 		if (argument[i].type == 4)
@@ -162,7 +173,11 @@ void	xor(t_vm *vm, t_cursor *c, t_arg *argument)
 		i++;
 	}
 	val = value[0] ^ value[1];
-	ft_memcpy(&c->registry[argument[2].value], &val, 4);
+	ft_memcpy(&c->registry[argument[2].value - 1], &val, 4);
+	if (val == 0)
+		c->carry = 1;
+	else
+		c->carry = 0;
 }
 
 void zjmp(t_vm *vm, t_cursor *c, t_arg *argument)
@@ -173,6 +188,11 @@ void zjmp(t_vm *vm, t_cursor *c, t_arg *argument)
 		c->position -= argument->value % IDX_MOD;
 	else
 		c->position += argument->value % IDX_MOD;
+}
+
+void	ldi(t_vm *vm, t_cursor *c, t_arg *argument)
+{
+
 }
 
 void	do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size)
