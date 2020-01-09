@@ -267,10 +267,10 @@ void	lldi(t_vm *vm, t_cursor *c, t_arg *argument)
 
 void	aff(t_vm *vm, t_cursor *c, t_arg *argument)
 {
-	char c;
+	char chr;
 
-	c = c->registry[argument[0].value - 1];
-	write(1, &c, 1);
+	chr = (char)(c->registry[argument[0].value - 1]);
+	write(1, &chr, 1);
 }
 
 void	ft_fork(t_vm *vm, t_cursor *c, t_arg *argument, int modulo)
