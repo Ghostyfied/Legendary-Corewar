@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 16:07:50 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/08 14:12:53 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/08 18:23:48 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static char		*ft_check_filename(char *file)
 		return (NULL);
 	if (ft_strcmp(end, ".cor"))
 		return (NULL);
-	new_file_ext = ft_strnew(end - file + 4);
-	ft_strncpy(new_file_ext, file, end - file + 1);
+	new_file_ext = ft_strnew(ft_strlen(file) - 2);
+	ft_strncpy(new_file_ext, file, ft_strlen(file) - 3);
 	ft_strncpy(ft_strrchr(new_file_ext, '.') + 1, "s", 1);
 	return (new_file_ext);
 }
@@ -57,7 +57,7 @@ static void		make_file(t_champ *champ, char *new_filename)
 	int				fd;
 	t_operation		*op;
 
-	fd = open(new_filename, O_CREAT | O_RDWR, 0666);
+	fd = open(new_filename, O_CREAT | O_RDWR | O_TRUNC, 0666);
 	if (fd < 0)
 		ft_error(strerror(errno));
 	ft_printf("Writing output to %s\n", new_filename);
@@ -75,7 +75,6 @@ static void		make_file(t_champ *champ, char *new_filename)
 int				main(int argc, char **argv)
 {
 	char	*new_file_ext;
-	char	*tmp;
 	t_champ	*champ;
 
 	if (argc < 2 || argc > 3)
@@ -85,9 +84,6 @@ int				main(int argc, char **argv)
 		ft_error("Can not read file");
 	champ = MEM(t_champ);
 	read_file(champ, argv[1]);
-	tmp = new_file_ext;
-	new_file_ext = ft_strjoin("dis_", new_file_ext);
-	free(tmp);
 	make_file(champ, new_file_ext);
 	return (0);
 }

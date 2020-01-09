@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 14:35:54 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/08 13:06:55 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/08 18:44:59 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,20 @@ int			valid_opcode(t_byte opcode)
 	return (1);
 }
 
-int			get_2bytes(t_byte *arena)
+int			get_bytes(t_byte *arena, int idx, int amount)
 {
-	short b;
+	int	i;
+	int value;
 
-	ft_memcpy(&b, arena, 2);
-	return (swap_16(b));
-}
-
-int			get_4bytes(t_byte *arena)
-{
-	int b;
-
-	ft_memcpy(&b, arena, 4);
-	return (swap_32(b));
+	i = 0;
+	value = 0;
+	while (i < amount)
+	{
+		value <<= 8;
+		value = value | arena[get_arena_index(idx, i)];
+		i++;
+	}
+	return (value);
 }
 
 /*
@@ -47,4 +47,16 @@ int			get_arena_index(int current, int move)
 	if (current < 0)
 		return ((MEM_SIZE - 1) + current);
 	return (current);
+}
+
+void			put_value(t_byte *arena, int idx, void *value)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		arena[get_arena_index(idx, i)] = ((t_byte*)value)[i];
+		i++;
+	}
 }

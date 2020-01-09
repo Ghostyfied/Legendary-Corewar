@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 15:53:57 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/08 15:26:47 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/09 11:19:38 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +56,11 @@ int				main(int argc, char **argv)
 	if (argc == 1)
 		ft_error("Why you no put files in?");
 	vm = init_vm();
-	// count_champions(vm, argv);
-	// retrieve_flags(vm, argc, argv);
-	// check_champion_position(vm);
-	// setup_game(vm);
-	// game(vm);
-	// free_vm(vm);
-
-	/* DEBUG */
-	int value = swap_32(0xff12e09f);
-
-	put_value(ARENA, MEM_SIZE - 2, &value);
-	dump64(vm);
-	/* DEBUG */
-
+	count_champions(vm, argv);
+	retrieve_flags(vm, argc, argv);
+	check_champion_position(CHAMPS, vm->champion_count);
+	setup_game(vm);
+	game(vm);
+	free_vm(vm);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: awehlbur <awehlbur@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/18 15:31:05 by awehlbur       #+#    #+#                */
-/*   Updated: 2020/01/07 17:54:23 by awehlbur      ########   odam.nl         */
+/*   Updated: 2020/01/08 16:46:29 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,5 +127,4 @@ void		retrieve_flags(t_vm *vm, int argc, char **argv)
 		i++;
 	}
 	get_champions_noflag(vm, argc, argv);
-	check_champion_position(vm);
 }

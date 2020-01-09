@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 15:20:46 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/07 18:21:53 by rvan-ket      ########   odam.nl         */
+/*   Updated: 2020/01/08 18:49:16 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,13 @@ static t_arg	*get_args(t_cursor *c, t_byte octal, t_byte *arena)
 	while (i < g_op_tab[c->opcode].nb_arg)
 	{
 		args[i] = get_arg(c->opcode, ((octal >> shift) & 3));
-		if (args[i].size == 1)
-			args[i].value = arena[c->position + op_idx];
-		else if (args[i].size == 2)
-			args[i].value = get_2bytes(&arena[c->position + op_idx]);
-		else
-			args[i].value = get_4bytes(&arena[c->position + op_idx]);
+		args[i].value = get_bytes(arena, c->position + op_idx, args[i].size);
+		// if (args[i].size == 1)
+		// 	args[i].value = arena[c->position + op_idx];
+		// else if (args[i].size == 2)
+		// 	args[i].value = get_2bytes(&arena[c->position + op_idx]);
+		// else
+		// 	args[i].value = get_4bytes(&arena[c->position + op_idx]);
 		shift -= 2;
 		op_idx += args[i].size;
 		i++;
@@ -140,8 +141,8 @@ void			execute_op(t_vm *vm, t_cursor *c)
 		args = MEM(t_arg);
 		size = 1 + g_op_tab[c->opcode].dir_size;
 		args->size = g_op_tab[c->opcode].dir_size;
-		args->value = args->size == 4 ? get_4bytes(&ARENA[c->position + 1])
-		: get_2bytes(&ARENA[c->position + 1]);
+		args->value = get_bytes(ARENA, c->position + 1, args->size);
+		// args->value = args->size == 4 ? get_4bytes(&ARENA[c->position + 1]) : get_2bytes(&ARENA[c->position + 1]);
 		args->type = T_DIR;
 		do_op(vm, c, args, size);
 	}
