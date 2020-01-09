@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 15:53:57 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/09 11:19:38 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/09 15:26:25 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ static	t_vm	*init_vm(void)
 ** alles met een '-' accepteert het. En ook alle getallen. en dit klopt ook niet ./corewar -bla 3 batman.cor
 */
 
-void			put_value(t_byte *arena, int idx, void *value);
-
 int				main(int argc, char **argv)
 {
 	t_vm *vm;
@@ -60,7 +58,8 @@ int				main(int argc, char **argv)
 	retrieve_flags(vm, argc, argv);
 	check_champion_position(CHAMPS, vm->champion_count);
 	setup_game(vm);
-	game(vm);
+	init_vis(vm);///////
+	// game(vm);
 	free_vm(vm);
 	return (0);
 }

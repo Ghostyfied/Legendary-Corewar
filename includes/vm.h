@@ -1,6 +1,7 @@
 #ifndef VM_H
 # define VM_H
 
+# include "visualizer.h"
 # include "communal.h"
 
 # define REG			1
@@ -62,6 +63,7 @@ typedef struct			s_vm
 	int					champ_nb; /* Current index of Champs in array */
 	int					champ_position; /* Position to multiply for champions in arena */
 	int					dump;
+	int					*colours;
 	t_byte				arena[MEM_SIZE];
 	t_champ				*champs;
 	t_game				*game;

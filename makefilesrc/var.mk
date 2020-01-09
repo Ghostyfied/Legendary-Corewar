@@ -25,6 +25,7 @@ COMM_SRCS		= $(addprefix $(COMM_PATH), $(COMM_SRCS_FILES))
 OBJS_PATH		= .objects/
 ASM_OBJS_PATH	= .objects/asm/
 CORE_OBJS_PATH	= .objects/corewar/
+VIS_OBJS_PATH	= .objects/corewar/visualizer/
 DIS_OBJS_PATH	= .objects/disassembler/
 COMM_OBJS_PATH	= .objects/communal/
 ASM_OBJS		= $(addprefix $(ASM_OBJS_PATH), $(ASM_SRCS_FILES:.c=.o))

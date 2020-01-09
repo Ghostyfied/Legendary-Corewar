@@ -16,7 +16,7 @@ ASM_SRCS_FILES		=	main.c \
 						hex.c \
 						misc.c \
 						free_shizzl.c \
-						arg.c
+						arg.c \
 
 CORE_SRCS_FILES		=	main.c \
 						validate_format.c \
@@ -33,17 +33,22 @@ CORE_SRCS_FILES		=	main.c \
 						check_op.c \
 						misc.c \
 						operations.c \
-						debug.c #DELETE ME LATER
+						$(VIS_SRCS_FILES) \
+						debug.c #DELETE ME LATER \
+
+VIS_SRCS_FILES		=	visualizer/visualizer.c \
+						visualizer/info.c \
+						visualizer/init.c \
 
 DIS_SRCS_FILES		=	main.c \
 						decode_code.c \
 						read_file.c \
 						structs.c \
 
-ASM_HEADERS_FILES	=	communal.h op.h asm.h
+ASM_HEADERS_FILES	=	communal.h asm.h op.h
 
-CORE_HEADERS_FILES	=	communal.h op.h vm.h
+CORE_HEADERS_FILES	=	communal.h vm.h visualizer.h op.h
 
-DIS_HEADERS_FILES	=	communal.h op.h dis.h
+DIS_HEADERS_FILES	=	communal.h dis.h op.h
 
 COMM_HEADERS_FILES	=	communal.h op.h

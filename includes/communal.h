@@ -8,12 +8,6 @@
 
 # define MEM(x) 		(x*)ft_memalloc(sizeof(x))
 
-typedef enum			e_bool
-{
-	false,
-	true
-}						t_bool;
-
 int						get_code_size(int fd);
 int						swap_32(int nb);
 int						octal_valid(t_byte octal, int nb_arg);
