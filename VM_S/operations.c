@@ -272,17 +272,38 @@ void	aff(t_vm *vm, t_cursor *c, t_arg *argument)
 	write(1, &c, 1);
 }
 
-void	ftfork(t_vm *vm, t_cursor *c, t_arg *argument)
+void	ft_fork(t_vm *vm, t_cursor *c, t_arg *argument, int modulo)
 {
-	// new cursor
-	// newcursor->pos = argument[0].value % IDX_MOD;
+	int i;
+	t_cursor *curr;
+
+	i = 0;
+	curr = new_cursor(argument[0].value % modulo, -c->id, GAME->cursors_id);
+	add_cursor(&GAME->cursors, curr);
+	GAME->cursors_id++;
+	while (i < 15)
+	{
+		curr->registry[i] = c->registry[i];
+		i++;
+	}
+	
 }
 
-void	lfork(t_vm *vm, t_cursor *c, t_arg *argument)
-{
-	// new cursor
-	// newcursor->pos = argument[0].value % MEM_SIZE;
-}
+// void	lfork(t_vm *vm, t_cursor *c, t_arg *argument)
+// {
+// 	int i;
+// 	t_cursor *curr;
+
+// 	i = 0;
+// 	curr = new_cursor(argument[0].value % MEM_SIZE, -c->id, GAME->cursors_id);
+// 	add_cursor(&GAME->cursors, curr);
+// 	GAME->cursors_id++;
+// 	while (i < 15)
+// 	{
+// 		curr->registry[i] = c->registry[i];
+// 		i++;
+// 	}
+// }
 
 void	do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size)
 {
@@ -312,13 +333,13 @@ void	do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size)
 	else if (opcode == 11)
 		sti(vm, cursor, args);
 	else if (opcode == 12)
-		ftfork(vm, cursor, args);
+		ft_fork(vm, cursor, args, IDX_MOD);
 	else if (opcode == 13)
 		lld(vm, cursor, args);
 	else if (opcode == 14)
 		lldi(vm, cursor, args);
 	else if (opcode == 15)
-		lfork(vm, cursor, args);
+		ft_fork(vm, cursor, args, MEM_SIZE);
 	else if (opcode == 16)
 		aff(vm, cursor, args);
 	cursor->position += size;
