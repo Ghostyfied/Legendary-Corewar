@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 14:38:02 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/07 18:37:12 by rvan-ket      ########   odam.nl         */
+/*   Updated: 2020/01/09 16:58:08 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void			game(t_vm *vm)
 			}
 			GAME->live_counter = 0;
 			cycles = 0;
+			// reset_champs_lives
 		}
 		if (vm->dump == GAME->cycles_counter)
 			dump64(vm);

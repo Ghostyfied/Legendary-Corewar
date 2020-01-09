@@ -8,8 +8,12 @@ void	init_vis(t_vm *vm)
 	int i;
 	int j;
 
-	vm->colours = (int[4]){PLAYER1_C, PLAYER2_C, PLAYER3_C, PLAYER4_C};
 	initscr();
+	start_color();
+	init_pair(1, PLAYER1_C, COLOR_BLACK);
+	init_pair(2, PLAYER2_C, COLOR_BLACK);
+	init_pair(3, PLAYER3_C, COLOR_BLACK);
+	init_pair(4, PLAYER4_C, COLOR_BLACK);
 	cbreak();
 	noecho();
 	arena_win = newwin(ARENA_H, ARENA_W, 0, 0);
@@ -27,15 +31,13 @@ void	init_vis(t_vm *vm)
 			i++;
 		}
 		waddstr(arena_win, " 00");
-		// waddch(arena_win, ' ');
-		// waddstr(arena_win, get_hex(ARENA[j], 1));
 		j++;
 	}
 	visualizer(vm, arena_win);
 	info_vis(vm, info_win);
 	wrefresh(arena_win);
 	wrefresh(info_win);
-	
+
 	c = getch();
 	endwin();
 }

@@ -41,6 +41,7 @@ typedef struct			s_champ
 	char				*name;
 	char				*comment;
 	int					lives;
+	int					last_live;
 	int					starting_pos;
 }						t_champ;
 
@@ -51,6 +52,7 @@ typedef struct			s_game
 	int					live_counter;
 	int					cycles_to_die;
 	int					checks;
+	int					cursors_count; /* Total cursor amount */
 	long				cursors_id;
 	t_cursor			*cursors;
 }						t_game;
@@ -63,7 +65,6 @@ typedef struct			s_vm
 	int					champ_nb; /* Current index of Champs in array */
 	int					champ_position; /* Position to multiply for champions in arena */
 	int					dump;
-	int					*colours;
 	t_byte				arena[MEM_SIZE];
 	t_champ				*champs;
 	t_game				*game;

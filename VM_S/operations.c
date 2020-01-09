@@ -13,6 +13,7 @@ void	live(t_vm *vm, t_cursor *c, t_arg *argument)
 	{
 		vm->champs[r1 - 1].lives++;
 		c->last_live = vm->game->cycles_counter;
+		vm->champs[r1 - 1].last_live = c->last_live;
 		GAME->live_counter++;
 	}
 	

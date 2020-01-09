@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 12:15:46 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/09 15:39:24 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/09 16:14:59 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@
 # define	INFO_W 80
 # define	ARENA_H 66 
 # define	ARENA_W 195
-# define	PLAYER1_C COLOR_RED
-# define	PLAYER2_C COLOR_YELLOW
+# define	PLAYER1_C COLOR_MAGENTA
+# define	PLAYER2_C COLOR_CYAN
 # define	PLAYER3_C COLOR_BLUE
-# define	PLAYER4_C COLOR_GREEN
+# define	PLAYER4_C COLOR_RED
+# define	INFO_C 5
 
 typedef struct s_vm	t_vm;
 
