@@ -6,7 +6,7 @@
 /*   By: awehlbur <awehlbur@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/18 15:31:05 by awehlbur       #+#    #+#                */
-/*   Updated: 2020/01/10 14:30:14 by awehlbur      ########   odam.nl         */
+/*   Updated: 2020/01/10 14:54:33 by awehlbur      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,8 @@ void		parse_number(t_vm *vm, char *num)
 	}
 	else if (temp == -1)
 	{
-		while (i < vm->champion_count)
-		{
-			if ((vm->tab[i] % 10) != 0)
-			{
-				vm->champs[vm->champ_nb].id = vm->tab[i];
-				vm->tab[i] *= 10;
-				return ;
-			}
-			i++;
-		}
+		if (parse_number_helper(i, vm) == 1)
+			return ;
 	}
 }
 
@@ -87,8 +79,10 @@ void		check_valid_input(char **argv, int argc)
 	while (i < argc)
 	{
 		if (ft_strequ(argv[i], "-n") || ft_strequ(argv[i], "-d") \
-			|| (ft_validate_format("%d", argv[i]) && ft_strequ(argv[i - 1], "-n")) \
-			|| (ft_validate_format("%d", argv[i]) && ft_strequ(argv[i - 1], "-d")) \
+			|| (ft_validate_format("%d", argv[i]) && \
+				ft_strequ(argv[i - 1], "-n")) \
+			|| (ft_validate_format("%d", argv[i]) && \
+				ft_strequ(argv[i - 1], "-d")) \
 			|| ft_strstr(argv[i], ".cor"))
 			i++;
 		else
@@ -112,21 +106,7 @@ void		retrieve_flags(t_vm *vm, int argc, char **argv)
 			vm->dump = ft_atoi(argv[i + 1]);
 		}
 		if (ft_strequ(argv[i], "-n"))
-			{
-			if ((i + 2) >= argc)
-				ft_error("Invalid flag");
-			if (ft_validate_format("%d", argv[i + 1]) != 1)
-				ft_error("Please enter the number the champion should be!");
-			if (vm->champion_count < ft_atoi(argv[i + 1]))
-				ft_error("That number is bigger than there are positions...");
-			if (ft_strstr(argv[i + 2], ".cor"))
-			{
-				parse_number(vm, argv[i + 1]);
-				read_file(vm, argv[i + 2], &vm->champs[vm->champ_nb]);
-			}
-			else
-				ft_error("Number does not belong to a champion");
-		}
+			retreive_flags_helper(argc, argv, i, vm);
 		i++;
 	}
 	get_champions_noflag(vm, argc, argv);

@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 11:27:18 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/08 13:52:14 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/10 15:54:01 by rvan-ket      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void				dump64(t_vm *vm)
 		line += 64;
 		i++;
 	}
-	free_vm(vm);
+	// free_vm(vm);
 	exit(0);
 }
 

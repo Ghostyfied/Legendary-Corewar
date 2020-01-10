@@ -16,6 +16,7 @@ void	live(t_vm *vm, t_cursor *c, t_arg *argument)
 		c->last_live = vm->game->cycles_counter;
 		vm->champs[r1 - 1].last_live = c->last_live;
 		GAME->live_counter++;
+		GAME->winner = r1;
 	}
 	
 }
@@ -28,7 +29,7 @@ void	ld(t_vm *vm, t_cursor *c, t_arg *argument)
 	arg1 = argument[0];
 	arg2 = argument[1];
 	if (arg1.type == 4)
-		c->registry[arg2.value - 1] = get_bytes(ARENA, c->position + arg1.value % IDX_MOD, 4);
+		c->registry[arg2.value - 1] = get_bytes(ARENA, get_arena_index(c->position, (arg1.value % IDX_MOD)), 4);
 		// c->registry[arg2.value - 1] = get_4bytes(&ARENA[c->position + arg1.value % IDX_MOD]);
 	else if (arg1.type == 2)
 		c->registry[arg2.value - 1] = arg1.value;
@@ -58,7 +59,6 @@ void	st(t_vm *vm, t_cursor *c, t_arg *argument)
 		put_value(ARENA, get_arena_index(c->position, (arg2.value % IDX_MOD)), &value);
 		if (vm->vflag)
 			update_arena(ARENA, get_arena_index(c->position, (arg2.value % IDX_MOD)), 4);
-		// swap_32();
 	}
 }
 
@@ -276,18 +276,19 @@ void	aff(t_vm *vm, t_cursor *c, t_arg *argument)
 
 void	ft_fork(t_vm *vm, t_cursor *c, t_arg *argument, int modulo)
 {
-	int i;
+	// int i;
 	t_cursor *curr;
 
-	i = 0;
-	curr = new_cursor(argument[0].value % modulo, -c->id, GAME->cursors_id);
+	// i = 0;
+	curr = copy_cursor(c, argument->value % modulo, GAME->cursors_id);
+	// curr = new_cursor(argument[0].value % modulo, -c->id, GAME->cursors_id);
 	add_cursor(&GAME->cursors, curr);
 	GAME->cursors_id++;
-	while (i < 15)
-	{
-		curr->registry[i] = c->registry[i];
-		i++;
-	}
+	// while (i < 15)
+	// {
+	// 	curr->registry[i] = c->registry[i];
+	// 	i++;
+	// }
 	
 }
 
