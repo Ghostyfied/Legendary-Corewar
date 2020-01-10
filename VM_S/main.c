@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 15:53:57 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/09 16:43:23 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/09 18:55:13 by rvan-ket      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ int				main(int argc, char **argv)
 	retrieve_flags(vm, argc, argv);
 	check_champion_position(CHAMPS, vm->champion_count);
 	setup_game(vm);
-	init_vis(vm);///////
-	// game(vm);
+	// init_vis(vm);///////
+	game(vm);
 	free_vm(vm);
 	return (0);
 }

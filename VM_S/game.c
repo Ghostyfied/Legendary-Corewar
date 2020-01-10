@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 14:38:02 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/09 16:58:08 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/09 19:12:08 by rvan-ket      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void		cursor_operations(t_vm *vm)
 	c = CURSORS;
 	while (c)
 	{
+		// ft_printf("pos : %d\n", c->position);
 		if (c->moved)
 			get_opcode(c, ARENA[c->position]);
 		if (c->wait_cycles > 0)
@@ -56,6 +57,7 @@ static void		check_cursors_live(t_vm *vm, int cycles)
 	c = CURSORS;
 	while (c)
 	{
+		// ft_printf("%d\n", c->last_live);
 		nxt = c->next;
 		if (GAME->cycles_to_die < 1 ||
 			c->last_live <= (GAME->cycles_counter - cycles))
@@ -74,10 +76,6 @@ void			game(t_vm *vm)
 		cursor_operations(vm);
 		if (GAME->cycles_to_die < 1 || cycles == GAME->cycles_to_die)
 		{
-			// ft_printf("\n\n\n%d\n", GAME->live_counter);
-			// print_cursor(CURSORS, true);
-			// ft_putendl("");
-
 			GAME->checks++;
 			check_cursors_live(vm, cycles);
 			if (GAME->live_counter >= NBR_LIVE || GAME->checks > MAX_CHECKS)
@@ -91,12 +89,14 @@ void			game(t_vm *vm)
 		}
 		if (vm->dump == GAME->cycles_counter)
 			dump64(vm);
-		cycles++;
 		GAME->cycles_counter++;
+		if (!(cycles % 10))
+			print_cursor(CURSORS, true);
+		cycles++;
+		if (cycles == 100)
+			exit(1);
 	}
-
 	// ft_printf("%d\n", GAME->cycles_counter);
-
 	ft_printf("Contestant %d, \"%s\", has won !\n",
 	GAME->winner, CHAMPS[GAME->winner - 1].name);
 }

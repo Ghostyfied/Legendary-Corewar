@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 16:00:30 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/07 16:01:48 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/09 19:10:22 by rvan-ket      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,9 @@ void	print_cursor(t_cursor *cursor, int reg)
 	ft_printf("%-8s : %d\n", "position", cursor->position);
 	ft_printf("%-8s : %d\n", "opcode", cursor->opcode);
 	ft_printf("%-8s : %d\n", "wait_cy", cursor->wait_cycles);
+	ft_printf("%-8s : %d\n", "carry", cursor->carry);
+	ft_printf("%-8s : %d\n", "moved", cursor->moved);
+	ft_printf("%-8s : %d\n", "l_live", cursor->last_live);
 	if (reg == false)
 	{
 		ft_putendl("");

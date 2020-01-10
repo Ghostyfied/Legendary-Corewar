@@ -32,9 +32,9 @@ void	ld(t_vm *vm, t_cursor *c, t_arg *argument)
 	else if (arg1.type == 2)
 		c->registry[arg2.value - 1] = arg1.value;
 	if (c->registry[arg2.value - 1] == 0)
-			c->carry = 1;
+			c->carry = true;
 		else
-			c->carry = 0;
+			c->carry = false;
 }
 
 /* not sure of die IDX_MOD daar juist is brobro*/
@@ -178,10 +178,13 @@ void zjmp(t_vm *vm, t_cursor *c, t_arg *argument)
 {
 	if (c->carry == 0)
 		return ;
+	argument->value = -19;
 	if (argument->value < 0)
-		c->position -= argument->value % IDX_MOD;
+		c->position = get_arena_index(c->position, -(-argument->value % IDX_MOD));
+	// 	c->position -= argument->value % IDX_MOD;
 	else
-		c->position += argument->value % IDX_MOD;
+		c->position = get_arena_index(c->position, (argument->value % IDX_MOD));
+	// 	c->position += argument->value % IDX_MOD;
 }
 
 void	ldi(t_vm *vm, t_cursor *c, t_arg *argument)
