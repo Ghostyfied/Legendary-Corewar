@@ -6,7 +6,7 @@
 /*   By: awehlbur <awehlbur@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 16:29:28 by awehlbur       #+#    #+#                */
-/*   Updated: 2019/12/05 20:37:24 by awehlbur      ########   odam.nl         */
+/*   Updated: 2020/01/10 14:21:03 by awehlbur      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,8 @@ t_player	*ft_player_malloc(t_vm *vm, t_player *player)
 	return (player);
 }
 
-int			validate_champions(int argc, char **argv, t_vm *vm)
+int			validate_champions(int argc, char **argv, t_vm *vm, int i)
 {
-	int			i;
 	int			j;
 	int			num;
 	int			temp;

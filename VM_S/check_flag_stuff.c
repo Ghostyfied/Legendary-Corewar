@@ -6,7 +6,7 @@
 /*   By: awehlbur <awehlbur@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/18 15:31:05 by awehlbur       #+#    #+#                */
-/*   Updated: 2020/01/08 16:46:29 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/10 14:30:14 by awehlbur      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,10 @@ void		check_valid_input(char **argv, int argc)
 	i = 1;
 	while (i < argc)
 	{
-		if (argv[i][0] == '-' || ft_validate_format("%d", argv[i]) || ft_strstr(argv[i], ".cor"))
+		if (ft_strequ(argv[i], "-n") || ft_strequ(argv[i], "-d") \
+			|| (ft_validate_format("%d", argv[i]) && ft_strequ(argv[i - 1], "-n")) \
+			|| (ft_validate_format("%d", argv[i]) && ft_strequ(argv[i - 1], "-d")) \
+			|| ft_strstr(argv[i], ".cor"))
 			i++;
 		else
 			ft_error("that is not a valid input");

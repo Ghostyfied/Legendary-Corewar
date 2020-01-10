@@ -6,13 +6,13 @@
 /*   By: awehlbur <awehlbur@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/18 15:31:12 by awehlbur       #+#    #+#                */
-/*   Updated: 2020/01/09 11:15:03 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/10 14:16:16 by awehlbur      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void					check_champion_position(t_champ *champs, int champ_count)
+void		check_champion_position(t_champ *champs, int champ_count)
 {
 	t_champ		temp_champ;
 	int			i;
