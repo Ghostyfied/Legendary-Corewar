@@ -180,8 +180,6 @@ void zjmp(t_vm *vm, t_cursor *c, t_arg *argument)
 	if (c->carry == 0)
 		return ;
 	c->position = get_arena_index(c->position, argument->value % IDX_MOD);
-	// 	c->position = get_arena_index(c->position, -(-argument->value % IDX_MOD));
-	// 	c->position = get_arena_index(c->position, (argument->value % IDX_MOD));
 }
 
 void	ldi(t_vm *vm, t_cursor *c, t_arg *argument)
@@ -309,40 +307,42 @@ void	ft_fork(t_vm *vm, t_cursor *c, t_arg *argument, int modulo)
 void	do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size)
 {
 	int	opcode;
-	// print_arg(args, g_op_tab[cursor->opcode].nb_arg);
+
+	// print_arg(args, g_op_tab[cursor->opcode].nb_arg);/////
+
 	opcode = cursor->opcode;
 	if (opcode == 1)
-		live(vm, cursor, args);
+		live(vm, cursor, args); // √
 	else if (opcode == 2)
-		ld(vm, cursor, args);
+		ld(vm, cursor, args); // √
 	else if (opcode == 3)
-		st(vm, cursor, args);
+		st(vm, cursor, args); // √
 	else if (opcode == 4)
-		add(vm, cursor, args);
+		add(vm, cursor, args); // √
 	else if (opcode == 5)
-		sub(vm, cursor, args);
+		sub(vm, cursor, args); // √
 	else if (opcode == 6)
-		and(vm, cursor, args);
+		and(vm, cursor, args); // √
 	else if (opcode == 7)
-		or(vm, cursor, args);
+		or(vm, cursor, args); // √
 	else if (opcode == 8)
-		xor(vm, cursor, args);
+		xor(vm, cursor, args); // √
 	else if (opcode == 9)
-		zjmp(vm, cursor, args);
+		zjmp(vm, cursor, args); // √
 	else if (opcode == 10)
-		ldi(vm, cursor, args);
+		ldi(vm, cursor, args); // √
 	else if (opcode == 11)
-		sti(vm, cursor, args);
+		sti(vm, cursor, args); // √
 	else if (opcode == 12)
-		ft_fork(vm, cursor, args, IDX_MOD);
+		ft_fork(vm, cursor, args, IDX_MOD); // √
 	else if (opcode == 13)
-		lld(vm, cursor, args);
+		lld(vm, cursor, args); // √
 	else if (opcode == 14)
-		lldi(vm, cursor, args);
+		lldi(vm, cursor, args); // √
 	else if (opcode == 15)
-		ft_fork(vm, cursor, args, MEM_SIZE);
+		ft_fork(vm, cursor, args, MEM_SIZE); // √
 	else if (opcode == 16)
-		aff(vm, cursor, args);
+		aff(vm, cursor, args); // √
 	if (opcode != 9)
 		cursor->position = get_arena_index(cursor->position, size);
 	cursor->moved = true;
