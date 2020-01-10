@@ -17,10 +17,10 @@ re='^[0-9]+$'
 if ! [[ $CYCLES =~ $re ]]; then
 	echo "error: $CYCLES is not a number" >&2 ; exit 1
 fi
-for (( i=0; i <= $CYCLES; i+=1000))
+for (( i=0; i <= $CYCLES; i+=1))
 do
-	../virtual_machine/corewar $@ -dump $i | sed -n -e '/^0x/p' > temp_output1
-	../resources/corewar $@ -d $i | sed -n -e'/^0x/p' > temp_output2
+	./corewar -d $i $@ | sed -n -e '/^0x/p' > temp_output1
+	./vm_champs/corewar $@ -d $i | sed -n -e'/^0x/p' > temp_output2
 	if ! cmp -s "temp_output1" "temp_output2"; then
 		printf '\033[0;31mmemory is NOT the same at cycle %s\n\033[0m' "$i" ; exit 1
 	fi

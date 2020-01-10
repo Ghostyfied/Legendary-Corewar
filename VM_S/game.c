@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 14:38:02 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/10 15:12:43 by rvan-ket      ########   odam.nl         */
+/*   Updated: 2020/01/10 15:47:36 by rvan-ket      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void			game(t_vm *vm)
 	cycles = 0;
 	while (CURSORS)
 	{
+		if (vm->dump == GAME->cycles_counter)
+			dump64(vm);
 		cursor_operations(vm);
 		if (GAME->cycles_to_die < 1 || cycles == GAME->cycles_to_die)
 		{
@@ -90,8 +92,6 @@ void			game(t_vm *vm)
 			cycles = 0;
 			// reset_champs_lives
 		}
-		if (vm->dump == GAME->cycles_counter)
-			dump64(vm);
 		cycles++;
 		GAME->cycles_counter++;
 	}

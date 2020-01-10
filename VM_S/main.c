@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 15:53:57 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/10 15:12:43 by rvan-ket      ########   odam.nl         */
+/*   Updated: 2020/01/10 15:53:25 by rvan-ket      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ static	t_vm	*init_vm(void)
 ** Visualizer if we have time/want to do it???
 ** Norminette ofcourse
 ** alles met een '-' accepteert het. En ook alle getallen. en dit klopt ook niet ./corewar -bla 3 batman.cor
+
+
+** ASM is nog niet goed want newlines gaan weg en comments boven naam/comment
 */
 
 int				main(int argc, char **argv)
