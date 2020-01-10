@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 14:35:54 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/10 13:44:41 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/10 14:42:45 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int			valid_opcode(t_byte opcode)
 int			get_bytes(t_byte *arena, int idx, int amount)
 {
 	int	i;
-	int value;
+	int	value;
 
 	i = 0;
 	value = 0;
@@ -32,6 +32,8 @@ int			get_bytes(t_byte *arena, int idx, int amount)
 		value = value | arena[get_arena_index(idx, i)];
 		i++;
 	}
+	if (amount == 2)
+		return ((short)value);
 	return (value);
 }
 

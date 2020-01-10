@@ -178,10 +178,7 @@ void zjmp(t_vm *vm, t_cursor *c, t_arg *argument)
 {
 	if (c->carry == 0)
 		return ;
-	if (argument->value < 0)
-		c->position -= argument->value % IDX_MOD;
-	else
-		c->position += argument->value % IDX_MOD;
+	c->position = get_arena_index(c->position, argument->value % IDX_MOD);
 }
 
 void	ldi(t_vm *vm, t_cursor *c, t_arg *argument)
@@ -345,7 +342,8 @@ void	do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size)
 		ft_fork(vm, cursor, args, MEM_SIZE);
 	else if (opcode == 16)
 		aff(vm, cursor, args);
-	cursor->position += size;
+	if (opcode != 9)
+		cursor->position = get_arena_index(cursor->position, size);
 	cursor->moved = true;
 
 	ft_printf("OPERATION EXECUTED :\n"); ///////

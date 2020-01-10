@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 15:53:57 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/10 13:44:46 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/10 14:41:55 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,7 @@ int				main(int argc, char **argv)
 	check_champion_position(CHAMPS, vm->champion_count);
 	setup_game(vm);
 	// init_vis(vm);///////
-
-	/* DEBUG */
-	ft_printf("opcode : %d\n",
-	get_bytes(ARENA, 19, 1));
-	ft_printf("value : %d\n",
-	get_bytes(ARENA, 19+1, 2));
-	// dump64(vm);
-	/* DEBUG */
-
-	// game(vm);
-	// free_vm(vm);
+	game(vm);
+	free_vm(vm);
 	return (0);
 }
