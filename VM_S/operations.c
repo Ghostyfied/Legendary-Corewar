@@ -15,6 +15,7 @@ void	live(t_vm *vm, t_cursor *c, t_arg *argument)
 		c->last_live = vm->game->cycles_counter;
 		vm->champs[r1 - 1].last_live = c->last_live;
 		GAME->live_counter++;
+		GAME->winner = r1;
 	}
 	
 }
@@ -308,7 +309,7 @@ void	ft_fork(t_vm *vm, t_cursor *c, t_arg *argument, int modulo)
 void	do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size)
 {
 	int	opcode;
-	print_arg(args, g_op_tab[cursor->opcode].nb_arg);
+	// print_arg(args, g_op_tab[cursor->opcode].nb_arg);
 	opcode = cursor->opcode;
 	if (opcode == 1)
 		live(vm, cursor, args);
@@ -346,7 +347,7 @@ void	do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size)
 		cursor->position = get_arena_index(cursor->position, size);
 	cursor->moved = true;
 
-	ft_printf("OPERATION EXECUTED :\n"); ///////
-	ft_printf("SIZE OF OP WAS : %d\n", size); //////
-	print_cursor(cursor, true); ///////
+	// ft_printf("OPERATION EXECUTED :\n"); ///////
+	// ft_printf("SIZE OF OP WAS : %d\n", size); //////
+	// print_cursor(cursor, true); ///////
 }
