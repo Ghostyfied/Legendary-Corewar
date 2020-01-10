@@ -6,7 +6,11 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 15:53:57 by fhignett       #+#    #+#                */
+<<<<<<< HEAD
 /*   Updated: 2020/01/10 15:53:25 by rvan-ket      ########   odam.nl         */
+=======
+/*   Updated: 2020/01/10 17:23:55 by awehlbur      ########   odam.nl         */
+>>>>>>> 097d396b3cd10a745a52756b639b45be39a312c8
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +48,6 @@ static	t_vm	*init_vm(void)
 ** - ./corewar batman.cor buttman.s doesn't give an error?
 ** Visualizer if we have time/want to do it???
 ** Norminette ofcourse
-** alles met een '-' accepteert het. En ook alle getallen. en dit klopt ook niet ./corewar -bla 3 batman.cor
-
-
-** ASM is nog niet goed want newlines gaan weg en comments boven naam/comment
 */
 
 int				main(int argc, char **argv)

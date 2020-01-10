@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 14:38:02 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/10 15:47:36 by rvan-ket      ########   odam.nl         */
+/*   Updated: 2020/01/10 17:24:51 by rvan-ket      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,4 @@ void			game(t_vm *vm)
 		cycles++;
 		GAME->cycles_counter++;
 	}
-	ft_printf("Contestant %d, \"%s\", has won !\n",
-	GAME->winner, CHAMPS[GAME->winner - 1].name);
 }

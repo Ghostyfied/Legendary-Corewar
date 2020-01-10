@@ -22,6 +22,7 @@ CORE_SRCS_FILES		=	main.c \
 						validate_format.c \
 						assign_positions.c \
 						check_flag_stuff.c \
+						check_flag_stuff_helper.c \
 						count_and_check_champs.c \
 						extra_functions.c \
 						read_file.c \

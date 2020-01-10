@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 16:00:30 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/10 13:50:26 by rvan-ket      ########   odam.nl         */
+/*   Updated: 2020/01/10 17:23:54 by awehlbur      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,16 @@ void	print_cursors(t_cursor *cursors, int reg)
 
 void	print_arg(t_arg *args, int nb_arg)
 {
-	int i;
-	char *type;
+	int		i;
+	char	*type;
 
 	i = 0;
 	while (i < nb_arg)
 	{
-		type = args[i].type == T_REG ? "T_REG" : (args[i].type == T_DIR ? "T_DIR" : "T_IND");
-		ft_printf("arg:%d %s, size %d, value : %d\n", i, type, args[i].size, args[i].value);
+		type = args[i].type == \
+			T_REG ? "T_REG" : (args[i].type == T_DIR ? "T_DIR" : "T_IND");
+		ft_printf("arg:%d %s, size %d, value : %d\n", i, \
+			type, args[i].size, args[i].value);
 		i++;
 	}
 	ft_putendl("");

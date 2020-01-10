@@ -89,6 +89,10 @@ void					execute_op(t_vm *vm, t_cursor *c);
 void					do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size);
 void					put_value(t_byte *arena, int idx, void *value);
 
+void					retreive_flags_helper(int argc, char **argv, int i, t_vm *vm);
+int						parse_number_helper(int i, t_vm *vm);
+void					parse_number(t_vm *vm, char *num);
+
 int						ft_arrlen(char **tab);
 int						ft_validate_format(char *format, char *str);
 int						ft_is_a_number(char *str);
