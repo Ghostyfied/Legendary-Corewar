@@ -32,9 +32,9 @@ void	ld(t_vm *vm, t_cursor *c, t_arg *argument)
 	else if (arg1.type == 2)
 		c->registry[arg2.value - 1] = arg1.value;
 	if (c->registry[arg2.value - 1] == 0)
-			c->carry = 1;
+			c->carry = true;
 		else
-			c->carry = 0;
+			c->carry = false;
 }
 
 /* not sure of die IDX_MOD daar juist is brobro*/
@@ -306,9 +306,7 @@ void	ft_fork(t_vm *vm, t_cursor *c, t_arg *argument, int modulo)
 void	do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size)
 {
 	int	opcode;
-
 	print_arg(args, g_op_tab[cursor->opcode].nb_arg);
-
 	opcode = cursor->opcode;
 	if (opcode == 1)
 		live(vm, cursor, args);

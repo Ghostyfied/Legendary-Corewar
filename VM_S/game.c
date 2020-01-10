@@ -6,7 +6,11 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 14:38:02 by fhignett       #+#    #+#                */
+<<<<<<< HEAD
 /*   Updated: 2020/01/10 14:49:22 by fhignett      ########   odam.nl         */
+=======
+/*   Updated: 2020/01/10 13:54:50 by rvan-ket      ########   odam.nl         */
+>>>>>>> 7b0fefc6296cd8682dd9978dd51a3a9f0cb82c36
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +40,7 @@ static void		cursor_operations(t_vm *vm)
 	c = CURSORS;
 	while (c)
 	{
+		// ft_printf("pos : %d\n", c->position);
 		if (c->moved)
 			get_opcode(c, ARENA[c->position]);
 		if (c->wait_cycles > 0)
@@ -59,6 +64,7 @@ static void		check_cursors_live(t_vm *vm, int cycles)
 	c = CURSORS;
 	while (c)
 	{
+		// ft_printf("%d\n", c->last_live);
 		nxt = c->next;
 		if (GAME->cycles_to_die < 1 ||
 			c->last_live <= (GAME->cycles_counter - cycles))
