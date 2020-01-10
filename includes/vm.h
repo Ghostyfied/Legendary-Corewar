@@ -65,9 +65,11 @@ typedef struct			s_vm
 	int					champ_nb; /* Current index of Champs in array */
 	int					champ_position; /* Position to multiply for champions in arena */
 	int					dump;
+	int					vflag;
 	t_byte				arena[MEM_SIZE];
 	t_champ				*champs;
 	t_game				*game;
+	t_visualizer		*vis;
 }						t_vm;
 
 void					check_champion_position(t_champ *champs, int champ_count);

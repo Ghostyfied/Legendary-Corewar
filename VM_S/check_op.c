@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 15:20:46 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/10 13:18:58 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/10 17:57:32 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ static void		check_octal_code(t_vm *vm, t_cursor *c)
 					g_op_tab[c->opcode].nb_arg) + 2;
 	if (!octal_valid(ARENA[c->position + 1], g_op_tab[c->opcode].nb_arg))
 	{
+		if (vm->vflag)
+			highlight_cursor(vm, c, A_NORMAL);
 		c->position += size;
 		return ;
 	}
@@ -110,6 +112,8 @@ static void		check_octal_code(t_vm *vm, t_cursor *c)
 			|| !(args[i].type & g_op_tab[c->opcode].args[i]))
 		{
 			free(args);
+			if (vm->vflag)
+				highlight_cursor(vm, c, A_NORMAL);
 			c->position += size;
 			return ;
 		}
