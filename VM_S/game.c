@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 14:38:02 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/09 19:12:08 by rvan-ket      ########   odam.nl         */
+/*   Updated: 2020/01/10 13:54:50 by rvan-ket      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ static void		get_opcode(t_cursor *cursor, t_byte opcode)
 		cursor->wait_cycles = 0;
 	else
 		cursor->wait_cycles = g_op_tab[opcode].cycle;
+	
+	ft_printf("SET OPCODE:\n"); ////////
+	print_cursor(cursor, false); ////////
 }
 
 /*
@@ -89,14 +92,11 @@ void			game(t_vm *vm)
 		}
 		if (vm->dump == GAME->cycles_counter)
 			dump64(vm);
-		GAME->cycles_counter++;
-		if (!(cycles % 10))
-			print_cursor(CURSORS, true);
 		cycles++;
+		GAME->cycles_counter++;
 		if (cycles == 100)
-			exit(1);
+			break ;
 	}
-	// ft_printf("%d\n", GAME->cycles_counter);
 	ft_printf("Contestant %d, \"%s\", has won !\n",
 	GAME->winner, CHAMPS[GAME->winner - 1].name);
 }
