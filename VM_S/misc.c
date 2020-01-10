@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 14:35:54 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/10 13:44:41 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/10 15:01:26 by awehlbur      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int			get_arena_index(int current, int move)
 	return (current);
 }
 
-void			put_value(t_byte *arena, int idx, void *value)
+void		put_value(t_byte *arena, int idx, void *value)
 {
 	int	i;
 
