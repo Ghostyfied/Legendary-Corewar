@@ -6,11 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 15:53:57 by fhignett       #+#    #+#                */
-<<<<<<< HEAD
-/*   Updated: 2020/01/10 15:53:25 by rvan-ket      ########   odam.nl         */
-=======
-/*   Updated: 2020/01/10 17:23:55 by awehlbur      ########   odam.nl         */
->>>>>>> 097d396b3cd10a745a52756b639b45be39a312c8
+/*   Updated: 2020/01/10 17:25:28 by rvan-ket      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
