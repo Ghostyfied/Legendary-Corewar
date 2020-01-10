@@ -85,7 +85,7 @@ zjmp %3
 live %4329034
 #fork %94
 live %3401123
-fork %47
+#fork %47
 live %4590543
 #fork %132
 ld %0, r2

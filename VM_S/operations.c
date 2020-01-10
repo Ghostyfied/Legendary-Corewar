@@ -54,7 +54,10 @@ void	st(t_vm *vm, t_cursor *c, t_arg *argument)
 	}
 	else if (arg2.type == 4)
 	{
+		// printf("val%d\n",value);		
 		value = swap_32(c->registry[arg1.value - 1]);
+		// printf("val2: %d\n",value);
+		// printf("pos: %d\n\n", get_arena_index(c->position, (arg2.value % IDX_MOD)));
 		put_value(ARENA, get_arena_index(c->position, (arg2.value % IDX_MOD)), &value);
 		// swap_32();
 	}
@@ -347,7 +350,7 @@ void	do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size)
 		cursor->position = get_arena_index(cursor->position, size);
 	cursor->moved = true;
 
-	// ft_printf("OPERATION EXECUTED :\n"); ///////
-	// ft_printf("SIZE OF OP WAS : %d\n", size); //////
-	// print_cursor(cursor, true); ///////
+	ft_printf("OPERATION EXECUTED :\n"); ///////
+	ft_printf("SIZE OF OP WAS : %d\n", size); //////
+	print_cursor(cursor, true); ///////
 }
