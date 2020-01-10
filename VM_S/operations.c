@@ -47,18 +47,17 @@ void	st(t_vm *vm, t_cursor *c, t_arg *argument)
 
 	arg1 = argument[0];
 	arg2 = argument[1];
-
-	if (arg2.type == 1)
+	if (arg2.type == T_REG)
 	{
 		// ft_memcpy(&c->registry[arg2.value - 1], &arg1.value, 4);
-		c->registry[arg2.value - 1] = arg1.value;
+		c->registry[arg2.value - 1] = c->registry[arg1.value - 1];
 	}
-	else if (arg2.type == 4)
+	else if (arg2.type == T_IND)
 	{
 		value = swap_32(c->registry[arg1.value - 1]);
-		put_value(ARENA, (c->position + arg2.value % IDX_MOD) % IDX_MOD, &value);
+		put_value(ARENA, get_arena_index(c->position, (arg2.value % IDX_MOD)), &value);
 		if (vm->vflag)
-			update_arena(ARENA, (c->position + arg2.value % IDX_MOD) % IDX_MOD, 4);
+			update_arena(ARENA, get_arena_index(c->position, (arg2.value % IDX_MOD)), 4);
 		// swap_32();
 	}
 }
@@ -227,7 +226,7 @@ void	sti(t_vm *vm, t_cursor *c, t_arg *argument)
 	value[0] = swap_32(value[0]);
 	put_value(ARENA, c->position + (value[1] + value[2]) % IDX_MOD, &value[0]);
 	if (vm->vflag)
-		update_arena(ARENA, c->position + (value[1] + value[2]) % IDX_MOD, 4);
+		update_arena(ARENA, get_arena_index(c->position, c->position + (value[1] + value[2]) % IDX_MOD), 4);
 }
 
 void	lld(t_vm *vm, t_cursor *c, t_arg *argument)
@@ -318,7 +317,7 @@ void	do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size)
 	else if (opcode == 2)
 		ld(vm, cursor, args); // √
 	else if (opcode == 3)
-		st(vm, cursor, args); // √ MEMORY CHANGED
+		st(vm, cursor, args); // √ MEMORY CHANGES
 	else if (opcode == 4)
 		add(vm, cursor, args); // √
 	else if (opcode == 5)
@@ -334,7 +333,7 @@ void	do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size)
 	else if (opcode == 10)
 		ldi(vm, cursor, args); // √
 	else if (opcode == 11)
-		sti(vm, cursor, args); // √ MEMORY CHANGED
+		sti(vm, cursor, args); // √ MEMORY CHANGES
 	else if (opcode == 12)
 		ft_fork(vm, cursor, args, IDX_MOD); // √
 	else if (opcode == 13)
