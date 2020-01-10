@@ -109,6 +109,7 @@ void					print_byte(const void *byte, size_t size);
 void					print_champions(t_champ *champs, int champ_nb);
 void					print_cursor(t_cursor *cursor, int reg);
 void					print_cursors(t_cursor *cursors, int reg);
+void					print_arg(t_arg *args, int nb_arg);
 
 /*
 ** ****************************** DEBUG ******************************

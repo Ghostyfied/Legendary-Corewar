@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 14:38:02 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/09 16:58:08 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/10 13:29:49 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ static void		get_opcode(t_cursor *cursor, t_byte opcode)
 		cursor->wait_cycles = 0;
 	else
 		cursor->wait_cycles = g_op_tab[opcode].cycle;
+	
+	ft_printf("SET OPCODE:\n"); ////////
+	print_cursor(cursor, false); ////////
 }
 
 /*
@@ -74,10 +77,6 @@ void			game(t_vm *vm)
 		cursor_operations(vm);
 		if (GAME->cycles_to_die < 1 || cycles == GAME->cycles_to_die)
 		{
-			// ft_printf("\n\n\n%d\n", GAME->live_counter);
-			// print_cursor(CURSORS, true);
-			// ft_putendl("");
-
 			GAME->checks++;
 			check_cursors_live(vm, cycles);
 			if (GAME->live_counter >= NBR_LIVE || GAME->checks > MAX_CHECKS)
@@ -93,10 +92,9 @@ void			game(t_vm *vm)
 			dump64(vm);
 		cycles++;
 		GAME->cycles_counter++;
+		if (cycles == 100)
+			break ;
 	}
-
-	// ft_printf("%d\n", GAME->cycles_counter);
-
 	ft_printf("Contestant %d, \"%s\", has won !\n",
 	GAME->winner, CHAMPS[GAME->winner - 1].name);
 }

@@ -310,6 +310,8 @@ void	do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size)
 {
 	int	opcode;
 
+	print_arg(args, g_op_tab[cursor->opcode].nb_arg);
+
 	opcode = cursor->opcode;
 	if (opcode == 1)
 		live(vm, cursor, args);
@@ -345,4 +347,8 @@ void	do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size)
 		aff(vm, cursor, args);
 	cursor->position += size;
 	cursor->moved = true;
+
+	ft_printf("OPERATION EXECUTED :\n"); ///////
+	ft_printf("SIZE OF OP WAS : %d\n", size); //////
+	print_cursor(cursor, true); ///////
 }
