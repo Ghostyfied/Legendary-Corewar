@@ -11,7 +11,7 @@ void	refresh_windows(WINDOW *arena_win, WINDOW *info_win)
 {
 	wrefresh(arena_win);
 	wrefresh(info_win);
-	sleep(SLEEP);
+	// sleep(SLEEP);
 }
 
 void	init_vis(t_vm *vm)
@@ -49,6 +49,6 @@ void	init_vis(t_vm *vm)
 	visualizer(vm, VISUAL->arena_win);
 	info_vis(vm, VISUAL->info_win);
 	refresh_windows(VISUAL->arena_win, VISUAL->info_win);
-	while (getch() != ' ')
-		;
+	// while (getch() != ' ')
+	// 	;
 }

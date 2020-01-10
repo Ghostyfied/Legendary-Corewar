@@ -206,7 +206,8 @@ void	ldi(t_vm *vm, t_cursor *c, t_arg *argument)
 			// value[i] = get_4bytes(&ARENA[c->position + argument[i].value % IDX_MOD]);
 		i++;
 	}
-	c->registry[argument[2].value - 1] = get_bytes(ARENA, c->position + (value[0] + value[1]) % IDX_MOD, 4);
+	
+	c->registry[argument[2].value - 1] = get_bytes(ARENA, get_arena_index(c->position, (value[0] + value[1]) % IDX_MOD), 4);
 }
 
 void	sti(t_vm *vm, t_cursor *c, t_arg *argument)
@@ -227,7 +228,7 @@ void	sti(t_vm *vm, t_cursor *c, t_arg *argument)
 		i++;
 	}
 	value[0] = swap_32(value[0]);
-	put_value(ARENA, c->position + (value[1] + value[2]) % IDX_MOD, &value[0]);
+	put_value(ARENA, get_arena_index(c->position, (value[1] + value[2]) % IDX_MOD), &value[0]);
 	if (vm->vflag)
 		update_arena(ARENA, get_arena_index(c->position, c->position + (value[1] + value[2]) % IDX_MOD), 4);
 }
@@ -354,7 +355,7 @@ void	do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size)
 		cursor->position = get_arena_index(cursor->position, size);
 	cursor->moved = true;
 
-	ft_printf("OPERATION EXECUTED :\n"); ///////
-	ft_printf("SIZE OF OP WAS : %d\n", size); //////
-	print_cursor(cursor, true); ///////
+	// ft_printf("OPERATION EXECUTED :\n"); ///////
+	// ft_printf("SIZE OF OP WAS : %d\n", size); //////
+	// print_cursor(cursor, true); ///////
 }

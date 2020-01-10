@@ -14,7 +14,7 @@ sti r1, %461, %1
 sti r1, %454, %9
 sti r1, %408, %1
 ld %0, r16
-#fork %323
+fork %323
 ld %0, r2
 ld %0, r16
 live %4902343
@@ -75,19 +75,19 @@ st r2, -501
 st r2, -510
 zjmp %-280
 live %4239423
-#fork %-5
+fork %-5
 ld %0, r16
 live %3442302
 zjmp %-5
 live %4320423
 zjmp %3
-#fork %-8
+fork %-8
 live %4329034
-#fork %94
+fork %94
 live %3401123
-#fork %47
+fork %47
 live %4590543
-#fork %132
+fork %132
 ld %0, r2
 ld %251883523, r3
 ld %0, r16
@@ -95,16 +95,16 @@ live %4930423
 ld %0, r16
 zjmp %120
 live %4342342
-#fork %-396
+fork %-396
 ld %251883523, r2
 ld %386101251, r3
 ld %0, r16
 ld %0, r16
 zjmp %81
 live %4239013
-#fork %-104
+fork %-104
 live %4093282
-#fork %-146
+fork %-146
 ld %-65280, r2
 ld %436432899, r3
 ld %0, r16
