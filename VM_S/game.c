@@ -6,11 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 14:38:02 by fhignett       #+#    #+#                */
-<<<<<<< HEAD
-/*   Updated: 2020/01/10 14:49:22 by fhignett      ########   odam.nl         */
-=======
-/*   Updated: 2020/01/10 13:54:50 by rvan-ket      ########   odam.nl         */
->>>>>>> 7b0fefc6296cd8682dd9978dd51a3a9f0cb82c36
+/*   Updated: 2020/01/10 15:09:01 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +21,8 @@ static void		get_opcode(t_cursor *cursor, t_byte opcode)
 	else
 		cursor->wait_cycles = g_op_tab[opcode].cycle;
 	
-	ft_printf("SET OPCODE:\n"); ////////
-	print_cursor(cursor, false); ////////
+	// ft_printf("SET OPCODE:\n"); ////////
+	// print_cursor(cursor, false); ////////
 }
 
 /*
