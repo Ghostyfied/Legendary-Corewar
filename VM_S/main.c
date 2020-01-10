@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 15:53:57 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/10 14:59:39 by awehlbur      ########   odam.nl         */
+/*   Updated: 2020/01/10 17:23:55 by awehlbur      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ int				main(int argc, char **argv)
 	setup_game(vm);
 	// init_vis(vm);///////
 	game(vm);
-	ft_printf("Contestant %d, \"%s\", has won !\n",
-	GAME->winner, CHAMPS[GAME->winner - 1].name);
 	free_vm(vm);
 	return (0);
 }
