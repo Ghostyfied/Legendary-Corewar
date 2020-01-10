@@ -1,11 +1,5 @@
 #include "vm.h"
 
-void	get_xy(int index, int *y, int *x)
-{
-	*y = (index / 64) + 1;
-	*x = ((index % 64) * 3) + 1;
-}
-
 void	visualizer(t_vm *vm, WINDOW *win)
 {
 	int i;

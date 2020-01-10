@@ -9,8 +9,9 @@ void	live(t_vm *vm, t_cursor *c, t_arg *argument)
 	int r1;
 
 	r1 = c->registry[0] * -1;
-	if (r1 > 0 && r1 <= vm->champ_nb && -r1 == argument->value)
+	if (r1 > 0 && r1 <= vm->champ_nb && -r1 == argument->value) // Only if champion is alive
 	{
+		GAME->winner = r1;
 		vm->champs[r1 - 1].lives++;
 		c->last_live = vm->game->cycles_counter;
 		vm->champs[r1 - 1].last_live = c->last_live;
@@ -47,19 +48,20 @@ void	st(t_vm *vm, t_cursor *c, t_arg *argument)
 
 	arg1 = argument[0];
 	arg2 = argument[1];
-	if (arg2.type == 1)
+	if (arg2.type == T_REG)
 	{
 		// ft_memcpy(&c->registry[arg2.value - 1], &arg1.value, 4);
 		c->registry[arg2.value - 1] = c->registry[arg1.value - 1];
 	}
-	else if (arg2.type == 4)
+	else if (arg2.type == T_IND)
 	{
 		// printf("val%d\n",value);		
 		value = swap_32(c->registry[arg1.value - 1]);
 		// printf("val2: %d\n",value);
 		// printf("pos: %d\n\n", get_arena_index(c->position, (arg2.value % IDX_MOD)));
 		put_value(ARENA, get_arena_index(c->position, (arg2.value % IDX_MOD)), &value);
-		// swap_32();
+		if (vm->vflag)
+			update_arena(ARENA, get_arena_index(c->position, (arg2.value % IDX_MOD)), 4);
 	}
 }
 
@@ -111,11 +113,11 @@ void	and(t_vm *vm, t_cursor *c, t_arg *argument)
 	i = 0;
 	while (i < 2)
 	{
-		if (argument[i].type == 1)
+		if (argument[i].type == T_REG)
 			value[i] = c->registry[argument[i].value - 1];
-		if (argument[i].type == 2)
+		if (argument[i].type == T_DIR)
 			value[i] = argument[i].value;
-		if (argument[i].type == 4)
+		if (argument[i].type == T_IND)
 			value[i] = get_bytes(ARENA, c->position + argument[i].value % IDX_MOD, 4);
 		i++;
 	}
@@ -136,11 +138,11 @@ void	or(t_vm *vm, t_cursor *c, t_arg *argument)
 	i = 0;
 	while (i < 2)
 	{
-		if (argument[i].type == 1)
+		if (argument[i].type == T_REG)
 			value[i] = c->registry[argument[i].value - 1];
-		if (argument[i].type == 2)
+		if (argument[i].type == T_DIR)
 			value[i] = argument[i].value;
-		if (argument[i].type == 4)
+		if (argument[i].type == T_IND)
 			value[i] = get_bytes(ARENA, c->position + argument[i].value % IDX_MOD, 4);
 		i++;
 	}
@@ -161,11 +163,11 @@ void	xor(t_vm *vm, t_cursor *c, t_arg *argument)
 	i = 0;
 	while (i < 2)
 	{
-		if (argument[i].type == 1)
+		if (argument[i].type == T_REG)
 			value[i] = c->registry[argument[i].value - 1];
-		if (argument[i].type == 2)
+		if (argument[i].type == T_DIR)
 			value[i] = argument[i].value;
-		if (argument[i].type == 4)
+		if (argument[i].type == T_IND)
 			value[i] = get_bytes(ARENA, c->position + argument[i].value % IDX_MOD, 4);
 		i++;
 	}
@@ -181,6 +183,8 @@ void zjmp(t_vm *vm, t_cursor *c, t_arg *argument)
 {
 	if (c->carry == 0)
 		return ;
+	if (vm->vflag)
+		highlight_cursor(vm, c, A_NORMAL);
 	c->position = get_arena_index(c->position, argument->value % IDX_MOD);
 }
 
@@ -193,11 +197,11 @@ void	ldi(t_vm *vm, t_cursor *c, t_arg *argument)
 
 	while (i < 2)
 	{
-		if (argument[i].type == 1)
+		if (argument[i].type == T_REG)
 			value[i] = c->registry[argument[i].value - 1];
-		if (argument[i].type == 2)
+		if (argument[i].type == T_DIR)
 			value[i] = argument[i].value;
-		if (argument[i].type == 4)
+		if (argument[i].type == T_IND)
 			value[i] = get_bytes(ARENA, c->position + argument[i].value % IDX_MOD, 4);
 			// value[i] = get_4bytes(&ARENA[c->position + argument[i].value % IDX_MOD]);
 		i++;
@@ -214,16 +218,18 @@ void	sti(t_vm *vm, t_cursor *c, t_arg *argument)
 
 	while (i < 3)
 	{
-		if (argument[i].type == 1)
+		if (argument[i].type == T_REG)
 			value[i] = c->registry[argument[i].value - 1];
-		if (argument[i].type == 2)
+		if (argument[i].type == T_DIR)
 			value[i] = argument[i].value;
-		if (argument[i].type == 4)
+		if (argument[i].type == T_IND)
 			value[i] = get_bytes(ARENA, c->position + argument[i].value % IDX_MOD, 4);
 		i++;
 	}
 	value[0] = swap_32(value[0]);
 	put_value(ARENA, c->position + (value[1] + value[2]) % IDX_MOD, &value[0]);
+	if (vm->vflag)
+		update_arena(ARENA, get_arena_index(c->position, c->position + (value[1] + value[2]) % IDX_MOD), 4);
 }
 
 void	lld(t_vm *vm, t_cursor *c, t_arg *argument)
@@ -233,10 +239,9 @@ void	lld(t_vm *vm, t_cursor *c, t_arg *argument)
 
 	arg1 = argument[0];
 	arg2 = argument[1];
-	if (arg1.type == 4)
+	if (arg1.type == T_IND)
 		c->registry[arg2.value - 1] = get_bytes(ARENA, (c->position + arg1.value) % MEM_SIZE, 4);
-		// c->registry[arg2.value - 1] = get_4bytes(&ARENA[c->position + arg1.value % IDX_MOD]);
-	else if (arg1.type == 2)
+	else if (arg1.type == T_DIR)
 		c->registry[arg2.value - 1] = arg1.value;
 	if (c->registry[arg2.value - 1] == 0)
 			c->carry = 1;
@@ -253,13 +258,12 @@ void	lldi(t_vm *vm, t_cursor *c, t_arg *argument)
 
 	while (i < 2)
 	{
-		if (argument[i].type == 1)
+		if (argument[i].type == T_REG)
 			value[i] = c->registry[argument[i].value - 1];
-		if (argument[i].type == 2)
+		if (argument[i].type == T_DIR)
 			value[i] = argument[i].value;
-		if (argument[i].type == 4)
+		if (argument[i].type == T_IND)
 			value[i] = get_bytes(ARENA, c->position + argument[i].value % IDX_MOD, 4);
-			// value[i] = get_4bytes(&ARENA[c->position + argument[i].value % IDX_MOD]);
 		i++;
 	}
 	c->registry[argument[2].value - 1] = get_bytes(ARENA, (c->position + value[0] + value[1]) % MEM_SIZE, 4);
@@ -311,15 +315,13 @@ void	do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size)
 {
 	int	opcode;
 
-	// print_arg(args, g_op_tab[cursor->opcode].nb_arg);/////
-
 	opcode = cursor->opcode;
 	if (opcode == 1)
 		live(vm, cursor, args); // √
 	else if (opcode == 2)
 		ld(vm, cursor, args); // √
 	else if (opcode == 3)
-		st(vm, cursor, args); // √
+		st(vm, cursor, args); // √ MEMORY CHANGES
 	else if (opcode == 4)
 		add(vm, cursor, args); // √
 	else if (opcode == 5)
@@ -335,7 +337,7 @@ void	do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size)
 	else if (opcode == 10)
 		ldi(vm, cursor, args); // √
 	else if (opcode == 11)
-		sti(vm, cursor, args); // √
+		sti(vm, cursor, args); // √ MEMORY CHANGES
 	else if (opcode == 12)
 		ft_fork(vm, cursor, args, IDX_MOD); // √
 	else if (opcode == 13)
@@ -346,6 +348,8 @@ void	do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size)
 		ft_fork(vm, cursor, args, MEM_SIZE); // √
 	else if (opcode == 16)
 		aff(vm, cursor, args); // √
+	if (vm->vflag)
+		highlight_cursor(vm, cursor, A_NORMAL);
 	if (opcode != 9)
 		cursor->position = get_arena_index(cursor->position, size);
 	cursor->moved = true;

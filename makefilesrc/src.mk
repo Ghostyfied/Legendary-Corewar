@@ -40,6 +40,7 @@ CORE_SRCS_FILES		=	main.c \
 VIS_SRCS_FILES		=	visualizer/visualizer.c \
 						visualizer/info.c \
 						visualizer/init.c \
+						visualizer/misc.c \
 
 DIS_SRCS_FILES		=	main.c \
 						decode_code.c \
