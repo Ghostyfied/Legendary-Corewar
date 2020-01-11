@@ -28,10 +28,9 @@ void	ld(t_vm *vm, t_cursor *c, t_arg *argument)
 
 	arg1 = argument[0];
 	arg2 = argument[1];
-	if (arg1.type == 4)
+	if (arg1.type == T_IND)
 		c->registry[arg2.value - 1] = get_bytes(ARENA, get_arena_index(c->position, (arg1.value % IDX_MOD)), 4);
-		// c->registry[arg2.value - 1] = get_4bytes(&ARENA[c->position + arg1.value % IDX_MOD]);
-	else if (arg1.type == 2)
+	else if (arg1.type == T_DIR)
 		c->registry[arg2.value - 1] = arg1.value;
 	if (c->registry[arg2.value - 1] == 0)
 			c->carry = true;
@@ -45,6 +44,7 @@ void	st(t_vm *vm, t_cursor *c, t_arg *argument)
 	t_arg arg1;
 	t_arg arg2;
 	int value;
+
 
 	arg1 = argument[0];
 	arg2 = argument[1];
@@ -202,7 +202,7 @@ void	ldi(t_vm *vm, t_cursor *c, t_arg *argument)
 		if (argument[i].type == T_DIR)
 			value[i] = argument[i].value;
 		if (argument[i].type == T_IND)
-			value[i] = get_bytes(ARENA, c->position + argument[i].value % IDX_MOD, 4);
+			value[i] = get_bytes(ARENA, get_arena_index(c->position, argument[i].value % IDX_MOD), 4);
 			// value[i] = get_4bytes(&ARENA[c->position + argument[i].value % IDX_MOD]);
 		i++;
 	}
@@ -224,7 +224,7 @@ void	sti(t_vm *vm, t_cursor *c, t_arg *argument)
 		if (argument[i].type == T_DIR)
 			value[i] = argument[i].value;
 		if (argument[i].type == T_IND)
-			value[i] = get_bytes(ARENA, c->position + argument[i].value % IDX_MOD, 4);
+			value[i] = get_bytes(ARENA, get_arena_index(c->position, argument[i].value % IDX_MOD), 4);
 		i++;
 	}
 	value[0] = swap_32(value[0]);
@@ -241,7 +241,7 @@ void	lld(t_vm *vm, t_cursor *c, t_arg *argument)
 	arg1 = argument[0];
 	arg2 = argument[1];
 	if (arg1.type == T_IND)
-		c->registry[arg2.value - 1] = get_bytes(ARENA, (c->position + arg1.value) % MEM_SIZE, 4);
+		c->registry[arg2.value - 1] = get_bytes(ARENA, get_arena_index(c->position, arg1.value % MEM_SIZE), 4);
 	else if (arg1.type == T_DIR)
 		c->registry[arg2.value - 1] = arg1.value;
 	if (c->registry[arg2.value - 1] == 0)
@@ -284,7 +284,7 @@ void	ft_fork(t_vm *vm, t_cursor *c, t_arg *argument, int modulo)
 	t_cursor *curr;
 
 	// i = 0;
-	curr = copy_cursor(c, argument->value % modulo, GAME->cursors_id);
+	curr = copy_cursor(c, get_arena_index(c->position, argument->value % modulo), GAME->cursors_id);
 	// curr = new_cursor(argument[0].value % modulo, -c->id, GAME->cursors_id);
 	add_cursor(&GAME->cursors, curr);
 	GAME->cursors_id++;
