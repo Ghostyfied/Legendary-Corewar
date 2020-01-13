@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 14:38:02 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/13 15:56:56 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/13 16:51:00 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void			game(t_vm *vm)
 {
 	int cycles;
 
-	vm->vflag = 1;/////////
+	// vm->vflag = 1;/////////
 	if (vm->vflag)
 		init_vis(vm);
 	cycles = 0;
@@ -93,6 +93,8 @@ void			game(t_vm *vm)
 			refresh_windows(vm, VISUAL->arena_win, VISUAL->info_win);
 		cycles++;
 		GAME->cycles_counter++;
+		// if (cycles >= 430)
+		// 	sleep(5);
 	}
 	if (vm->vflag)
 		end_vis(vm);

@@ -28,9 +28,9 @@ void	ld(t_vm *vm, t_cursor *c, t_arg *argument)
 
 	arg1 = argument[0];
 	arg2 = argument[1];
-	if (arg1.type == 4)
+	if (arg1.type == T_IND)
 		c->registry[arg2.value - 1] = get_bytes(ARENA, get_arena_index(c->position, (arg1.value % IDX_MOD)), 4);
-	else if (arg1.type == 2)
+	else if (arg1.type == T_DIR)
 		c->registry[arg2.value - 1] = arg1.value;
 	if (c->registry[arg2.value - 1] == 0)
 			c->carry = true;
@@ -45,6 +45,7 @@ void	st(t_vm *vm, t_cursor *c, t_arg *argument)
 	t_arg arg2;
 	int value;
 	int index;
+
 
 	arg1 = argument[0];
 	arg2 = argument[1];
@@ -195,10 +196,10 @@ void	ldi(t_vm *vm, t_cursor *c, t_arg *argument)
 		if (argument[i].type == T_DIR)
 			value[i] = argument[i].value;
 		if (argument[i].type == T_IND)
-			value[i] = get_bytes(ARENA, c->position + argument[i].value % IDX_MOD, 4);
+			value[i] = get_bytes(ARENA, get_arena_index(c->position, argument[i].value % IDX_MOD), 4);
 		i++;
 	}
-	c->registry[argument[2].value - 1] = get_bytes(ARENA, c->position + (value[0] + value[1]) % IDX_MOD, 4);
+	c->registry[argument[2].value - 1] = get_bytes(ARENA, get_arena_index(c->position, (value[0] + value[1]) % IDX_MOD), 4);
 }
 
 void	sti(t_vm *vm, t_cursor *c, t_arg *argument)
@@ -215,7 +216,7 @@ void	sti(t_vm *vm, t_cursor *c, t_arg *argument)
 		if (argument[i].type == T_DIR)
 			value[i] = argument[i].value;
 		if (argument[i].type == T_IND)
-			value[i] = get_bytes(ARENA, c->position + argument[i].value % IDX_MOD, 4);
+			value[i] = get_bytes(ARENA, get_arena_index(c->position, argument[i].value % IDX_MOD), 4);
 		i++;
 	}
 	value[0] = swap_32(value[0]);
@@ -233,7 +234,7 @@ void	lld(t_vm *vm, t_cursor *c, t_arg *argument)
 	arg1 = argument[0];
 	arg2 = argument[1];
 	if (arg1.type == T_IND)
-		c->registry[arg2.value - 1] = get_bytes(ARENA, (c->position + arg1.value) % MEM_SIZE, 4);
+		c->registry[arg2.value - 1] = get_bytes(ARENA, get_arena_index(c->position, arg1.value % MEM_SIZE), 4);
 	else if (arg1.type == T_DIR)
 		c->registry[arg2.value - 1] = arg1.value;
 	if (c->registry[arg2.value - 1] == 0)
@@ -274,12 +275,12 @@ void	ft_fork(t_vm *vm, t_cursor *c, t_arg *argument, int modulo)
 {
 	t_cursor *curr;
 
-	curr = copy_cursor(c, (argument->value % modulo), GAME->cursors_id);
-	if (vm->vflag)
-		highlight_cursor(vm, -1, (argument->value % modulo), ATTR);
+	curr = copy_cursor(c, get_arena_index(c->position, argument->value % modulo), GAME->cursors_id);
 	add_cursor(&GAME->cursors, curr);
 	GAME->cursors_id++;
 	GAME->cursors_count++;
+	if (vm->vflag)
+		highlight_cursor(vm, -1, curr->position, ATTR);
 }
 
 void	do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size)

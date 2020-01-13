@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 14:35:54 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/13 13:44:17 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/13 16:51:10 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int			get_arena_index(int current, int move)
 		return ((current + move) % MEM_SIZE);
 	current += move;
 	if (current < 0)
-		return ((MEM_SIZE - 1) + current);
+		return (MEM_SIZE + current);
 	return (current);
 }
 
