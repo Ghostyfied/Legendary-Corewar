@@ -7,26 +7,34 @@ void	end_vis(void)
 	endwin();
 }
 
-void	refresh_windows(WINDOW *arena_win, WINDOW *info_win)
+void	refresh_windows(t_vm *vm, WINDOW *arena_win, WINDOW *info_win)
 {
+	info_vis(vm, info_win);
 	wrefresh(arena_win);
 	wrefresh(info_win);
 	usleep(SLEEP);
 }
 
+void	init_colours(void)
+{
+	init_pair(1, PLAYER1_C, -1);
+	init_pair(2, PLAYER2_C, -1);
+	init_pair(3, PLAYER3_C, -1);
+	init_pair(4, PLAYER4_C, -1);
+
+	init_pair(INFO_C, COLOR_YELLOW, COLOR_BLACK);
+}
+
 void	init_vis(t_vm *vm)
 {
-	int i;
-	int j;
+	int		i;
+	int		j;
 
 	VISUAL = MEM(t_visualizer);
 	initscr();
 	start_color();
 	use_default_colors();
-	init_pair(1, PLAYER1_C, -1);
-	init_pair(2, PLAYER2_C, -1);
-	init_pair(3, PLAYER3_C, -1);
-	init_pair(4, PLAYER4_C, -1);
+	init_colours();
 	cbreak();
 	noecho();
 	VISUAL->arena_win = newwin(ARENA_H, ARENA_W, 0, 0);
@@ -48,7 +56,7 @@ void	init_vis(t_vm *vm)
 	}
 	visualizer(vm, VISUAL->arena_win);
 	info_vis(vm, VISUAL->info_win);
-	refresh_windows(VISUAL->arena_win, VISUAL->info_win);
+	refresh_windows(vm, VISUAL->arena_win, VISUAL->info_win);
 	while (getch() != ' ')
 		;
 }

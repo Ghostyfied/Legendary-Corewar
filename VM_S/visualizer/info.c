@@ -23,11 +23,9 @@ void	info_vis(t_vm *vm, WINDOW *win)
 {
 	char *cycles;
 	char *cursors;
-	int x;
 	int y;
+	int x;
 	int i;
-
-	init_pair(INFO_C, COLOR_YELLOW, COLOR_BLACK);
 	
 	y = 10;
 	x = 10;

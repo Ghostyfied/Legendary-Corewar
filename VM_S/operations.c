@@ -44,6 +44,7 @@ void	st(t_vm *vm, t_cursor *c, t_arg *argument)
 	t_arg arg1;
 	t_arg arg2;
 	int value;
+	int index;
 
 	arg1 = argument[0];
 	arg2 = argument[1];
@@ -52,7 +53,10 @@ void	st(t_vm *vm, t_cursor *c, t_arg *argument)
 	else if (arg2.type == T_IND)
 	{
 		value = swap_32(c->registry[arg1.value - 1]);
-		put_value(ARENA, get_arena_index(c->position, (arg2.value % IDX_MOD)), &value);
+		index = get_arena_index(c->position, (arg2.value % IDX_MOD));
+		put_value(ARENA, index, &value);
+		if (vm->vflag)
+			update_arena(vm, index, VISUAL->carena[c->position]);
 	}
 }
 
@@ -172,7 +176,7 @@ void	xor(t_vm *vm, t_cursor *c, t_arg *argument)
 
 void zjmp(t_vm *vm, t_cursor *c, t_arg *argument)
 {
-	if (c->carry == 0) // IMPORTANT, IF CARRY == 0, MOET IE DAN WEL MOVEN?
+	if (c->carry == 0)
 		return ;
 	move_cursor(vm, c, (argument->value % IDX_MOD));
 }
@@ -201,9 +205,9 @@ void	sti(t_vm *vm, t_cursor *c, t_arg *argument)
 {
 	int value[3];
 	int i;
+	int idx;
 
 	i = 0;
-
 	while (i < 3)
 	{
 		if (argument[i].type == T_REG)
@@ -215,7 +219,10 @@ void	sti(t_vm *vm, t_cursor *c, t_arg *argument)
 		i++;
 	}
 	value[0] = swap_32(value[0]);
-	put_value(ARENA, c->position + (value[1] + value[2]) % IDX_MOD, &value[0]);
+	idx = get_arena_index(c->position, (value[1] + value[2]) % IDX_MOD);
+	put_value(ARENA, idx, &value[0]);
+	if (vm->vflag)
+		update_arena(vm, idx, VISUAL->carena[c->position]);
 }
 
 void	lld(t_vm *vm, t_cursor *c, t_arg *argument)
@@ -267,26 +274,13 @@ void	ft_fork(t_vm *vm, t_cursor *c, t_arg *argument, int modulo)
 {
 	t_cursor *curr;
 
-	curr = copy_cursor(c, argument->value % modulo, GAME->cursors_id);
+	curr = copy_cursor(c, (argument->value % modulo), GAME->cursors_id);
+	if (vm->vflag)
+		highlight_cursor(vm, -1, (argument->value % modulo), ATTR);
 	add_cursor(&GAME->cursors, curr);
 	GAME->cursors_id++;
+	GAME->cursors_count++;
 }
-
-// void	lfork(t_vm *vm, t_cursor *c, t_arg *argument)
-// {
-// 	int i;
-// 	t_cursor *curr;
-
-// 	i = 0;
-// 	curr = new_cursor(argument[0].value % MEM_SIZE, -c->id, GAME->cursors_id);
-// 	add_cursor(&GAME->cursors, curr);
-// 	GAME->cursors_id++;
-// 	while (i < 15)
-// 	{
-// 		curr->registry[i] = c->registry[i];
-// 		i++;
-// 	}
-// }
 
 void	do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size)
 {
@@ -325,7 +319,7 @@ void	do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size)
 		ft_fork(vm, cursor, args, MEM_SIZE); // √ CURSOR DUPLICATES
 	else if (opcode == 16)
 		aff(vm, cursor, args); // √
-	if (opcode != ZJUMP) // IMPORTANT, IF CARRY == 0, MOET IE DAN WEL HIER MOVEN?!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	if (opcode != ZJUMP || (opcode == ZJUMP && !cursor->carry)) // IMPORTANT, IF CARRY == 0, MOET IE DAN WEL HIER MOVEN?!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		move_cursor(vm, cursor, size);
 	free(args);	
 }
