@@ -7,6 +7,7 @@
 # define REG			1
 # define DIR			2
 # define IND			3
+# define ZJUMP			9
 # define CODE_OFFSET	(16 + COMMENT_LENGTH + PROG_NAME_LENGTH)
 # define GAME			vm->game
 # define CURSORS		GAME->cursors
@@ -66,10 +67,10 @@ typedef struct			s_vm
 	int					champ_position; /* Position to multiply for champions in arena */
 	int					dump;
 	int					vflag;
+	t_visualizer		*visual;
 	t_byte				arena[MEM_SIZE];
 	t_champ				*champs;
 	t_game				*game;
-	t_visualizer		*vis;
 }						t_vm;
 
 void					check_champion_position(t_champ *champs, int champ_count);
@@ -90,11 +91,12 @@ void					free_cursors(t_cursor *cursor);
 void					execute_op(t_vm *vm, t_cursor *c);
 void					do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size);
 void					put_value(t_byte *arena, int idx, void *value);
-
+void					move_cursor(t_vm *vm, t_cursor *c, int move);
 void					retreive_flags_helper(int argc, char **argv, int i, t_vm *vm);
-int						parse_number_helper(int i, t_vm *vm);
 void					parse_number(t_vm *vm, char *num);
 
+
+int						parse_number_helper(int i, t_vm *vm);
 int						ft_arrlen(char **tab);
 int						ft_validate_format(char *format, char *str);
 int						ft_is_a_number(char *str);

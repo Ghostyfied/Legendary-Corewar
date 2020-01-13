@@ -11,7 +11,7 @@ void	refresh_windows(WINDOW *arena_win, WINDOW *info_win)
 {
 	wrefresh(arena_win);
 	wrefresh(info_win);
-	sleep(SLEEP);
+	usleep(SLEEP);
 }
 
 void	init_vis(t_vm *vm)

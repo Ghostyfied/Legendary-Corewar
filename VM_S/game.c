@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 14:38:02 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/10 18:26:39 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/13 10:52:17 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,13 @@ static void		cursor_operations(t_vm *vm)
 	while (c)
 	{
 		if (c->moved)
-		{
 			get_opcode(c, ARENA[c->position]);
-			if (vm->vflag)
-				highlight_cursor(vm, c, ATTR);
-		}
 		if (c->wait_cycles > 0)
 			c->wait_cycles--;
 		if (c->wait_cycles == 0 && valid_opcode(c->opcode))
 			execute_op(vm, c);
 		else if (!c->wait_cycles)
-		{
-			if (vm->vflag)
-				highlight_cursor(vm, c, A_NORMAL);
-			c->position = get_arena_index(c->position, 1);
-			c->moved = true;
-		}
+			move_cursor(vm, c, 1);
 		c = c->next;
 	}
 }
@@ -65,11 +56,7 @@ static void		check_cursors_live(t_vm *vm, int cycles)
 		nxt = c->next;
 		if (GAME->cycles_to_die < 1 ||
 			c->last_live <= (GAME->cycles_counter - cycles))
-		{
-			if (vm->vflag)
-				highlight_cursor(vm, c, A_NORMAL);
 			CURSORS = delete_cursor(CURSORS, c->id);
-		}
 		c = nxt;
 	}
 }
@@ -78,13 +65,13 @@ void			game(t_vm *vm)
 {
 	int cycles;
 
-	vm->vflag = 1;/////////
-	if (vm->vflag)
-		init_vis(vm);
+	// vm->vflag = 1;/////////
+	// if (vm->vflag)
+	// 	init_vis(vm);
 	cycles = 0;
 	while (CURSORS)
 	{
-		if (!vm->vflag && vm->dump == GAME->cycles_counter)
+		if (/* !vm->vflag &&  */vm->dump == GAME->cycles_counter)
 			dump64(vm);
 		cursor_operations(vm);
 		if (GAME->cycles_to_die < 1 || cycles == GAME->cycles_to_die)
@@ -100,13 +87,13 @@ void			game(t_vm *vm)
 			cycles = 0;
 			// reset_champs_lives
 		}
-		if (vm->vflag)
-			refresh_windows(VISUAL->arena_win, VISUAL->info_win);
+		// if (vm->vflag)
+		// 	refresh_windows(VISUAL->arena_win, VISUAL->info_win);
 		cycles++;
 		GAME->cycles_counter++;
 	}
-	if (vm->vflag)
-		end_vis();
+	// if (vm->vflag)
+	// 	end_vis();
 	ft_printf("Contestant %d, \"%s\", has won !\n",
 	GAME->winner, CHAMPS[GAME->winner - 1].name);
 }

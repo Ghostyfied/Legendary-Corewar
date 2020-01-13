@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 14:35:54 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/10 17:24:58 by rvan-ket      ########   odam.nl         */
+/*   Updated: 2020/01/13 10:48:53 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,15 @@ void		put_value(t_byte *arena, int idx, void *value)
 		arena[get_arena_index(idx, i)] = ((t_byte*)value)[i];
 		i++;
 	}
+}
+
+void		move_cursor(t_vm *vm, t_cursor *c, int move)
+{
+	int old_pos;
+
+	old_pos = c->position;
+	c->position = get_arena_index(old_pos, move);
+	c->moved = true;
+	if (vm->vflag)
+		; // HIGHLIGHT CURSOR
 }

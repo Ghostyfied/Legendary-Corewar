@@ -9,7 +9,7 @@ void	live(t_vm *vm, t_cursor *c, t_arg *argument)
 	int r1;
 
 	r1 = c->registry[0] * -1;
-	if (r1 > 0 && r1 <= vm->champ_nb && -r1 == argument->value) // Only if champion is alive
+	if (r1 > 0 && r1 <= vm->champ_nb && -r1 == argument->value)
 	{
 		GAME->winner = r1;
 		vm->champs[r1 - 1].lives++;
@@ -30,7 +30,6 @@ void	ld(t_vm *vm, t_cursor *c, t_arg *argument)
 	arg2 = argument[1];
 	if (arg1.type == 4)
 		c->registry[arg2.value - 1] = get_bytes(ARENA, get_arena_index(c->position, (arg1.value % IDX_MOD)), 4);
-		// c->registry[arg2.value - 1] = get_4bytes(&ARENA[c->position + arg1.value % IDX_MOD]);
 	else if (arg1.type == 2)
 		c->registry[arg2.value - 1] = arg1.value;
 	if (c->registry[arg2.value - 1] == 0)
@@ -49,16 +48,11 @@ void	st(t_vm *vm, t_cursor *c, t_arg *argument)
 	arg1 = argument[0];
 	arg2 = argument[1];
 	if (arg2.type == T_REG)
-	{
-		// ft_memcpy(&c->registry[arg2.value - 1], &arg1.value, 4);
 		c->registry[arg2.value - 1] = c->registry[arg1.value - 1];
-	}
 	else if (arg2.type == T_IND)
 	{
 		value = swap_32(c->registry[arg1.value - 1]);
 		put_value(ARENA, get_arena_index(c->position, (arg2.value % IDX_MOD)), &value);
-		if (vm->vflag)
-			update_arena(ARENA, get_arena_index(c->position, (arg2.value % IDX_MOD)), 4);
 	}
 }
 
@@ -178,11 +172,9 @@ void	xor(t_vm *vm, t_cursor *c, t_arg *argument)
 
 void zjmp(t_vm *vm, t_cursor *c, t_arg *argument)
 {
-	if (c->carry == 0)
+	if (c->carry == 0) // IMPORTANT, IF CARRY == 0, MOET IE DAN WEL MOVEN?
 		return ;
-	if (vm->vflag)
-		highlight_cursor(vm, c, A_NORMAL);
-	c->position = get_arena_index(c->position, argument->value % IDX_MOD);
+	move_cursor(vm, c, (argument->value % IDX_MOD));
 }
 
 void	ldi(t_vm *vm, t_cursor *c, t_arg *argument)
@@ -200,7 +192,6 @@ void	ldi(t_vm *vm, t_cursor *c, t_arg *argument)
 			value[i] = argument[i].value;
 		if (argument[i].type == T_IND)
 			value[i] = get_bytes(ARENA, c->position + argument[i].value % IDX_MOD, 4);
-			// value[i] = get_4bytes(&ARENA[c->position + argument[i].value % IDX_MOD]);
 		i++;
 	}
 	c->registry[argument[2].value - 1] = get_bytes(ARENA, c->position + (value[0] + value[1]) % IDX_MOD, 4);
@@ -225,8 +216,6 @@ void	sti(t_vm *vm, t_cursor *c, t_arg *argument)
 	}
 	value[0] = swap_32(value[0]);
 	put_value(ARENA, c->position + (value[1] + value[2]) % IDX_MOD, &value[0]);
-	if (vm->vflag)
-		update_arena(ARENA, get_arena_index(c->position, c->position + (value[1] + value[2]) % IDX_MOD), 4);
 }
 
 void	lld(t_vm *vm, t_cursor *c, t_arg *argument)
@@ -276,20 +265,11 @@ void	aff(t_vm *vm, t_cursor *c, t_arg *argument)
 
 void	ft_fork(t_vm *vm, t_cursor *c, t_arg *argument, int modulo)
 {
-	// int i;
 	t_cursor *curr;
 
-	// i = 0;
 	curr = copy_cursor(c, argument->value % modulo, GAME->cursors_id);
-	// curr = new_cursor(argument[0].value % modulo, -c->id, GAME->cursors_id);
 	add_cursor(&GAME->cursors, curr);
 	GAME->cursors_id++;
-	// while (i < 15)
-	// {
-	// 	curr->registry[i] = c->registry[i];
-	// 	i++;
-	// }
-	
 }
 
 // void	lfork(t_vm *vm, t_cursor *c, t_arg *argument)
@@ -330,28 +310,22 @@ void	do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size)
 	else if (opcode == 8)
 		xor(vm, cursor, args); // √
 	else if (opcode == 9)
-		zjmp(vm, cursor, args); // √
+		zjmp(vm, cursor, args); // √ CURSOR MOVES
 	else if (opcode == 10)
 		ldi(vm, cursor, args); // √
 	else if (opcode == 11)
 		sti(vm, cursor, args); // √ MEMORY CHANGES
 	else if (opcode == 12)
-		ft_fork(vm, cursor, args, IDX_MOD); // √
+		ft_fork(vm, cursor, args, IDX_MOD); // √ CURSOR DUPLICATES
 	else if (opcode == 13)
 		lld(vm, cursor, args); // √
 	else if (opcode == 14)
 		lldi(vm, cursor, args); // √
 	else if (opcode == 15)
-		ft_fork(vm, cursor, args, MEM_SIZE); // √
+		ft_fork(vm, cursor, args, MEM_SIZE); // √ CURSOR DUPLICATES
 	else if (opcode == 16)
 		aff(vm, cursor, args); // √
-	if (vm->vflag)
-		highlight_cursor(vm, cursor, A_NORMAL);
-	if (opcode != 9)
-		cursor->position = get_arena_index(cursor->position, size);
-	cursor->moved = true;
-
-	// ft_printf("OPERATION EXECUTED :\n"); ///////
-	// ft_printf("SIZE OF OP WAS : %d\n", size); //////
-	// print_cursor(cursor, true); ///////
+	if (opcode != ZJUMP) // IMPORTANT, IF CARRY == 0, MOET IE DAN WEL HIER MOVEN?!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		move_cursor(vm, cursor, size);
+	free(args);	
 }
