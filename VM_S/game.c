@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 14:38:02 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/13 13:34:33 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/13 15:56:56 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void			game(t_vm *vm)
 			}
 			GAME->live_counter = 0;
 			cycles = 0;
-			// reset_champs_lives
 		}
 		if (vm->vflag)
 			refresh_windows(vm, VISUAL->arena_win, VISUAL->info_win);
@@ -96,7 +95,7 @@ void			game(t_vm *vm)
 		GAME->cycles_counter++;
 	}
 	if (vm->vflag)
-		end_vis();
+		end_vis(vm);
 	ft_printf("Contestant %d, \"%s\", has won !\n",
 	GAME->winner, CHAMPS[GAME->winner - 1].name);
 }

@@ -1,18 +1,20 @@
 #include "vm.h"
 
-void	end_vis(void)
+void	end_vis(t_vm *vm)
 {
-	while (getch() != ' ')
-		;
+	paused(VISUAL->info_win);
 	endwin();
 }
 
 void	refresh_windows(t_vm *vm, WINDOW *arena_win, WINDOW *info_win)
 {
 	info_vis(vm, info_win);
+	curs_set(0);
 	wrefresh(arena_win);
 	wrefresh(info_win);
 	usleep(SLEEP);
+	if (wgetch(info_win) == ' ')
+		paused(info_win);
 }
 
 void	init_colours(void)
@@ -21,8 +23,6 @@ void	init_colours(void)
 	init_pair(2, PLAYER2_C, -1);
 	init_pair(3, PLAYER3_C, -1);
 	init_pair(4, PLAYER4_C, -1);
-
-	init_pair(INFO_C, COLOR_YELLOW, COLOR_BLACK);
 }
 
 void	init_vis(t_vm *vm)
@@ -54,9 +54,9 @@ void	init_vis(t_vm *vm)
 		waddstr(VISUAL->arena_win, " 00");
 		j++;
 	}
+	nodelay(VISUAL->info_win, true);
 	visualizer(vm, VISUAL->arena_win);
 	info_vis(vm, VISUAL->info_win);
-	refresh_windows(vm, VISUAL->arena_win, VISUAL->info_win);
-	while (getch() != ' ')
-		;
+	wrefresh(VISUAL->arena_win);
+	paused(VISUAL->info_win);
 }

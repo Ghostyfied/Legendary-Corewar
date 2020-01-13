@@ -45,6 +45,7 @@ void	update_arena(t_vm *vm, int pos, int colour)
 		wattron(VISUAL->arena_win, COLOR_PAIR(colour));
 		waddstr(VISUAL->arena_win, hex);
 		wattroff(VISUAL->arena_win, COLOR_PAIR(colour));
+		VISUAL->carena[code] = colour;
 		free(hex);
 		i++;
 	}
