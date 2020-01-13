@@ -1,5 +1,5 @@
 .name "Butt"
-.comment "I like banananananananananananananananananananana"
+.comment "I like banana"
 
 sti r1, %7, %1
 live %0

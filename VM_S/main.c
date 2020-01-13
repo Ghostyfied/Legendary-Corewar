@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 15:53:57 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/13 11:45:46 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/13 17:22:17 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,8 @@ static	t_vm	*init_vm(void)
 
 /*
 ** Reminder/to do:
-** - Basic operations
-** - Add size to cursor->position after successful executed operation
-** 		and set cursor->moved to true
-** - Everytime live is performed GAME->live_counter++.
-**		Will be reset during the cursor live check.
-** - -d flag needs to be implemented, function already written.
-** - When doing an operation, when copying a value into the arena,
-**		watch out for max index, for example if 4 bytes are placed into
-**		the arena at index 4094, the last 2 bytes will be placed at index
-**		0 and 1, right?
-** - function get_arena_index() added, might be usefull. Gives you the correct
-**		index back after saying how many steps
-**   	+ or - you want from current index.
+** - -d(ump) /-v(isual) flag needs to be implemented, function already written.
 ** - ./corewar batman.cor buttman.s doesn't give an error?
-** Visualizer if we have time/want to do it???
 ** Norminette ofcourse
 */
 

@@ -22,8 +22,11 @@ void	highlight_cursor(t_vm *vm, int prev, int pos, int attr)
 		wattroff(VISUAL->arena_win, COLOR_PAIR(VISUAL->carena[prev]));
 		free(hex);
 	}
-	get_xy(pos, &y, &x);
-	mvwchgat(VISUAL->arena_win, y, x + 1, 2, attr, 0, NULL);
+	if (pos >= 0)
+	{
+		get_xy(pos, &y, &x);
+		mvwchgat(VISUAL->arena_win, y, x + 1, 2, attr, 0, NULL);
+	}
 }
 
 void	update_arena(t_vm *vm, int pos, int colour)
