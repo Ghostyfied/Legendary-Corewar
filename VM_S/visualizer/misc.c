@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   misc.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/01/14 16:08:41 by fhignett       #+#    #+#                */
+/*   Updated: 2020/01/14 16:15:12 by fhignett      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vm.h"
 
 void	get_xy(int index, int *y, int *x)
@@ -16,9 +28,8 @@ void	highlight_cursor(t_vm *vm, int prev, int pos, int attr)
 	{
 		hex = get_hex(ARENA[prev], 1);
 		get_xy(prev, &y, &x);
-		wmove(VISUAL->arena_win, y, x + 1);
 		wattron(VISUAL->arena_win, COLOR_PAIR(VISUAL->carena[prev]));
-		waddstr(VISUAL->arena_win, hex);
+		mvwaddstr(VISUAL->arena_win, y, x + 1, hex);
 		wattroff(VISUAL->arena_win, COLOR_PAIR(VISUAL->carena[prev]));
 		free(hex);
 	}
@@ -42,8 +53,7 @@ void	update_arena(t_vm *vm, int pos, int colour)
 	{
 		code = get_arena_index(pos, i);
 		get_xy(code, &y, &x);
-		wmove(VISUAL->arena_win, y, x);
-		waddch(VISUAL->arena_win, ' ');
+		mvwaddch(VISUAL->arena_win, y, x, ' ');
 		hex = get_hex(ARENA[code], 1);
 		wattron(VISUAL->arena_win, COLOR_PAIR(colour));
 		waddstr(VISUAL->arena_win, hex);
