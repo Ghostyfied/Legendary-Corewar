@@ -6,13 +6,13 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/14 16:39:15 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/14 16:54:19 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/14 17:57:14 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void	paused(WINDOW *win)
+void			paused(WINDOW *win)
 {
 	mvwaddstr(win, 5, 10, "PAUSED ");
 	curs_set(0);
@@ -21,7 +21,7 @@ void	paused(WINDOW *win)
 		;
 }
 
-void	champ_info(t_champ champ, int y, int x, WINDOW *win)
+void			champ_info(t_champ champ, int y, int x, WINDOW *win)
 {
 	char	*info;
 
@@ -42,10 +42,11 @@ void	champ_info(t_champ champ, int y, int x, WINDOW *win)
 	wattron(win, COLOR_PAIR(champ.id));
 	waddstr(win, info);
 	wattroff(win, COLOR_PAIR(champ.id));
+	waddstr(win, "          ");
 	free(info);
 }
 
-void	reset_champ_lives(t_champ *champs, int champ_count)
+void			reset_champ_lives(t_champ *champs, int champ_count)
 {
 	int i;
 
@@ -57,53 +58,49 @@ void	reset_champ_lives(t_champ *champs, int champ_count)
 	}
 }
 
-void	info_vis(t_vm *vm, WINDOW *win)
+static	void	put_info(t_vm *vm, WINDOW *win)
 {
-	char *cycles;
-	char *cursors;
-	char *check;
-	int y;
-	int x;
+	char	*info;
+	int		y;
+	int		x;
+
+	mvwaddstr(win, 10, 10, "Cycles\t: ");
+	info = ft_itoa(GAME->cycles_counter);
+	waddstr(win, info);
+	free(info);
+	mvwaddstr(win, 12, 10, "Check at\t: ");
+	info = ft_itoa(GAME->check_counter);
+	waddstr(win, info);
+	free(info);
+	mvwaddstr(win, 13, 10, "Check every\t: ");
+	info = ft_itoa(GAME->cycles_to_die);
+	waddstr(win, info);
+	free(info);
+	mvwaddstr(win, 15, 10, "Cursors\t: ");
+	info = ft_itoa(GAME->cursors_count);
+	waddstr(win, info);
+	free(info);
+	waddstr(win, "          ");
+}
+
+void			info_vis(t_vm *vm, WINDOW *win)
+{
 	int i;
+	int y;
 
 	mvwaddstr(win, 5, 10, "RUNNING");
-	y = 10;
-	x = 10;
-
-	wmove(win, y, x);
-	waddstr(win, "Cycles\t: ");
-	cycles = ft_itoa(GAME->cycles_counter);
-	waddstr(win, cycles);
-	free(cycles);
-
-	wmove(win, y + 2, x);
-	waddstr(win, "Check at\t: ");
-	check = ft_itoa(GAME->check_counter);
-	waddstr(win, check);
-	free(check);
-	wmove(win, y + 3, x);
-	waddstr(win, "Check every\t: ");
-	check = ft_itoa(GAME->cycles_to_die);
-	waddstr(win, check);
-	free(check);
-
-	y += 5;
-	wmove(win, y, x);
-	waddstr(win, "Cursors\t: ");
-	cursors = ft_itoa(GAME->cursors_count);
-	waddstr(win, cursors);
-	free(cursors);
-
+	put_info(vm, win);
 	i = 0;
+	y = 20;
 	while (i < vm->champion_count)
 	{
+		champ_info(CHAMPS[i], y, 10, win);
 		y += 5;
-		champ_info(CHAMPS[i], y, x, win);
 		i++;
 	}
 	if (!CURSORS)
 	{
-		mvwaddstr(win, y + 15, x + 5, "*** WINNER : ");
+		mvwaddstr(win, y + 15, 15, "*** WINNER : ");
 		wattron(win, COLOR_PAIR(GAME->winner));
 		waddstr(win, CHAMPS[GAME->winner - 1].name);
 		wattroff(win, COLOR_PAIR(GAME->winner));
