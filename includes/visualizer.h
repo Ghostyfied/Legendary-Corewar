@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 12:15:46 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/14 13:59:23 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/14 16:26:01 by rvan-ket      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # define	PLAYER4_C	COLOR_RED
 # define	VISUAL		vm->visual
 # define	ATTR		A_STANDOUT
-// # define	SLEEP		5000 // 0.025 sec
-# define	SLEEP		10000 // 0.025 sec
+# define	SLEEP		5000 // 0.005 sec
+// # define	SLEEP		10000 // 0.01 sec
 // # define	SLEEP		25000 // 0.025 sec
 
 typedef struct s_vm		t_vm;
@@ -50,4 +50,4 @@ void				highlight_cursor(t_vm *vm, int prev, int pos, int attr);
 void				update_arena(t_vm *vm, int pos, int colour);
 void				paused(WINDOW *win);
 
-#endif
+#endif 

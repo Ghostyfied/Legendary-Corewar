@@ -17,7 +17,7 @@ re='^[0-9]+$'
 if ! [[ $CYCLES =~ $re ]]; then
 	echo "error: $CYCLES is not a number" >&2 ; exit 1
 fi
-for (( i=0; i <= $CYCLES; i+=100))
+for (( i=0; i <= $CYCLES; i+=1000))
 do
 	./corewar -d $i $@ | sed -n -e '/^0x/p' > temp_output1
 	./vm_champs/corewar $@ -d $i | sed -n -e'/^0x/p' > temp_output2
