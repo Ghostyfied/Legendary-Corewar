@@ -231,7 +231,7 @@ void	lld(t_vm *vm, t_cursor *c, t_arg *argument)
 	arg1 = argument[0];
 	arg2 = argument[1];
 	if (arg1.type == T_IND)
-		c->registry[arg2.value - 1] = get_bytes(ARENA, get_arena_index(c->position, arg1.value % MEM_SIZE), 4);
+		c->registry[arg2.value - 1] = get_bytes(ARENA, get_arena_index(c->position, arg1.value), 4);
 	else if (arg1.type == T_DIR)
 		c->registry[arg2.value - 1] = arg1.value;
 	if (c->registry[arg2.value - 1] == 0)
