@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 12:15:46 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/14 17:07:59 by rvan-ket      ########   odam.nl         */
+/*   Updated: 2020/01/14 18:20:11 by rvan-ket      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define	PLAYER4_C	COLOR_RED
 # define	VISUAL		vm->visual
 # define	ATTR		A_STANDOUT
-# define	SLEEP		25000 // 0.025 sec
+# define	SLEEP		250 // 0.025 sec
 
 typedef struct s_vm		t_vm;
 typedef struct s_cursor	t_cursor;

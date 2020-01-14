@@ -34,6 +34,9 @@ CORE_SRCS_FILES		=	main.c \
 						check_op.c \
 						misc.c \
 						operations.c \
+						operations2.c \
+						operations3.c \
+						operations4.c \
 						$(VIS_SRCS_FILES) \
 						debug.c #DELETE ME LATER \
 
