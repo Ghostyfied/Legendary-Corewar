@@ -317,7 +317,7 @@ void	do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size)
 		ft_fork(vm, cursor, args, MEM_SIZE); // √ CURSOR DUPLICATES
 	else if (opcode == 16)
 		aff(vm, cursor, args); // √
-	if (opcode != ZJUMP || (opcode == ZJUMP && !cursor->carry)) // IMPORTANT, IF CARRY == 0, MOET IE DAN WEL HIER MOVEN?!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	if (opcode != ZJUMP || (opcode == ZJUMP && !cursor->carry))
 		move_cursor(vm, cursor, size);
 	free(args);	
 }
