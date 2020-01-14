@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:24:50 by fhignett       #+#    #+#                */
-/*   Updated: 2019/12/19 16:53:58 by rvan-ket      ########   odam.nl         */
+/*   Updated: 2020/01/14 15:02:28 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void		get_operation(t_operation **head, char *operation)
 	char	**args;
 
 	i = chr_idx(operation, LABEL_CHAR);
-	i = i && operation[i - 2] == '%' ? 0 : i;
+	i = i && operation[i - 2] == DIRECT_CHAR ? 0 : i;
 	i = operation[i] == ' ' ? i + 1 : i;
 	size = chr_idx(&operation[i], ' ') - 1;
 	(*head)->op = check_operation(&operation[i], size);

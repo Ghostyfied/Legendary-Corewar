@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 14:38:02 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/13 17:36:02 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/14 13:57:33 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void			game(t_vm *vm)
 {
 	int cycles;
 
-	// vm->vflag = 1; /////////
+	vm->vflag = 1; /////////
 	if (vm->vflag)
 		init_vis(vm);
 	cycles = 0;
@@ -85,11 +85,12 @@ void			game(t_vm *vm)
 		{
 			GAME->checks++;
 			check_cursors_live(vm, cycles);
-			if (GAME->live_counter >= NBR_LIVE || GAME->checks > MAX_CHECKS)
+			if (GAME->live_counter >= NBR_LIVE || GAME->checks >= MAX_CHECKS)
 			{
 				GAME->cycles_to_die -= CYCLE_DELTA;
 				GAME->checks = 0;
 			}
+			GAME->check_counter += GAME->cycles_to_die;
 			GAME->live_counter = 0;
 			cycles = 0;
 		}

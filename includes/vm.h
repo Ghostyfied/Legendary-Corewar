@@ -52,6 +52,7 @@ typedef struct			s_game
 	int					cycles_counter;
 	int					live_counter;
 	int					cycles_to_die;
+	int					check_counter;
 	int					checks;
 	int					cursors_count; /* Total cursor amount */
 	long				cursors_id;

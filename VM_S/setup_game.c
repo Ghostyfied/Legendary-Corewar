@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 15:51:45 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/09 15:47:04 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/14 13:36:23 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void			setup_game(t_vm *vm)
 	GAME = MEM(t_game);
 	GAME->winner = vm->champion_count;
 	GAME->cycles_to_die = CYCLE_TO_DIE;
+	GAME->check_counter = CYCLE_TO_DIE;
 	GAME->cursors_id = 1;
 	GAME->cursors_count = vm->champion_count;
 	setup_cursors(vm);

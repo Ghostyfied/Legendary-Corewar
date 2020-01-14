@@ -41,20 +41,33 @@ void	info_vis(t_vm *vm, WINDOW *win)
 {
 	char *cycles;
 	char *cursors;
+	char *check;
 	int y;
 	int x;
 	int i;
-	
+
 	mvwaddstr(win, 5, 10, "RUNNING");
 	y = 10;
 	x = 10;
+
 	wmove(win, y, x);
 	waddstr(win, "Cycles\t: ");
 	cycles = ft_itoa(GAME->cycles_counter);
-	free(cycles);
 	waddstr(win, cycles);
+	free(cycles);
 
-	y += 2;
+	wmove(win, y + 2, x);
+	waddstr(win, "Check at\t: ");
+	check = ft_itoa(GAME->check_counter);
+	waddstr(win, check);
+	free(check);
+	wmove(win, y + 3, x);
+	waddstr(win, "Check every\t: ");
+	check = ft_itoa(GAME->cycles_to_die);
+	waddstr(win, check);
+	free(check);
+
+	y += 5;
 	wmove(win, y, x);
 	waddstr(win, "Cursors\t: ");
 	cursors = ft_itoa(GAME->cursors_count);

@@ -4,19 +4,16 @@
 
 
  /*nog niet getest */
-void	live(t_vm *vm, t_cursor *c, t_arg *argument)
+void	live(t_vm *vm, t_cursor *c, t_arg *arg)
 {
-	int r1;
-
-	r1 = c->registry[0] * -1;
-	if (r1 > 0 && r1 <= vm->champ_nb && -r1 == argument->value)
+	arg->value = -arg->value;
+	c->last_live = vm->game->cycles_counter;
+	if (arg->value > 0 && arg->value <= vm->champ_nb)
 	{
-		GAME->winner = r1;
-		vm->champs[r1 - 1].lives++;
-		c->last_live = vm->game->cycles_counter;
-		vm->champs[r1 - 1].last_live = c->last_live;
-		GAME->live_counter++;
-		GAME->winner = r1;
+		CHAMPS[arg->value - 1].lives++;
+		CHAMPS[arg->value - 1].last_live = c->last_live;
+		GAME->winner = arg->value;
+		GAME->live_counter++; // HIER OF BUITEN DE IF STATEMENT???
 	}
 	
 }
