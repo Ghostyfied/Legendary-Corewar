@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 14:38:02 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/14 16:51:33 by rvan-ket      ########   odam.nl         */
+/*   Updated: 2020/01/14 17:07:42 by rvan-ket      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void			game(t_vm *vm)
 			GAME->check_counter += GAME->cycles_to_die;
 			GAME->live_counter = 0;
 			cycles = 0;
+			if (vm->vflag)
+				reset_champ_lives(CHAMPS, vm->champion_count);
 		}
 		if (vm->vflag)
 			refresh_windows(vm, VISUAL->arena_win, VISUAL->info_win);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   info.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/01/14 16:39:15 by fhignett       #+#    #+#                */
+/*   Updated: 2020/01/14 16:54:19 by fhignett      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vm.h"
 
 void	paused(WINDOW *win)
@@ -11,30 +23,38 @@ void	paused(WINDOW *win)
 
 void	champ_info(t_champ champ, int y, int x, WINDOW *win)
 {
-	char	*last_live;
-	char	*total_lives;
+	char	*info;
 
-	wmove(win, y, x);
-	waddstr(win, "Player ");
+	mvwaddstr(win, y, x, "Player ");
 	waddch(win, champ.id + '0');
 	waddstr(win, "\t: ");
 	wattron(win, COLOR_PAIR(champ.id));
 	waddstr(win, champ.name);
 	wattroff(win, COLOR_PAIR(champ.id));
-	wmove(win, y + 2, x);
-	waddstr(win, "Last Live\t: ");
-	last_live = ft_itoa(champ.last_live);
+	mvwaddstr(win, y + 2, x, "Last Live\t: ");
+	info = ft_itoa(champ.last_live);
 	wattron(win, COLOR_PAIR(champ.id));
-	waddstr(win, last_live);
+	waddstr(win, info);
 	wattroff(win, COLOR_PAIR(champ.id));
-	free(last_live);
-	wmove(win, y + 3, x);
-	waddstr(win, "Total Lives\t: ");
-	total_lives = ft_itoa(champ.lives);
+	free(info);
+	mvwaddstr(win, y + 3, x, "Current Lives\t: ");
+	info = ft_itoa(champ.lives);
 	wattron(win, COLOR_PAIR(champ.id));
-	waddstr(win, total_lives);
+	waddstr(win, info);
 	wattroff(win, COLOR_PAIR(champ.id));
-	free(total_lives);
+	free(info);
+}
+
+void	reset_champ_lives(t_champ *champs, int champ_count)
+{
+	int i;
+
+	i = 0;
+	while (i < champ_count)
+	{
+		champs[i].lives = 0;
+		i++;
+	}
 }
 
 void	info_vis(t_vm *vm, WINDOW *win)
