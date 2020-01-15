@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/14 17:26:37 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/15 16:12:02 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/15 16:21:52 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void			init_colours(void)
 	init_pair(7, COLOR_BLACK, PLAYER3_C);
 	init_pair(8, COLOR_BLACK, PLAYER4_C);
 	init_pair(9, COLOR_BLACK, COLOR_WHITE);
+	init_pair(10, COLOR_WHITE, COLOR_BLACK);
 }
 
 static	void	init_arena(t_visualizer *vis)
@@ -57,7 +58,9 @@ static	void	init_arena(t_visualizer *vis)
 			wmove(vis->arena_win, i, 1);
 			i++;
 		}
+		wattron(vis->arena_win, COLOR_PAIR(10));
 		waddstr(vis->arena_win, " 00");
+		wattroff(vis->arena_win, COLOR_PAIR(10));
 		j++;
 	}
 }
