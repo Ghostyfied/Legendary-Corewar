@@ -6,7 +6,7 @@
 /*   By: tide-jon <tide-jon@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/06 16:04:41 by tide-jon       #+#    #+#                */
-/*   Updated: 2020/01/09 14:16:39 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/15 13:08:42 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,5 @@ int				ft_abs(int num)
 {
 	if (num < 0)
 		num *= -1;
-	return (num);	
+	return (num);
 }

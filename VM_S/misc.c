@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 14:35:54 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/14 17:59:49 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/15 13:27:15 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,5 @@ void		move_cursor(t_vm *vm, t_cursor *c, int move)
 	c->position = get_arena_index(old_pos, move);
 	c->moved = true;
 	if (vm->vflag)
-		highlight_cursor(vm, old_pos, c->position, ATTR); // HIGHLIGHT CURSOR
+		highlight_cursor(vm, old_pos, c->position, ATTR);
 }

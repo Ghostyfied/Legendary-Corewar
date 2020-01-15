@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:06:32 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/15 12:38:22 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/15 13:07:06 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static void	make_file(char **champion, char *new_filename, t_asm *asm_info)
 	close(fd);
 }
 
-int			main(int argc, char **argv) // IF .s FILE HAS NO CODE SEGFAULT
+int			main(int argc, char **argv)
 {
 	int		res;
 	char	*new_file_ext;

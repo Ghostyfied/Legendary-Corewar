@@ -6,7 +6,7 @@
 /*   By: rvan-ket <rvan-ket@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/14 17:25:14 by rvan-ket       #+#    #+#                */
-/*   Updated: 2020/01/15 12:51:22 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/15 13:28:05 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ void	do_op_next(t_vm *vm, t_cursor *cursor, t_arg *args, int size)
 	int	opcode;
 
 	opcode = cursor->opcode;
-	if (opcode == 10)
+	if (opcode == 9)
+		zjmp(vm, cursor, args);
+	else if (opcode == 10)
 		ldi(vm, cursor, args);
 	else if (opcode == 11)
 		sti(vm, cursor, args);
@@ -54,8 +56,6 @@ void	do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size)
 		or(vm, cursor, args);
 	else if (opcode == 8)
 		xor(vm, cursor, args);
-	else if (opcode == 9)
-		zjmp(vm, cursor, args);
 	else
 		do_op_next(vm, cursor, args, size);
 	if (opcode != ZJUMP || (opcode == ZJUMP && !cursor->carry))

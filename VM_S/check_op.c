@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 15:20:46 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/14 17:06:47 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/15 13:33:42 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ static t_arg	*get_args(t_cursor *c, t_byte octal, t_byte *arena)
 	while (i < g_op_tab[c->opcode].nb_arg)
 	{
 		args[i] = get_arg(c->opcode, ((octal >> shift) & 3));
-		args[i].value = get_bytes(arena, get_arena_index(c->position, op_idx), args[i].size);
+		args[i].value =
+		get_bytes(arena, get_arena_index(c->position, op_idx), args[i].size);
 		shift -= 2;
 		op_idx += args[i].size;
 		i++;
@@ -99,10 +100,7 @@ static void		check_octal_code(t_vm *vm, t_cursor *c)
 	octal = ARENA[get_arena_index(c->position, 1)];
 	size = get_size(c->opcode, octal, g_op_tab[c->opcode].nb_arg) + 2;
 	if (!octal_valid(octal, g_op_tab[c->opcode].nb_arg))
-	{
-		move_cursor(vm, c, size);
-		return ;
-	}
+		return (move_cursor(vm, c, size));
 	args = get_args(c, octal, ARENA);
 	i = 0;
 	while (i < g_op_tab[c->opcode].nb_arg)
@@ -111,8 +109,7 @@ static void		check_octal_code(t_vm *vm, t_cursor *c)
 			|| !(args[i].type & g_op_tab[c->opcode].args[i]))
 		{
 			free(args);
-			move_cursor(vm, c, size);
-			return ;
+			return (move_cursor(vm, c, size));
 		}
 		i++;
 	}
@@ -136,7 +133,8 @@ void			execute_op(t_vm *vm, t_cursor *c)
 		args = MEM(t_arg);
 		size = 1 + g_op_tab[c->opcode].dir_size;
 		args->size = g_op_tab[c->opcode].dir_size;
-		args->value = get_bytes(ARENA, get_arena_index(c->position, 1), args->size);
+		args->value =
+		get_bytes(ARENA, get_arena_index(c->position, 1), args->size);
 		args->type = T_DIR;
 		do_op(vm, c, args, size);
 	}

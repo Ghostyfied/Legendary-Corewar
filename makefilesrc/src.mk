@@ -3,7 +3,7 @@ COMM_SRCS_FILES		=	op.c \
 						swap.c \
 						valid.c \
 						hex.c \
-						code.c \
+						code.c
 
 ASM_SRCS_FILES		=	main.c \
 						read_file.c \
@@ -16,7 +16,7 @@ ASM_SRCS_FILES		=	main.c \
 						hex.c \
 						misc.c \
 						free_shizzl.c \
-						arg.c \
+						arg.c
 
 CORE_SRCS_FILES		=	main.c \
 						validate_format.c \
@@ -37,18 +37,17 @@ CORE_SRCS_FILES		=	main.c \
 						operations2.c \
 						operations3.c \
 						operations4.c \
-						$(VIS_SRCS_FILES) \
-						debug.c #DELETE ME LATER \
+						$(VIS_SRCS_FILES)
 
 VIS_SRCS_FILES		=	visualizer/visualizer.c \
 						visualizer/info.c \
 						visualizer/init.c \
-						visualizer/misc.c \
+						visualizer/misc.c
 
 DIS_SRCS_FILES		=	main.c \
 						decode_code.c \
 						read_file.c \
-						structs.c \
+						structs.c
 
 ASM_HEADERS_FILES	=	communal.h asm.h op.h
 

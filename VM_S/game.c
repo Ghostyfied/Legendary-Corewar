@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 14:38:02 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/14 18:35:49 by rvan-ket      ########   odam.nl         */
+/*   Updated: 2020/01/15 13:26:32 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,26 @@ static void		check_cursors_live(t_vm *vm, int cycles)
 	}
 }
 
+static int		perform_check(t_vm *vm, int cycles)
+{
+	GAME->checks++;
+	check_cursors_live(vm, cycles);
+	if (GAME->live_counter >= NBR_LIVE || GAME->checks >= MAX_CHECKS)
+	{
+		GAME->cycles_to_die -= CYCLE_DELTA;
+		GAME->checks = 0;
+	}
+	GAME->check_counter += GAME->cycles_to_die;
+	GAME->live_counter = 0;
+	if (vm->vflag)
+		reset_champ_lives(CHAMPS, vm->champion_count);
+	return (0);
+}
+
 void			game(t_vm *vm)
 {
 	int cycles;
 
-	// vm->vflag = 1; /////////
 	if (vm->vflag)
 		init_vis(vm);
 	cycles = 0;
@@ -82,20 +97,7 @@ void			game(t_vm *vm)
 		GAME->cycles_counter++;
 		cursor_operations(vm);
 		if (GAME->cycles_to_die < 1 || cycles == GAME->cycles_to_die)
-		{
-			GAME->checks++;
-			check_cursors_live(vm, cycles);
-			if (GAME->live_counter >= NBR_LIVE || GAME->checks >= MAX_CHECKS)
-			{
-				GAME->cycles_to_die -= CYCLE_DELTA;
-				GAME->checks = 0;
-			}
-			GAME->check_counter += GAME->cycles_to_die;
-			GAME->live_counter = 0;
-			cycles = 0;
-			if (vm->vflag)
-				reset_champ_lives(CHAMPS, vm->champion_count);
-		}
+			cycles = perform_check(vm, cycles);
 		if (vm->vflag)
 			refresh_windows(vm, VISUAL->arena_win, VISUAL->info_win);
 	}

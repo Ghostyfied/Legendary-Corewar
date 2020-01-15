@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:24:50 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/15 12:47:16 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/15 13:07:18 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,6 @@ void			parse(char **champion, t_asm **asm_info)
 
 	head = NULL;
 	i = get_name_comm(champion, asm_info);
-	if (!champion[i])
-		ft_error("No champion code located");
 	delete_comments(&champion[i], COMMENT_CHAR);
 	delete_comments(&champion[i], ALT_COMMENT_CHAR);
 	champion = delete_empty_lines(champion, &i);

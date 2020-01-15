@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:16:26 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/15 12:39:54 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/15 13:07:31 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,5 +126,7 @@ int			get_name_comm(char **champion, t_asm **asm_info)
 	i++;
 	while (champion[i] && is_empty(champion[i]))
 		i++;
+	if (!champion[i])
+		ft_error("No champion code located");
 	return (i);
 }

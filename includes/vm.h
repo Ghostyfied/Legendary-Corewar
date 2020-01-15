@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   vm.h                                               :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/01/15 12:55:16 by fhignett       #+#    #+#                */
+/*   Updated: 2020/01/15 13:00:13 by fhignett      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef VM_H
 # define VM_H
 
@@ -24,7 +36,7 @@ typedef struct			s_arg
 typedef struct			s_cursor
 {
 	long				id;
-	int					moved; /* To check if cursor has moved last round, init with true */
+	int					moved;
 	int					carry;
 	int					opcode;
 	int					last_live;
@@ -38,7 +50,7 @@ typedef struct			s_cursor
 typedef struct			s_champ
 {
 	int					id;
-	int					code_size; /* Size of champions code */
+	int					code_size;
 	char				*name;
 	char				*comment;
 	int					lives;
@@ -48,24 +60,24 @@ typedef struct			s_champ
 
 typedef struct			s_game
 {
-	int					winner; /* This is the variable showing the winner. It is initialised with the highest player id, and is updated every time operation live is performed. */
+	int					winner;
 	int					cycles_counter;
 	int					live_counter;
 	int					cycles_to_die;
 	int					check_counter;
 	int					checks;
-	int					cursors_count; /* Total cursor amount */
+	int					cursors_count;
 	long				cursors_id;
 	t_cursor			*cursors;
 }						t_game;
 
 typedef struct			s_vm
 {
-	int					arg_idx; /* Argument index */
-	int					*tab; /* Used for Champion positon in array */
-	int					champion_count; /* Amount of Champions */
-	int					champ_nb; /* Current index of Champs in array */
-	int					champ_position; /* Position to multiply for champions in arena */
+	int					arg_idx;
+	int					*tab;
+	int					champion_count;
+	int					champ_nb;
+	int					champ_position;
 	int					dump;
 	int					vflag;
 	t_visualizer		*visual;
@@ -74,7 +86,8 @@ typedef struct			s_vm
 	t_game				*game;
 }						t_vm;
 
-void					check_champion_position(t_champ *champs, int champ_count);
+void					check_champion_position(t_champ *champs,
+						int champ_count);
 void					count_champions(t_vm *vm, char **argv);
 void					assign_champ_num(t_vm *vm, int argc, char **argv);
 void					ft_arrdel(char **arr);
@@ -90,12 +103,13 @@ void					dump32(t_vm *vm);
 void					game(t_vm *vm);
 void					free_cursors(t_cursor *cursor);
 void					execute_op(t_vm *vm, t_cursor *c);
-void					do_op(t_vm *vm, t_cursor *cursor, t_arg *args, int size);
+void					do_op(t_vm *vm, t_cursor *cursor,
+						t_arg *args, int size);
 void					put_value(t_byte *arena, int idx, void *value);
 void					move_cursor(t_vm *vm, t_cursor *c, int move);
-void					retreive_flags_helper(int argc, char **argv, int i, t_vm *vm);
+void					retreive_flags_helper(int argc, char **argv,
+						int i, t_vm *vm);
 void					parse_number(t_vm *vm, char *num);
-
 
 int						parse_number_helper(int i, t_vm *vm);
 int						ft_arrlen(char **tab);
@@ -110,7 +124,6 @@ t_cursor				*new_cursor(int	position, int r1, long id);
 t_cursor				*copy_cursor(t_cursor *src, int position, long id);
 t_cursor				*delete_cursor(t_cursor *head, long cursor_id);
 
-
 void					live(t_vm *vm, t_cursor *c, t_arg *arg);
 void					ld(t_vm *vm, t_cursor *c, t_arg *argument);
 void					st(t_vm *vm, t_cursor *c, t_arg *argument);
@@ -120,28 +133,14 @@ void					sub(t_vm *vm, t_cursor *c, t_arg *argument);
 void					and(t_vm *vm, t_cursor *c, t_arg *argument);
 void					or(t_vm *vm, t_cursor *c, t_arg *argument);
 void					xor(t_vm *vm, t_cursor *c, t_arg *argument);
-void 					zjmp(t_vm *vm, t_cursor *c, t_arg *argument);
+void					zjmp(t_vm *vm, t_cursor *c, t_arg *argument);
 void					ldi(t_vm *vm, t_cursor *c, t_arg *argument);
 
 void					sti(t_vm *vm, t_cursor *c, t_arg *argument);
 void					lld(t_vm *vm, t_cursor *c, t_arg *argument);
 void					lldi(t_vm *vm, t_cursor *c, t_arg *argument);
 void					aff(t_vm *vm, t_cursor *c, t_arg *argument);
-void					ft_fork(t_vm *vm, t_cursor *c, t_arg *argument, int modulo);
-
-
-/*
-** ****************************** DEBUG ******************************
-*/
-
-void					print_byte(const void *byte, size_t size);
-void					print_champions(t_champ *champs, int champ_nb);
-void					print_cursor(t_cursor *cursor, int reg);
-void					print_cursors(t_cursor *cursors, int reg);
-void					print_arg(t_arg *args, int nb_arg);
-
-/*
-** ****************************** DEBUG ******************************
-*/
+void					ft_fork(t_vm *vm, t_cursor *c, t_arg *argument,
+						int modulo);
 
 #endif
