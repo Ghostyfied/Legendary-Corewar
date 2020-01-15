@@ -2,8 +2,5 @@
 
 .comment	"test test"
 
+# COMMENT
 
-		live	%-1
-		ld	%0, r2
-		lldi %3, %3, r2 
-		zjmp %:dit

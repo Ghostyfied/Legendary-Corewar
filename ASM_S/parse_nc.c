@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:16:26 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/14 18:13:04 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/15 12:39:54 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ int			get_name_comm(char **champion, t_asm **asm_info)
 		i++;
 	}
 	i++;
-	while (is_empty(champion[i]))
+	while (champion[i] && is_empty(champion[i]))
 		i++;
 	return (i);
 }
