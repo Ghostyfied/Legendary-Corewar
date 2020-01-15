@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/15 12:54:13 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/15 12:54:14 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/15 16:37:36 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void					arg_exc_code(t_operation *tmp,
 void					get_arg_type(t_operation **op, int size);
 void					delete_comments(char **champion, char comment_char);
 void					free_labels(t_label *label);
+void					ft_usage(char *name);
 
 int						make_exc_code(t_operation **op, int *size);
 int						get_name_comm(char **champion, t_asm **asm_info);

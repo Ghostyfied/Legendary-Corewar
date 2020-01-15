@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:50:34 by fhignett       #+#    #+#                */
-/*   Updated: 2019/12/16 14:58:37 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/15 16:37:56 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 ** T_IND = 11 (3)
 */
 
-int	get_encoding_byte(t_arg *args)
+int		get_encoding_byte(t_arg *args)
 {
 	t_byte	byte;
 	int		arg;
@@ -40,7 +40,7 @@ int	get_encoding_byte(t_arg *args)
 ** If not found index 0 is returned.
 */
 
-int	chr_idx(char *s, int c)
+int		chr_idx(char *s, int c)
 {
 	int i;
 
@@ -62,7 +62,7 @@ int	chr_idx(char *s, int c)
 ** Returns operation code
 */
 
-int	check_operation(char *s, int size)
+int		check_operation(char *s, int size)
 {
 	int i;
 
@@ -75,4 +75,10 @@ int	check_operation(char *s, int size)
 	}
 	ft_printf("ERROR OCCURRED AT : -> %s <-\n", s);
 	return (0);
+}
+
+void	ft_usage(char *name)
+{
+	ft_printf("Usage: %s\t<file.s>\n", name);
+	exit(1);
 }

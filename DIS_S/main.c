@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 16:07:50 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/08 18:23:48 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/15 16:40:28 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,22 @@ static void		make_file(t_champ *champ, char *new_filename)
 	close(fd);
 }
 
+static void		ft_usage(char *name)
+{
+	ft_printf("Usage: %s\t<file.cor>\n", name);
+	exit(1);
+}
+
 int				main(int argc, char **argv)
 {
 	char	*new_file_ext;
 	t_champ	*champ;
 
 	if (argc < 2 || argc > 3)
-		ft_error("Usage:");
+		ft_usage(argv[0]);
 	new_file_ext = ft_check_filename(argv[1]);
 	if (!new_file_ext)
-		ft_error("Can not read file");
+		ft_usage(argv[0]);
 	champ = MEM(t_champ);
 	read_file(champ, argv[1]);
 	make_file(champ, new_file_ext);
