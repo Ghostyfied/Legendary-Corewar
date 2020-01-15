@@ -20,9 +20,9 @@ fi
 mkdir -p compare
 for (( i=0; i <= $CYCLES; i+=1000))
 do
-	./corewar -d $i $@ | sed -n -e '/^0x/p' > compare/temp_output1
-	./vm_champs/corewar $@ -d $i | sed -n -e'/^0x/p' > compare/temp_output2
-	if ! cmp -s "temp_output1" "temp_output2"; then
+	./../corewar -d $i $@ | sed -n -e '/^0x/p' > compare/temp_output1
+	./../vm_champs/corewar $@ -d $i | sed -n -e'/^0x/p' > compare/temp_output2
+	if ! cmp -s "compare/temp_output1" "compare/temp_output2"; then
 		printf '\033[0;31mmemory is NOT the same at cycle %s\n\033[0m' "$i" ; exit 1
 	fi
 done
