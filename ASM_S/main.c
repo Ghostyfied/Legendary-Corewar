@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:06:32 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/15 16:35:05 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/15 17:05:54 by rvan-ket      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	make_file(char **champion, char *new_filename, t_asm *asm_info)
 	if (fd < 0)
 		ft_error(strerror(errno));
 	ft_printf("Writing output program to %s\n", new_filename);
-	puthex(get_hex(COREWAR_EXEC_MAGIC, 4), fd);
+	puthex("0xea83f3", fd);
 	puthex(asm_info->name, fd);
 	puthex("00000000", fd);
 	exec_size = get_hex(asm_info->exec_code_size, 4);
