@@ -110,6 +110,26 @@ t_cursor				*new_cursor(int	position, int r1, long id);
 t_cursor				*copy_cursor(t_cursor *src, int position, long id);
 t_cursor				*delete_cursor(t_cursor *head, long cursor_id);
 
+
+void					live(t_vm *vm, t_cursor *c, t_arg *arg);
+void					ld(t_vm *vm, t_cursor *c, t_arg *argument);
+void					st(t_vm *vm, t_cursor *c, t_arg *argument);
+void					add(t_vm *vm, t_cursor *c, t_arg *argument);
+void					sub(t_vm *vm, t_cursor *c, t_arg *argument);
+
+void					and(t_vm *vm, t_cursor *c, t_arg *argument);
+void					or(t_vm *vm, t_cursor *c, t_arg *argument);
+void					xor(t_vm *vm, t_cursor *c, t_arg *argument);
+void 					zjmp(t_vm *vm, t_cursor *c, t_arg *argument);
+void					ldi(t_vm *vm, t_cursor *c, t_arg *argument);
+
+void					sti(t_vm *vm, t_cursor *c, t_arg *argument);
+void					lld(t_vm *vm, t_cursor *c, t_arg *argument);
+void					lldi(t_vm *vm, t_cursor *c, t_arg *argument);
+void					aff(t_vm *vm, t_cursor *c, t_arg *argument);
+void					ft_fork(t_vm *vm, t_cursor *c, t_arg *argument, int modulo);
+
+
 /*
 ** ****************************** DEBUG ******************************
 */
