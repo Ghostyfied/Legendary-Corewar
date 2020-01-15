@@ -1,6 +1,3 @@
-#!/bin/bash
-
-rm -rf compare
 mkdir -p compare
 
 filename="${1%.*}"

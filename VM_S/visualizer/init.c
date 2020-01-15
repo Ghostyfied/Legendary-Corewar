@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/14 17:26:37 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/14 17:52:28 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/15 16:12:02 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void			end_vis(t_vm *vm)
 void			refresh_windows(t_vm *vm, WINDOW *arena_win, WINDOW *info_win)
 {
 	info_vis(vm, info_win);
+	update_copied(vm);
 	curs_set(0);
 	wrefresh(arena_win);
 	wrefresh(info_win);
@@ -31,10 +32,15 @@ void			refresh_windows(t_vm *vm, WINDOW *arena_win, WINDOW *info_win)
 
 void			init_colours(void)
 {
-	init_pair(1, PLAYER1_C, -1);
-	init_pair(2, PLAYER2_C, -1);
-	init_pair(3, PLAYER3_C, -1);
-	init_pair(4, PLAYER4_C, -1);
+	init_pair(1, PLAYER1_C, COLOR_BLACK);
+	init_pair(2, PLAYER2_C, COLOR_BLACK);
+	init_pair(3, PLAYER3_C, COLOR_BLACK);
+	init_pair(4, PLAYER4_C, COLOR_BLACK);
+	init_pair(5, COLOR_BLACK, PLAYER1_C);
+	init_pair(6, COLOR_BLACK, PLAYER2_C);
+	init_pair(7, COLOR_BLACK, PLAYER3_C);
+	init_pair(8, COLOR_BLACK, PLAYER4_C);
+	init_pair(9, COLOR_BLACK, COLOR_WHITE);
 }
 
 static	void	init_arena(t_visualizer *vis)

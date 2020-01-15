@@ -6,7 +6,7 @@
 /*   By: awehlbur <awehlbur@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/18 15:31:05 by awehlbur       #+#    #+#                */
-/*   Updated: 2020/01/10 14:54:33 by awehlbur      ########   odam.nl         */
+/*   Updated: 2020/01/15 13:53:10 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void		check_valid_input(char **argv, int argc)
 	while (i < argc)
 	{
 		if (ft_strequ(argv[i], "-n") || ft_strequ(argv[i], "-d") \
+			|| ft_strequ(argv[i], "-v") \
 			|| (ft_validate_format("%d", argv[i]) && \
 				ft_strequ(argv[i - 1], "-n")) \
 			|| (ft_validate_format("%d", argv[i]) && \
@@ -105,8 +106,10 @@ void		retrieve_flags(t_vm *vm, int argc, char **argv)
 				ft_error("That is not a valid number for the hexdump");
 			vm->dump = ft_atoi(argv[i + 1]);
 		}
-		if (ft_strequ(argv[i], "-n"))
+		else if (ft_strequ(argv[i], "-n"))
 			retreive_flags_helper(argc, argv, i, vm);
+		else if (ft_strequ(argv[i], "-v"))
+			vm->vflag = true;
 		i++;
 	}
 	get_champions_noflag(vm, argc, argv);

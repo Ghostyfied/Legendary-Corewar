@@ -6,7 +6,7 @@
 /*   By: rvan-ket <rvan-ket@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/14 17:32:00 by rvan-ket       #+#    #+#                */
-/*   Updated: 2020/01/14 17:43:03 by rvan-ket      ########   odam.nl         */
+/*   Updated: 2020/01/15 16:09:07 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,5 @@ void	ft_fork(t_vm *vm, t_cursor *c, t_arg *argument, int modulo)
 	GAME->cursors_id++;
 	GAME->cursors_count++;
 	if (vm->vflag)
-		highlight_cursor(vm, -1, curr->position, ATTR);
+		highlight_cursor(vm, -1, curr->position);
 }

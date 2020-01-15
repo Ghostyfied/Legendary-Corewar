@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 12:15:46 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/15 12:55:11 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/15 16:10:31 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # define PLAYER3_C		COLOR_BLUE
 # define PLAYER4_C		COLOR_RED
 # define VISUAL			vm->visual
-# define ATTR			A_STANDOUT
 # define SLEEP			20000
+# define COPIED_CYCLES	50
 
 typedef struct s_vm		t_vm;
 typedef struct s_cursor	t_cursor;
@@ -37,6 +37,7 @@ typedef struct			s_visualizer
 	WINDOW				*arena_win;
 	WINDOW				*info_win;
 	t_byte				carena[MEM_SIZE];
+	t_byte				copied[MEM_SIZE];
 }						t_visualizer;
 
 void					visualizer(t_vm *vm, WINDOW *arena_win);
@@ -46,9 +47,10 @@ void					end_vis(t_vm *vm);
 void					refresh_windows(t_vm *vm, WINDOW *arena_win,
 						WINDOW *info_win);
 void					get_xy(int index, int *y, int *x);
-void					highlight_cursor(t_vm *vm, int prev, int pos, int attr);
+void					highlight_cursor(t_vm *vm, int prev, int pos);
 void					update_arena(t_vm *vm, int pos, int colour);
 void					paused(WINDOW *win);
 void					reset_champ_lives(t_champ *champs, int champ_count);
+void					update_copied(t_vm *vm);
 
 #endif

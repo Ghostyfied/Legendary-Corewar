@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/14 17:32:18 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/14 17:55:32 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/15 16:09:40 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void			visualizer(t_vm *vm, WINDOW *win)
 	while (i < vm->champion_count)
 	{
 		put_code(vm, win, i);
-		highlight_cursor(vm, -1, CHAMPS[i].starting_pos, ATTR);
+		highlight_cursor(vm, -1, CHAMPS[i].starting_pos);
 		i++;
 	}
 }

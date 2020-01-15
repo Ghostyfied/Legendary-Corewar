@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 14:38:02 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/15 13:26:32 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/15 16:08:28 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void		check_cursors_live(t_vm *vm, int cycles)
 			c->last_live <= (GAME->cycles_counter - cycles))
 		{
 			if (vm->vflag)
-				highlight_cursor(vm, c->position, -1, 0);
+				highlight_cursor(vm, c->position, -1);
 			CURSORS = delete_cursor(CURSORS, c->id);
 			GAME->cursors_count--;
 		}

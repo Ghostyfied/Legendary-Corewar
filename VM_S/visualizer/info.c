@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/14 16:39:15 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/14 17:57:14 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/15 14:59:16 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void			paused(WINDOW *win)
 {
-	mvwaddstr(win, 5, 10, "PAUSED ");
+	mvwaddstr(win, 5, 25, "PAUSED ");
 	curs_set(0);
 	wrefresh(win);
 	while (getch() != ' ')
@@ -88,7 +88,10 @@ void			info_vis(t_vm *vm, WINDOW *win)
 	int i;
 	int y;
 
-	mvwaddstr(win, 5, 10, "RUNNING");
+	wattron(win, A_BOLD);
+	mvwaddstr(win, 4, 25, "COREWAR");
+	wattroff(win, A_BOLD);
+	mvwaddstr(win, 5, 25, "RUNNING");
 	put_info(vm, win);
 	i = 0;
 	y = 20;
