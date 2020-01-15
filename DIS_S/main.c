@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 16:07:50 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/15 16:40:28 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/15 17:11:43 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,6 @@ int				main(int argc, char **argv)
 	champ = MEM(t_champ);
 	read_file(champ, argv[1]);
 	make_file(champ, new_file_ext);
+	free(new_file_ext);
 	return (0);
 }

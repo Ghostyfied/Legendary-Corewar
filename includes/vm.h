@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/15 12:55:16 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/15 13:00:13 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/15 17:24:01 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ void					add_cursor(t_cursor **head, t_cursor *new);
 void					play_game(t_vm *vm);
 void					free_vm(t_vm *vm);
 void					dump64(t_vm *vm);
-void					dump32(t_vm *vm);
 void					game(t_vm *vm);
 void					free_cursors(t_cursor *cursor);
 void					execute_op(t_vm *vm, t_cursor *c);
@@ -110,6 +109,7 @@ void					move_cursor(t_vm *vm, t_cursor *c, int move);
 void					retreive_flags_helper(int argc, char **argv,
 						int i, t_vm *vm);
 void					parse_number(t_vm *vm, char *num);
+void					ft_usage(char *name);
 
 int						parse_number_helper(int i, t_vm *vm);
 int						ft_arrlen(char **tab);

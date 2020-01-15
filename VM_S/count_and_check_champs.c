@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 16:00:54 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/07 17:53:03 by awehlbur      ########   odam.nl         */
+/*   Updated: 2020/01/15 17:24:18 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ void			count_champions(t_vm *vm, char **argv)
 		i++;
 	}
 	if (vm->champion_count > MAX_PLAYERS)
-		ft_error("too many champs omegalul");
+		ft_error("Max 4 players");
 	if (!vm->champion_count)
-		ft_error("no players please put some in");
+		ft_usage(argv[0]);
 	vm->champs = (t_champ*)ft_memalloc(sizeof(t_champ) * vm->champion_count);
 	vm->champ_position = MEM_SIZE / vm->champion_count;
 }

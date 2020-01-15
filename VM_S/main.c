@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 15:53:57 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/15 17:03:06 by rvan-ket      ########   odam.nl         */
+/*   Updated: 2020/01/15 17:23:51 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ static	t_vm	*init_vm(void)
 	return (vm);
 }
 
-static void		ft_usage(char *name)
+void			ft_usage(char *name)
 {
-	ft_printf("Usage: %s [-v | -d n] [-n n] <file.cor> <...>\n", name);
+	ft_printf("Usage: %s [-v | -d (n)] [-n (n)] <file.cor> <...>\n", name);
 	ft_putendl("\n\t-v\t: Visualization, takes priority over -d if both given");
-	ft_putendl("\t-d n\t: Hex dump after n cycles");
-	ft_putendl("\t-n n\t: Indicate which player (n) <file.cor> will be");
+	ft_putendl("\t-d (n)\t: Hex dump after (n) cycles");
+	ft_putendl("\t-n (n)\t: Indicate which player (n) <file.cor> will be");
 	exit(1);
 }
 
