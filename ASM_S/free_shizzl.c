@@ -6,7 +6,7 @@
 /*   By: rvan-ket <rvan-ket@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 17:27:14 by rvan-ket       #+#    #+#                */
-/*   Updated: 2019/12/10 18:04:44 by rvan-ket      ########   odam.nl         */
+/*   Updated: 2020/01/16 12:03:23 by flintlouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	free_labels(t_label *label)
 		label = label->next;
 		free(temp->name);
 		free(temp);
+		temp = NULL;
 	}
 }
 

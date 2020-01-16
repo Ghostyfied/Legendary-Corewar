@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/15 12:54:13 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/15 16:37:36 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/16 13:00:30 by flintlouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct			s_operation
 {
 	int					size_index;
 	t_label				*labels;
+	t_label				*eof_labels;
 	int					op;
 	t_arg				arg[3];
 	char				*executable;
@@ -40,6 +41,7 @@ typedef struct			s_operation
 typedef	struct			s_asm
 {
 	t_operation			*operations;
+	t_label				*eof_labels;
 	int					exec_code_size;
 	char				*name;
 	char				*comment;
@@ -61,6 +63,7 @@ void					get_arg_type(t_operation **op, int size);
 void					delete_comments(char **champion, char comment_char);
 void					free_labels(t_label *label);
 void					ft_usage(char *name);
+void					set_eof_labels(t_operation **op, t_label *eof_labels);
 
 int						make_exc_code(t_operation **op, int *size);
 int						get_name_comm(char **champion, t_asm **asm_info);

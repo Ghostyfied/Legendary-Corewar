@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:24:50 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/15 13:07:18 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/16 13:23:21 by flintlouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static void		get_operation(t_operation **head, char *operation)
 	ft_chararrfree(&args);
 }
 
-static int		parse_champion(char **champion, t_operation **head,
+static int		parse_champion(char **champion, t_asm **asm_info,
 				t_operation **op, int *i)
 {
 	t_label		*labels;
@@ -95,12 +95,12 @@ static int		parse_champion(char **champion, t_operation **head,
 	labels = get_labels(champion, i);
 	if (!champion[*i])
 	{
-		free_labels(labels);
+		if (labels)
+			(*asm_info)->eof_labels = labels;
 		return (0);
 	}
 	*op = new_operation(labels);
 	get_operation(op, champion[*i]);
-	add_operation(head, *op);
 	return (1);
 }
 
@@ -131,10 +131,12 @@ void			parse(char **champion, t_asm **asm_info)
 	name_comm_hexify(asm_info);
 	while (champion[i])
 	{
-		if (!parse_champion(champion, &head, &op, &i))
-			break ;
+		if (!parse_champion(champion, asm_info, &op, &i))
+			break ;	
+		add_operation(&head, op);
 		i++;
 	}
+	set_eof_labels(&head, (*asm_info)->eof_labels);
 	size = (int*)ft_memalloc(sizeof(int) * (op->size_index + 2));
 	calculate_size(head, &size, 0);
 	(*asm_info)->exec_code_size = make_exc_code(&head, size);

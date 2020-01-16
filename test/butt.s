@@ -1,7 +1,14 @@
 .name "Butt"
 .comment "I like banana"
 
-sti r1, %7, %1
-live %0
-ld %0, r2
-zjmp %-19
+loop:
+        sti r1, %:eof, %1
+live:
+        live %0
+        ld %0, r2
+        zjmp %:loop
+end:
+
+eof:
+
+

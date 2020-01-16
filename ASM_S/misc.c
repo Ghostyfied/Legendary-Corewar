@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:50:34 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/15 16:37:56 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/16 13:00:57 by flintlouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,12 @@ void	ft_usage(char *name)
 {
 	ft_printf("Usage: %s\t<file.s>\n", name);
 	exit(1);
+}
+
+void	set_eof_labels(t_operation **op, t_label *eof_labels)
+{
+		if (!eof_labels || !*op || !op)
+			return ;
+		set_eof_labels(&(*op)->next, eof_labels);
+		(*op)->eof_labels = eof_labels;
 }

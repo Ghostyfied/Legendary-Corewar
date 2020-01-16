@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:09:17 by fhignett       #+#    #+#                */
-/*   Updated: 2019/12/11 13:07:07 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/16 13:32:23 by flintlouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,29 @@ static int	calc_bytes_dist(int *size, int label, int arg)
 	return (byte_dist);
 }
 
+static int	check_eof_labels(t_label *eof_labels, char *label, int size_idx, int *size)
+{
+	t_label *lbl;
+	int		value;
+
+	lbl = eof_labels;
+	value = 0;
+	while (lbl)
+	{
+		if (ft_strequ(lbl->name, label))
+		{
+			while (size[size_idx])
+			{
+				value += size[size_idx];
+				size_idx++;
+			}
+			return (value);
+		}
+		lbl = lbl->next;
+	}
+	return (0);
+}
+
 /*
 ** Finds and calculates the amount of bytes from
 ** arg:label to label:operation the cursor has to jump in the VM.
@@ -53,7 +76,11 @@ static int	calc_bytes_dist(int *size, int label, int arg)
 int			find_label(t_operation *op, char *label, int size_idx, int *size)
 {
 	t_label		*lbl;
+	int			value;
 
+	value = check_eof_labels(op->eof_labels, label, size_idx, size);
+	if (value)
+		return (value);
 	while (op)
 	{
 		lbl = op->labels;
