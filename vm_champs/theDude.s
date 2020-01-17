@@ -1,20 +1,16 @@
-.name "Flintinator"
+.name "The dude"
 
 
 
-.comment "first I ping pong the ball, then I bing bong your mom"
+.comment "hey dude check hoe laat het is"
 
 
 
 start:
-live: 
+live:
 	live %1
+    ld %20, r16
+	fork %500
     sti r1, %:live, %1
     ld %0, r16
     zjmp %:live
-bomb:
-    live %1
-    fork %:live
-    live %1
-    fork %:bomb
-    live %1
