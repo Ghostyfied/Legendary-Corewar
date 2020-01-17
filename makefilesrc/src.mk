@@ -47,7 +47,8 @@ VIS_SRCS_FILES		=	visualizer/visualizer.c \
 DIS_SRCS_FILES		=	main.c \
 						decode_code.c \
 						read_file.c \
-						structs.c
+						structs.c \
+						free.c
 
 ASM_HEADERS_FILES	=	communal.h asm.h op.h
 

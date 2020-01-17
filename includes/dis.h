@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/15 12:54:38 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/15 12:57:17 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/17 13:28:59 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct			s_champ
 void					decode_code(int fd, t_champ *champ);
 void					read_file(t_champ *vm, char *file);
 void					add_operation(t_operation **head, t_operation *new);
+void					free_champ(t_champ *champ);
 
 t_operation				*new_operation(int op_code);
 
