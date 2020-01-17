@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/15 12:55:16 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/15 17:24:01 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/17 15:32:58 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,8 @@ t_cursor				*delete_cursor(t_cursor *head, long cursor_id);
 void					live(t_vm *vm, t_cursor *c, t_arg *arg);
 void					ld(t_vm *vm, t_cursor *c, t_arg *argument);
 void					st(t_vm *vm, t_cursor *c, t_arg *argument);
-void					add(t_vm *vm, t_cursor *c, t_arg *argument);
-void					sub(t_vm *vm, t_cursor *c, t_arg *argument);
+void					add(t_cursor *c, t_arg *argument);
+void					sub(t_cursor *c, t_arg *argument);
 
 void					and(t_vm *vm, t_cursor *c, t_arg *argument);
 void					or(t_vm *vm, t_cursor *c, t_arg *argument);
@@ -139,7 +139,7 @@ void					ldi(t_vm *vm, t_cursor *c, t_arg *argument);
 void					sti(t_vm *vm, t_cursor *c, t_arg *argument);
 void					lld(t_vm *vm, t_cursor *c, t_arg *argument);
 void					lldi(t_vm *vm, t_cursor *c, t_arg *argument);
-void					aff(t_vm *vm, t_cursor *c, t_arg *argument);
+void					aff(t_cursor *c, t_arg *argument);
 void					ft_fork(t_vm *vm, t_cursor *c, t_arg *argument,
 						int modulo);
 

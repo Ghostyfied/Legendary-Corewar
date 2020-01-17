@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:43:46 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/08 13:52:41 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/17 15:29:19 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char		*hex_fill(char *str, int size)
 
 	i = 0;
 	name = ft_strnew(0);
-	if (ft_strlen(str) > size)
+	if (ft_strlen(str) > (size_t)size)
 		ft_error("Name or comment is too large boi");
 	while (str[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: rvan-ket <rvan-ket@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/14 17:32:00 by rvan-ket       #+#    #+#                */
-/*   Updated: 2020/01/15 16:09:07 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/17 15:32:51 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	lldi(t_vm *vm, t_cursor *c, t_arg *argument)
 	get_arena_index(c->position, (value[0] + value[1]) % MEM_SIZE), 4);
 }
 
-void	aff(t_vm *vm, t_cursor *c, t_arg *argument)
+void	aff(t_cursor *c, t_arg *argument)
 {
 	char chr;
 

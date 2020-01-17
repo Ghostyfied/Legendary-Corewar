@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 16:08:01 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/07 16:32:00 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/17 15:34:10 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 void		read_file(t_champ *champ, char *file)
 {
 	int		fd;
-	t_byte	*code;
 	int		size;
 
 	fd = open(file, O_RDONLY);

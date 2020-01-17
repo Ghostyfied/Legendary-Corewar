@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 16:07:47 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/07 16:41:22 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/17 15:33:58 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,6 @@ void			decode_code(int fd, t_champ *champ)
 {
 	t_byte		op_code;
 	t_byte		octal;
-	short		b2;
-	int			b4;
 	t_operation *op;
 
 	while (read(fd, &op_code, 1))
