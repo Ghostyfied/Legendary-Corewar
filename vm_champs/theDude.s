@@ -1,27 +1,20 @@
-.name		"Big 
-
-Lebowski"
-
-.comment	"I'm the Dude, 
-
-so that's what you call me."
+.name "Flintinator"
 
 
 
+.comment "ping pong"
 
 
 
-
-
-loop:
-
-
-fk:		
-		ld 0, r6
-		ld %6, r7
-		fork %:hier
-		zjmp %:fk
-hier:
-		st r6, 4
-		st r7, 4
-	
+start:
+live: 
+	live %1
+    sti r1, %:live, %1
+    ld %0, r16
+    zjmp %:live
+bomb:
+    live %1
+    fork %:live
+    live %1
+    fork %:bomb
+    live %1

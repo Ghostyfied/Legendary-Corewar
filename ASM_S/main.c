@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:06:32 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/17 11:57:07 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/17 16:09:27 by rvan-ket      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int			main(int argc, char **argv)
 	t_asm	*asm_info;
 
 	asm_info = MEM(t_asm);
-	if (argc < 2 || argc > 3)
+	if (argc < 2 || argc >= 3)
 		ft_usage(argv[0]);
 	new_file_ext = ft_check_filename(argv[1]);
 	if (!new_file_ext)
