@@ -2,5 +2,4 @@
 
 .comment	"test test"
 
-# COMMENT
-
+end:

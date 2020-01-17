@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:09:17 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/16 13:32:23 by flintlouis    ########   odam.nl         */
+/*   Updated: 2020/01/17 11:59:30 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ static int	calc_bytes_dist(int *size, int label, int arg)
 	return (byte_dist);
 }
 
-static int	check_eof_labels(t_label *eof_labels, char *label, int size_idx, int *size)
+static int	eof_labels(t_label *eof_lbl, char *label, int size_idx, int *size)
 {
 	t_label *lbl;
 	int		value;
 
-	lbl = eof_labels;
+	lbl = eof_lbl;
 	value = 0;
 	while (lbl)
 	{
@@ -78,7 +78,7 @@ int			find_label(t_operation *op, char *label, int size_idx, int *size)
 	t_label		*lbl;
 	int			value;
 
-	value = check_eof_labels(op->eof_labels, label, size_idx, size);
+	value = eof_labels(op->eof_labels, label, size_idx, size);
 	if (value)
 		return (value);
 	while (op)

@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:06:32 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/15 17:39:51 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/17 11:57:07 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static void	make_file(char **champion, char *new_filename, t_asm *asm_info)
 	free(new_filename);
 }
 
-int			main(int argc, char **argv) // FLUTTERSHY.S DOESN'T WORK, LABEL ERROR FIX
+int			main(int argc, char **argv)
 {
 	int		res;
 	char	*new_file_ext;
