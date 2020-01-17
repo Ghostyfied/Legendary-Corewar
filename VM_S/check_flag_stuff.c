@@ -6,7 +6,7 @@
 /*   By: awehlbur <awehlbur@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/18 15:31:05 by awehlbur       #+#    #+#                */
-/*   Updated: 2020/01/17 12:23:30 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/17 12:29:07 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,8 @@ void		retrieve_flags(t_vm *vm, int argc, char **argv)
 	{
 		if (ft_strequ(argv[i], "-d") && (i + 1) < argc)
 		{
-			if (!ft_validate_format("%d", argv[i + 1]) || ft_atoi(argv[i + 1]) < 0)
+			if (!ft_validate_format("%d", argv[i + 1])
+				|| ft_atoi(argv[i + 1]) < 0)
 				ft_error("That is not a valid number for the hexdump");
 			vm->dump = ft_atoi(argv[i + 1]);
 			i++;

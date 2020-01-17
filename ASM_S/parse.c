@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:24:50 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/17 12:00:59 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/17 13:17:25 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static int		parse_champion(char **champion, t_operation **head,
 	labels = get_labels(champion, i);
 	if (!champion[*i])
 	{
-		if (!head)
+		if (!*head)
 			ft_error("No champion code located");
 		if (labels)
 			(*head)->eof_labels = labels;

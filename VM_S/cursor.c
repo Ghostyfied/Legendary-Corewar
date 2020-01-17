@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 15:56:22 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/13 10:53:49 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/17 13:14:54 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,29 @@ t_cursor	*copy_cursor(t_cursor *src, int position, long id)
 
 t_cursor	*delete_cursor(t_cursor *head, long cursor_id)
 {
-	t_cursor *ret;
+	t_cursor *prv;
+	t_cursor *tmp;
 
-	if (!head)
-		return (head);
 	if (head->id == cursor_id)
 	{
-		ret = head->next;
-		free(head);
-		return (ret);
+		tmp = head;
+		head = head->next;
+		free(tmp);
+		tmp = NULL;
+		return (head);
 	}
-	head->next = delete_cursor(head->next, cursor_id);
+	tmp = head;
+	while (tmp)
+	{
+		if (tmp->id == cursor_id)
+		{
+			prv->next = tmp->next;
+			free(tmp);
+			tmp = NULL;
+			break ;
+		}
+		prv =tmp; 
+		tmp = tmp->next;
+	}
 	return (head);
 }
