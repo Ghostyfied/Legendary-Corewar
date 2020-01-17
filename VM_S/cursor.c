@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 15:56:22 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/17 13:14:54 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/17 13:18:09 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_cursor	*delete_cursor(t_cursor *head, long cursor_id)
 			tmp = NULL;
 			break ;
 		}
-		prv =tmp; 
+		prv = tmp;
 		tmp = tmp->next;
 	}
 	return (head);
