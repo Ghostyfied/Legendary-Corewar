@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:50:34 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/17 14:51:04 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/17 16:11:26 by rvan-ket      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,16 @@ void	ft_usage(char *name)
 {
 	ft_printf("Usage: %s <file.s>\n", name);
 	exit(1);
+}
+
+void	checkafternewline(char *str, int i)
+{
+	while (str[i])
+	{
+		if (str[i] == COMMENT_CHAR || str[i] == ALT_COMMENT_CHAR)
+			return ;
+		if (str[i] != ' ' && str[i] != '\t')
+			ft_error("Error parsing name and comment");
+		i++;
+	}
 }

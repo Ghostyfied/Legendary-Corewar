@@ -6,47 +6,21 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:16:26 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/17 15:28:08 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/17 16:14:15 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static char	*get_other_lines(char **champion, char *str, int *i, int j)
-{
-	while (champion[j])
-	{
-		j++;
-		if (!champion[j])
-			ft_error("Name or comment wrong format boi maybe u forgot a  \" ");
-		str = ft_strjoinfree(str, ft_strdup("\n"));
-		if (ft_strchr(champion[j], '"'))
-		{
-			str = ft_strjoinfree(str, ft_strsub(champion[j],
-			0, ft_strchr(champion[j], '"') - champion[j]));
-			*i = j;
-			return (str);
-		}
-		else
-			str = ft_strjoin(str, champion[j]);
-	}
-	ft_error("Name or comment wrong format boi");
-	return (str);
-}
-
 static void	check_line(char *str, int len)
 {
 	int i;
-	int flag;
 
-	i = 0;
-	flag = 0;
-	while (str[i] && i < len)
-		i++;
+	i = len;
 	while (str[i] && str[i] != '"')
 	{
 		if (str[i] != ' ' && str[i] != '\t')
-			ft_error("Name or comment wrong format boi");
+			ft_error("Error parsing name and comment");
 		i++;
 	}
 	i++;
@@ -57,10 +31,33 @@ static void	check_line(char *str, int len)
 	{
 		if (str[i] == COMMENT_CHAR || str[i] == ALT_COMMENT_CHAR)
 			return ;
-		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
-			ft_error("Name or comment wrong format boii");
+		if (str[i] != ' ' && str[i] != '\t')
+			ft_error("Error parsing name and comment");
 		i++;
 	}
+}
+
+static char	*get_other_lines(char **champion, char *str, int *i, int j)
+{
+	while (champion[j])
+	{
+		j++;
+		if (!champion[j])
+			ft_error("Error parsing name and comment");
+		str = ft_strjoinfree(str, ft_strdup("\n"));
+		if (ft_strchr(champion[j], '"'))
+		{
+			str = ft_strjoinfree(str, ft_strsub(champion[j],
+			0, ft_strchr(champion[j], '"') - champion[j]));
+			checkafternewline(champion[j], chr_idx(champion[j], '"'));
+			*i = j;
+			return (str);
+		}
+		else
+			str = ft_strjoin(str, champion[j]);
+	}
+	ft_error("Error parsing name and comment");
+	return (str);
 }
 
 static char	*get_str(char **champion, int *i, int j, int len)
@@ -116,7 +113,7 @@ int			get_name_comm(char **champion, t_asm **asm_info)
 		else if (!ft_strncmp(".comment", champion[i], 8))
 			(*asm_info)->comment = get_str(champion, &i, i, 8);
 		else if (*champion[i] != '\n')
-			ft_error("foute naam of comment brobro");
+			ft_error("Error parsing name and comment");
 		if ((*asm_info)->name && (*asm_info)->comment)
 			break ;
 		i++;
