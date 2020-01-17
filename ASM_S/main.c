@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:06:32 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/17 16:09:27 by rvan-ket      ########   odam.nl         */
+/*   Updated: 2020/01/17 16:11:29 by rvan-ket      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,11 @@ static void	puthex(char *str, int fd)
 	}
 }
 
-static void	make_file(char **champion, char *new_filename, t_asm *asm_info)
+static void	make_file(char *new_filename, t_asm *asm_info)
 {
 	int				fd;
 	t_operation		*op;
 	char			*exec_size;
-	unsigned char	byte;
 
 	fd = open(new_filename, O_CREAT | O_RDWR | O_TRUNC, 0666);
 	if (fd < 0)
@@ -87,7 +86,6 @@ static void	make_file(char **champion, char *new_filename, t_asm *asm_info)
 
 int			main(int argc, char **argv)
 {
-	int		res;
 	char	*new_file_ext;
 	char	**champion;
 	t_asm	*asm_info;
@@ -100,7 +98,7 @@ int			main(int argc, char **argv)
 		ft_error("Can not read file");
 	champion = ft_read_file(argv[1]);
 	parse(champion, &asm_info);
-	make_file(champion, new_file_ext, asm_info);
+	make_file(new_file_ext, asm_info);
 	free_asm(asm_info);
 	return (0);
 }

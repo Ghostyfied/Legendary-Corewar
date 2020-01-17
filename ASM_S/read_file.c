@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:04:31 by fhignett       #+#    #+#                */
-/*   Updated: 2019/12/16 15:34:18 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/17 15:27:30 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ char		**ft_read_file(char *filename)
 {
 	int			fd;
 	char		*buff;
-	char		*tmp;
 	size_t		size;
 	char		**champion;
 

@@ -6,11 +6,28 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:24:50 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/17 13:17:25 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/17 15:24:27 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+static int		check_label(char *s, int j)
+{
+	if (s[j] == ' ')
+		return (1);
+	while (s[j])
+	{
+		if (s[j] == LABEL_CHAR)
+			break ;
+		j++;
+	}
+	if (!s[j])
+		return (1);
+	ft_putendl(s);
+	ft_error("Label error");
+	return (0);
+}
 
 /*
 ** Goes char by char over the string until it finds the LABEL_CHAR.
@@ -31,13 +48,16 @@ static t_label	*get_labels(char **chmp, int *i)
 	{
 		if (chmp[*i][j] == LABEL_CHAR)
 		{
+			if (!j)
+				ft_error("Empty label");
 			add_label(&label, new_label(ft_strncpy(ft_strnew(j), chmp[*i], j)));
 			if (chmp[*i][j + 1])
 				break ;
 			j = 0;
 			(*i)++;
 		}
-		else if (!ft_strchr(LABEL_CHARS, chmp[*i][j]))
+		else if (!ft_strchr(LABEL_CHARS, chmp[*i][j]) &&
+				check_label(chmp[*i], j))
 			break ;
 		else
 			j++;

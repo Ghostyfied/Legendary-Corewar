@@ -9,7 +9,7 @@ COREWAR			= corewar
 DISASSEMBLER	= disassembler
 
 # ========== Flags ========== #
-FLAGS			= -g # -Wall -Wextra -Werror #
+FLAGS			= -Wall -Wextra -Werror
 
 # ========== Sources =========== #
 ASM_PATH		= ASM_S/

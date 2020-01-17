@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:16:26 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/17 16:07:59 by rvan-ket      ########   odam.nl         */
+/*   Updated: 2020/01/17 16:11:34 by rvan-ket      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,6 @@ int			is_empty(char *str)
 int			get_name_comm(char **champion, t_asm **asm_info)
 {
 	int		i;
-	char	*name;
-	char	*comment;
 
 	i = 0;
 	(*asm_info)->name = NULL;

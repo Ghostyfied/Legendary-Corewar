@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/07 15:59:07 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/08 12:59:24 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/17 15:29:59 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 int		ft_is_a_number(char *str)
 {
-	int		i;
+	size_t	i;
 
 	i = -1;
 	if (str[0] == '-' && str[1])
