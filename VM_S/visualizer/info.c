@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/14 16:39:15 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/15 14:59:16 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/17 14:22:38 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ static	void	put_info(t_vm *vm, WINDOW *win)
 	mvwaddstr(win, 13, 10, "Check every\t: ");
 	info = ft_itoa(GAME->cycles_to_die);
 	waddstr(win, info);
+	waddstr(win, "       ");
 	free(info);
 	mvwaddstr(win, 15, 10, "Cursors\t: ");
 	info = ft_itoa(GAME->cursors_count);

@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 12:15:46 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/17 13:32:18 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/17 14:21:34 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # define PLAYER3_C		COLOR_BLUE
 # define PLAYER4_C		COLOR_RED
 # define VISUAL			vm->visual
-# define SLEEP			20000
-# define COPIED_CYCLES	25
+# define SLEEP			15000
+# define COPIED_CYCLES	50
 
 typedef struct s_vm		t_vm;
 typedef struct s_cursor	t_cursor;
