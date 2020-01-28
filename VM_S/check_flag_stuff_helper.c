@@ -6,7 +6,7 @@
 /*   By: awehlbur <awehlbur@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 14:54:16 by awehlbur       #+#    #+#                */
-/*   Updated: 2020/01/10 14:57:40 by awehlbur      ########   odam.nl         */
+/*   Updated: 2020/01/28 15:47:20 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void		retreive_flags_helper(int argc, char **argv, int i, t_vm *vm)
 		ft_error("Please enter the number the champion should be!");
 	if (vm->champion_count < ft_atoi(argv[i + 1]))
 		ft_error("That number is bigger than there are positions...");
+	if (ft_atoi(argv[i + 1]) < 1)
+		ft_error("Size matters... it's too small");
 	if (ft_strstr(argv[i + 2], ".cor"))
 	{
 		parse_number(vm, argv[i + 1]);

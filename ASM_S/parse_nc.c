@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 16:16:26 by fhignett       #+#    #+#                */
-/*   Updated: 2020/01/17 16:14:15 by fhignett      ########   odam.nl         */
+/*   Updated: 2020/01/28 15:33:04 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ static char	*get_str(char **champion, int *i, int j, int len)
 	char *str;
 
 	ptr = ft_strchr(champion[j], '"');
+	if (!ptr)
+		ft_error("Error parsing name and comment");
 	ptr2 = ft_strchr(ptr + 1, '"');
 	if (ptr2 == NULL)
 	{
